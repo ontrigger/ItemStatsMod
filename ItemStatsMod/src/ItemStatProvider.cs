@@ -28,7 +28,7 @@ namespace ItemStatsMod
                         statValueStr = Math.Round(statValue * 100f, 2).ToString("0.##") + "%";
                         break;
                     case StatFormatRule.Count:
-                        statValueStr = Math.Round(statValue).ToString("0.##");
+                        statValueStr = Math.Round(statValue).ToString();
                         break;
                     case StatFormatRule.Radius:
                         statValueStr = Math.Round(statValue) + "m";
@@ -128,8 +128,7 @@ namespace ItemStatsMod
                     ),
                     new Test(
                         calculateStat: (itemCount) => itemCount * 1.6f,
-                        statText: "Maximum Health",
-                        formattingRule: StatFormatRule.Count
+                        statText: "Health per Second"
                     ),
                 },
                 [ItemIndex.Clover] = new List<Test>()
@@ -152,15 +151,14 @@ namespace ItemStatsMod
                 {
                     new Test(
                         calculateStat: (itemCount) => 1.5f + 0.3f * (itemCount - 1),
-                        statText: "Damage Increase",
-                        formattingRule: StatFormatRule.Count
+                        statText: "Damage Increase"
                     ),
                 },
                 [ItemIndex.Tooth] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => Mathf.Pow(itemCount, 0.25f),
-                        statText: "Damage Increase",
+                        calculateStat: (itemCount) => 4 * itemCount,
+                        statText: "Heal Amount",
                         formattingRule: StatFormatRule.Count
                     ),
                 },
@@ -175,7 +173,7 @@ namespace ItemStatsMod
                 [ItemIndex.Bandolier] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 1f - 1f / Mathf.Pow((itemCount + 1), 0.33f),
+                        calculateStat: (itemCount) => (1f - 1f / Mathf.Pow(itemCount + 1, 0.33f)),
                         statText: "Drop Chance"
                     ),
                 },
@@ -320,11 +318,6 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 0.15f * itemCount,
                         statText: "Bleed Chance Increase"
-                    ),
-                    new Test(
-                        calculateStat: (itemCount) => 3 * itemCount,
-                        statText: "Dagger Count",
-                        formattingRule: StatFormatRule.Count
                     ),
                 },
                 [ItemIndex.SlowOnHit] = new List<Test>()
@@ -500,6 +493,22 @@ namespace ItemStatsMod
                         calculateStat: (itemCount) => 3 * itemCount,
                         statText: "Missile Damage Increase",
                         formattingRule: StatFormatRule.Count
+                    ),
+                },
+                [ItemIndex.Infusion] = new List<Test>()
+                {
+                    new Test(
+                        calculateStat: (itemCount) => 100 * itemCount,
+                        statText: "Max Possible Health",
+                        formattingRule: StatFormatRule.Count
+                    ),
+                },
+                [ItemIndex.JumpBoost] = new List<Test>()
+                {
+                    new Test(
+                        calculateStat: (itemCount) => 10 * itemCount,
+                        statText: "Boost Length",
+                        formattingRule: StatFormatRule.Radius
                     ),
                 },
             };
