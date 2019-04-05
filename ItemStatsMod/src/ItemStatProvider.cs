@@ -240,7 +240,7 @@ namespace ItemStatsMod
                 [ItemIndex.AutoCastEquipment] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 0.5f + itemCount * 0.5f,
+                        calculateStat: (itemCount) => Mathf.Round(1 - Mathf.Pow(0.5f, itemCount)),
                         statText: "Cooldown Decrease"
                     ),
                 },
@@ -287,7 +287,7 @@ namespace ItemStatsMod
                     ),
                     new Test(
                         calculateStat: (itemCount) => 1.5f + 1.5f * itemCount,
-                        statText: "Damage Increase"
+                        statText: "Duration Increase"
                     ),
                 },
                 [ItemIndex.WardOnLevel] = new List<Test>()
@@ -475,7 +475,7 @@ namespace ItemStatsMod
                 [ItemIndex.AlienHead] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 0.25f + 0.25f * (itemCount - 1),
+                        calculateStat: (itemCount) => Mathf.Round(1 - Mathf.Pow(0.75f, itemCount)),
                         statText: "Cooldown Reduction"
                     ),
                 },
