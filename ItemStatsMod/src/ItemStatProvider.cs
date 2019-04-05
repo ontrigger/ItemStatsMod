@@ -57,14 +57,14 @@ namespace ItemStatsMod
             {
                 [ItemIndex.Bear] = new List<Test>()
                 {
-                    new Test(calculateStat: (itemCount) => (1f - 1f / (0.15f * (float) itemCount + 1f)))
+                    new Test(calculateStat: (itemCount) => (1f - 1f / (0.15f * itemCount + 1f)))
                 },
 
 
                 [ItemIndex.Hoof] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 0.14f,
+                        calculateStat: (itemCount) => itemCount * 0.14f,
                         statText: "Walk Speed Increase")
                 },
 
@@ -72,18 +72,18 @@ namespace ItemStatsMod
                 [ItemIndex.Syringe] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 0.15f,
+                        calculateStat: (itemCount) => itemCount * 0.15f,
                         statText: "Attack Speed Increase")
                 },
 
                 [ItemIndex.Mushroom] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 0.0225f + 0.0225f * (float) itemCount,
+                        calculateStat: (itemCount) => 0.0225f + 0.0225f * itemCount,
                         statText: "Healing Increase"
                     ),
                     new Test(
-                        calculateStat: (itemCount) => 1.5f + 1.5f * (float) itemCount,
+                        calculateStat: (itemCount) => 1.5f + 1.5f * itemCount,
                         statText: "Area Increase",
                         formattingRule: StatFormatRule.Radius
                     )
@@ -91,14 +91,14 @@ namespace ItemStatsMod
                 [ItemIndex.CritGlasses] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 0.1f,
+                        calculateStat: (itemCount) => itemCount * 0.1f,
                         statText: "Crit Chance Increase"
                     )
                 },
                 [ItemIndex.Feather] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount,
+                        calculateStat: (itemCount) => itemCount,
                         statText: "Total Jumps",
                         formattingRule: StatFormatRule.Count
                     )
@@ -106,7 +106,7 @@ namespace ItemStatsMod
                 [ItemIndex.Seed] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount,
+                        calculateStat: (itemCount) => itemCount,
                         statText: "Total Heal Hp",
                         formattingRule: StatFormatRule.Count
                     )
@@ -114,7 +114,7 @@ namespace ItemStatsMod
                 [ItemIndex.GhostOnKill] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 30f,
+                        calculateStat: (itemCount) => itemCount * 30f,
                         statText: "Ghost Duration (seconds)",
                         formattingRule: StatFormatRule.Count
                     )
@@ -122,12 +122,12 @@ namespace ItemStatsMod
                 [ItemIndex.Knurl] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 40f,
+                        calculateStat: (itemCount) => itemCount * 40f,
                         statText: "Maximum Health",
                         formattingRule: StatFormatRule.Count
                     ),
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 1.6f,
+                        calculateStat: (itemCount) => itemCount * 1.6f,
                         statText: "Maximum Health",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -135,7 +135,7 @@ namespace ItemStatsMod
                 [ItemIndex.Clover] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount,
+                        calculateStat: (itemCount) => itemCount,
                         statText: "Additional Rerolls",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -143,7 +143,7 @@ namespace ItemStatsMod
                 [ItemIndex.Medkit] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 10f,
+                        calculateStat: (itemCount) => itemCount * 10f,
                         statText: "Health Healed",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -151,7 +151,7 @@ namespace ItemStatsMod
                 [ItemIndex.Crowbar] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 1.5f + 0.3f * (float) (itemCount - 1),
+                        calculateStat: (itemCount) => 1.5f + 0.3f * (itemCount - 1),
                         statText: "Damage Increase",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -167,7 +167,7 @@ namespace ItemStatsMod
                 [ItemIndex.Talisman] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 2f + (float) itemCount * 2f,
+                        calculateStat: (itemCount) => 2f + itemCount * 2f,
                         statText: "Cooldown Reduction",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -182,21 +182,21 @@ namespace ItemStatsMod
                 [ItemIndex.IceRing] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 1.25f + 1.25f * (float) itemCount,
+                        calculateStat: (itemCount) => 1.25f + 1.25f * itemCount,
                         statText: "Damage Increase"
                     ),
                 },
                 [ItemIndex.FireRing] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 2.5f + 2.5f * (float) itemCount,
+                        calculateStat: (itemCount) => 2.5f + 2.5f * itemCount,
                         statText: "Damage Increase"
                     ),
                 },
                 [ItemIndex.WarCryOnMultiKill] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 2f + 4f * (float) itemCount,
+                        calculateStat: (itemCount) => 2f + 4f * itemCount,
                         statText: "Frenzy Duration",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -204,21 +204,21 @@ namespace ItemStatsMod
                 [ItemIndex.SprintOutOfCombat] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 0.3f,
+                        calculateStat: (itemCount) => itemCount * 0.3f,
                         statText: "Speed Increase"
                     ),
                 },
                 [ItemIndex.StunChanceOnHit] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 1f - 1f / (0.05f * (float) itemCount + 1f),
+                        calculateStat: (itemCount) => 1f - 1f / (0.05f * itemCount + 1f),
                         statText: "Stun Chance Increase"
                     ),
                 },
                 [ItemIndex.WarCryOnCombat] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 2f + 4f * (float) itemCount,
+                        calculateStat: (itemCount) => 2f + 4f * itemCount,
                         statText: "Frenzy Duration",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -226,7 +226,7 @@ namespace ItemStatsMod
                 [ItemIndex.SecondarySkillMagazine] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount,
+                        calculateStat: (itemCount) => itemCount,
                         statText: "Bonus Stock",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -234,7 +234,7 @@ namespace ItemStatsMod
                 [ItemIndex.UtilitySkillMagazine] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 2f,
+                        calculateStat: (itemCount) => itemCount * 2f,
                         statText: "Bonus Charges",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -242,14 +242,14 @@ namespace ItemStatsMod
                 [ItemIndex.AutoCastEquipment] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 0.5f + (float) itemCount * 0.5f,
+                        calculateStat: (itemCount) => 0.5f + itemCount * 0.5f,
                         statText: "Cooldown Decrease"
                     ),
                 },
                 [ItemIndex.KillEliteFrenzy] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 1f + (float) itemCount * 2f,
+                        calculateStat: (itemCount) => 1f + itemCount * 2f,
                         statText: "Frenzy Duration",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -257,45 +257,45 @@ namespace ItemStatsMod
                 [ItemIndex.BossDamageBonus] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 0.2f + 0.1f * (float) (itemCount - 1),
+                        calculateStat: (itemCount) => 0.2f + 0.1f * (itemCount - 1),
                         statText: "Damage Increase"
                     ),
                 },
                 [ItemIndex.ExplodeOnDeath] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 12f + 2.4f * ((float) itemCount - 1f),
+                        calculateStat: (itemCount) => 12f + 2.4f * (itemCount - 1f),
                         statText: "Radius Increase",
                         formattingRule: StatFormatRule.Radius
                     ),
                     new Test(
-                        calculateStat: (itemCount) => 3.5f * (1f + (float) (itemCount - 1) * 0.8f),
+                        calculateStat: (itemCount) => 3.5f * (1f + (itemCount - 1) * 0.8f),
                         statText: "Damage Increase"
                     ),
                 },
                 [ItemIndex.HealWhileSafe] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 2.5f + (float) (itemCount - 1) * 1.5f,
+                        calculateStat: (itemCount) => 2.5f + (itemCount - 1) * 1.5f,
                         statText: "Regeneration Increase"
                     ),
                 },
                 [ItemIndex.IgniteOnKill] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 8f + 4f * (float) itemCount,
+                        calculateStat: (itemCount) => 8f + 4f * itemCount,
                         statText: "Radius Increase",
                         formattingRule: StatFormatRule.Radius
                     ),
                     new Test(
-                        calculateStat: (itemCount) => 1.5f + 1.5f * (float) itemCount,
+                        calculateStat: (itemCount) => 1.5f + 1.5f * itemCount,
                         statText: "Damage Increase"
                     ),
                 },
                 [ItemIndex.WardOnLevel] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 8f + 8f * (float) itemCount,
+                        calculateStat: (itemCount) => 8f + 8f * itemCount,
                         statText: "Radius Increase",
                         formattingRule: StatFormatRule.Radius
                     ),
@@ -303,14 +303,14 @@ namespace ItemStatsMod
                 [ItemIndex.NovaOnHeal] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount,
+                        calculateStat: (itemCount) => itemCount,
                         statText: "Soul Energy Increase"
                     ),
                 },
                 [ItemIndex.HealOnCrit] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 4f + (float) itemCount * 4f,
+                        calculateStat: (itemCount) => 4f + itemCount * 4f,
                         statText: "Health per Crit",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -318,11 +318,11 @@ namespace ItemStatsMod
                 [ItemIndex.BleedOnHit] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 0.15f * (float) itemCount,
+                        calculateStat: (itemCount) => 0.15f * itemCount,
                         statText: "Bleed Chance Increase"
                     ),
                     new Test(
-                        calculateStat: (itemCount) => 3 * (float) itemCount,
+                        calculateStat: (itemCount) => 3 * itemCount,
                         statText: "Dagger Count",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -330,7 +330,7 @@ namespace ItemStatsMod
                 [ItemIndex.SlowOnHit] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount,
+                        calculateStat: (itemCount) => itemCount,
                         statText: "Slow Duration",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -338,19 +338,19 @@ namespace ItemStatsMod
                 [ItemIndex.EquipmentMagazine] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount,
+                        calculateStat: (itemCount) => itemCount,
                         statText: "Bonus Charges",
                         formattingRule: StatFormatRule.Count
                     ),
                     new Test(
-                        calculateStat: (itemCount) => 0.15f + 0.15f * (float) itemCount,
+                        calculateStat: (itemCount) => 0.15f + 0.15f * itemCount,
                         statText: "Cooldown Decrease"
                     ),
                 },
                 [ItemIndex.GoldOnHit] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 2f * Run.instance.difficultyCoefficient,
+                        calculateStat: (itemCount) => itemCount * 2f * Run.instance.difficultyCoefficient,
                         statText: "Gold per Hit(*)",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -358,14 +358,14 @@ namespace ItemStatsMod
                 [ItemIndex.IncreaseHealing] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount,
+                        calculateStat: (itemCount) => itemCount,
                         statText: "Healing Increase"
                     ),
                 },
                 [ItemIndex.PersonalShield] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 25f,
+                        calculateStat: (itemCount) => itemCount * 25f,
                         statText: "Shield Health Increase",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -373,12 +373,12 @@ namespace ItemStatsMod
                 [ItemIndex.ChainLightning] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount * 2f,
+                        calculateStat: (itemCount) => itemCount * 2f,
                         statText: "Total Bounces",
                         formattingRule: StatFormatRule.Count
                     ),
                     new Test(
-                        calculateStat: (itemCount) => 20f + 2f * (float) (itemCount),
+                        calculateStat: (itemCount) => 20f + 2f * (itemCount),
                         statText: "Bounce Range",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -386,7 +386,7 @@ namespace ItemStatsMod
                 [ItemIndex.TreasureCache] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => (float) itemCount,
+                        calculateStat: (itemCount) => itemCount,
                         statText: "Crate Count",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -394,11 +394,11 @@ namespace ItemStatsMod
                 [ItemIndex.BounceNearby] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 1f - 100f / (100f + 20f * (float) itemCount),
+                        calculateStat: (itemCount) => 1f - 100f / (100f + 20f * itemCount),
                         statText: "Bounce Chance"
                     ),
                     new Test(
-                        calculateStat: (itemCount) => 5f + (float) itemCount * 5f,
+                        calculateStat: (itemCount) => 5f + itemCount * 5f,
                         statText: "Max Enemies Hooked",
                         formattingRule: StatFormatRule.Count
                     ),
@@ -406,14 +406,14 @@ namespace ItemStatsMod
                 [ItemIndex.SprintBonus] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 0.1f + 0.2f * (float) itemCount,
+                        calculateStat: (itemCount) => 0.1f + 0.2f * itemCount,
                         statText: "Speed Increase"
                     ),
                 },
                 [ItemIndex.SprintArmor] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => 30f * (float) itemCount,
+                        calculateStat: (itemCount) => 30f * itemCount,
                         statText: "Armor Point Increase",
                         formattingRule: StatFormatRule.Count
                     ),
