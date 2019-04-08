@@ -40,7 +40,8 @@ namespace ItemStatsMod
             return $"{fullStatText}\n<align=right>({itemCount} stacks)<line-height=1em>";
         }
 
-        static ItemStatProvider() {
+        static ItemStatProvider()
+        {
             testDefs = new Dictionary<ItemIndex, List<Test>>
             {
                 [ItemIndex.Bear] = new List<Test>()
@@ -72,7 +73,9 @@ namespace ItemStatsMod
                 {
                     new Test(
                         calculateStat: (itemCount) => 0.0225f + 0.0225f * itemCount,
-                        statText: "Healing Increase"
+                        statText: "Healing Increase",
+                        // TODO: use a decorator instead of additional param for the formatter
+                        formatter: new PercentageFormatter(maxValue: 1f)
                     ),
                     new Test(
                         calculateStat: (itemCount) => 1.5f + 1.5f * itemCount,
@@ -84,7 +87,8 @@ namespace ItemStatsMod
                 {
                     new Test(
                         calculateStat: (itemCount) => itemCount * 0.1f,
-                        statText: "Crit Chance"
+                        statText: "Crit Chance",
+                        formatter: new PercentageFormatter(maxValue: 1f)
                     )
                 },
                 [ItemIndex.Feather] = new List<Test>()
@@ -203,7 +207,8 @@ namespace ItemStatsMod
                 {
                     new Test(
                         calculateStat: (itemCount) => 1f - 1f / (0.05f * itemCount + 1f),
-                        statText: "Stun Chance Increase"
+                        statText: "Stun Chance Increase",
+                        formatter: new PercentageFormatter(maxValue: 1f)
                     ),
                 },
                 [ItemIndex.WarCryOnCombat] = new List<Test>()
@@ -311,7 +316,8 @@ namespace ItemStatsMod
                 {
                     new Test(
                         calculateStat: (itemCount) => 0.15f * itemCount,
-                        statText: "Bleed Chance Increase"
+                        statText: "Bleed Chance Increase",
+                        formatter: new PercentageFormatter(maxValue: 1f)
                     ),
                 },
                 [ItemIndex.SlowOnHit] = new List<Test>()
@@ -436,7 +442,8 @@ namespace ItemStatsMod
                     ),
                     new Test(
                         calculateStat: (itemCount) => (0.025f + 0.025f * itemCount),
-                        statText: "Proc Chance Increase"
+                        statText: "Proc Chance Increase",
+                        formatter: new PercentageFormatter(maxValue: 1f)
                     ),
                 },
                 [ItemIndex.RepeatHeal] = new List<Test>()
@@ -506,6 +513,13 @@ namespace ItemStatsMod
                         formatter: new IntFormatter("m")
                     ),
                 },
+                [ItemIndex.AttackSpeedOnCrit] = new List<Test>()
+                {
+                    new Test(
+                        calculateStat: (itemCount) => 0.3f * itemCount,
+                        statText: "Max Attack Speed"
+                    )
+                }
             };
         }
 
