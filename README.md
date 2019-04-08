@@ -1,4 +1,4 @@
-# RoR2Mods.ItemStats
+# ItemStats
 Provides current stack bonuses for an item in the tooltip
 
 ![demo](https://i.imgur.com/24ho8CG.png)
