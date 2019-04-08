@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ItemStatsMod.ValueFormatters;
 using RoR2;
 using UnityEngine;
 
@@ -21,19 +22,7 @@ namespace ItemStatsMod
             {
                 float statValue = subItemStat.CalculateStat(itemCount);
 
-                var statValueStr = string.Empty;
-                switch (subItemStat.FormattingRule)
-                {
-                    case StatFormatRule.Percentage:
-                        statValueStr = Math.Round(statValue * 100f, 2).ToString("0.##") + "%";
-                        break;
-                    case StatFormatRule.Count:
-                        statValueStr = Math.Round(statValue).ToString();
-                        break;
-                    case StatFormatRule.Radius:
-                        statValueStr = Math.Round(statValue) + "m";
-                        break;
-                }
+                var statValueStr = subItemStat.Formatter.Format(statValue);
 
                 if (itemStatList.IndexOf(subItemStat) == itemStatList.Count - 1)
                 {
@@ -57,7 +46,9 @@ namespace ItemStatsMod
             {
                 [ItemIndex.Bear] = new List<Test>()
                 {
-                    new Test(calculateStat: (itemCount) => (1f - 1f / (0.15f * itemCount + 1f)))
+                    new Test(calculateStat: (itemCount) => (1f - 1f / (0.15f * itemCount + 1f)),
+                        statText: "Proc Chance"
+                    ),
                 },
 
 
@@ -65,7 +56,8 @@ namespace ItemStatsMod
                 {
                     new Test(
                         calculateStat: (itemCount) => itemCount * 0.14f,
-                        statText: "Walk Speed Increase")
+                        statText: "Walk Speed Increase"
+                    )
                 },
 
 
@@ -73,7 +65,8 @@ namespace ItemStatsMod
                 {
                     new Test(
                         calculateStat: (itemCount) => itemCount * 0.15f,
-                        statText: "Attack Speed Increase")
+                        statText: "Attack Speed Increase"
+                    )
                 },
 
                 [ItemIndex.Mushroom] = new List<Test>()
@@ -85,14 +78,14 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 1.5f + 1.5f * itemCount,
                         statText: "Area Increase",
-                        formattingRule: StatFormatRule.Radius
+                        formatter: new IntFormatter("m")
                     )
                 },
                 [ItemIndex.CritGlasses] = new List<Test>()
                 {
                     new Test(
                         calculateStat: (itemCount) => itemCount * 0.1f,
-                        statText: "Crit Chance Increase"
+                        statText: "Crit Chance"
                     )
                 },
                 [ItemIndex.Feather] = new List<Test>()
@@ -100,7 +93,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount,
                         statText: "Total Jumps",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     )
                 },
                 [ItemIndex.Seed] = new List<Test>()
@@ -108,15 +101,15 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount,
                         statText: "Total Heal Hp",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("HP")
                     )
                 },
                 [ItemIndex.GhostOnKill] = new List<Test>()
                 {
                     new Test(
                         calculateStat: (itemCount) => itemCount * 30f,
-                        statText: "Ghost Duration (seconds)",
-                        formattingRule: StatFormatRule.Count
+                        statText: "Ghost Duration",
+                        formatter: new IntFormatter("s")
                     )
                 },
                 [ItemIndex.Knurl] = new List<Test>()
@@ -124,11 +117,12 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount * 40f,
                         statText: "Maximum Health",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("HP")
                     ),
                     new Test(
                         calculateStat: (itemCount) => itemCount * 1.6f,
-                        statText: "Health per Second"
+                        statText: "Regeneration",
+                        formatter: new IntFormatter("HP/s")
                     ),
                 },
                 [ItemIndex.Clover] = new List<Test>()
@@ -136,7 +130,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount,
                         statText: "Additional Rerolls",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.Medkit] = new List<Test>()
@@ -144,7 +138,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount * 10f,
                         statText: "Health Healed",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("HP")
                     ),
                 },
                 [ItemIndex.Crowbar] = new List<Test>()
@@ -159,7 +153,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 4 * itemCount,
                         statText: "Heal Amount",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("HP")
                     ),
                 },
                 [ItemIndex.Talisman] = new List<Test>()
@@ -167,7 +161,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 2f + itemCount * 2f,
                         statText: "Cooldown Reduction",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("s")
                     ),
                 },
                 [ItemIndex.Bandolier] = new List<Test>()
@@ -196,7 +190,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 2f + 4f * itemCount,
                         statText: "Frenzy Duration",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("s")
                     ),
                 },
                 [ItemIndex.SprintOutOfCombat] = new List<Test>()
@@ -218,7 +212,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 2f + 4f * itemCount,
                         statText: "Frenzy Duration",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.SecondarySkillMagazine] = new List<Test>()
@@ -226,7 +220,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount,
                         statText: "Bonus Stock",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.UtilitySkillMagazine] = new List<Test>()
@@ -234,14 +228,15 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount * 2f,
                         statText: "Bonus Charges",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.AutoCastEquipment] = new List<Test>()
                 {
                     new Test(
-                        calculateStat: (itemCount) => Mathf.Round(1 - Mathf.Pow(0.5f, itemCount)),
-                        statText: "Cooldown Decrease"
+                        calculateStat: (itemCount) => 1 - Mathf.Pow(0.5f, itemCount),
+                        statText: "Cooldown Decrease",
+                        formatter: new PercentageFormatter(0)
                     ),
                 },
                 [ItemIndex.KillEliteFrenzy] = new List<Test>()
@@ -249,7 +244,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 1f + itemCount * 2f,
                         statText: "Frenzy Duration",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("s")
                     ),
                 },
                 [ItemIndex.BossDamageBonus] = new List<Test>()
@@ -264,7 +259,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 12f + 2.4f * (itemCount - 1f),
                         statText: "Radius Increase",
-                        formattingRule: StatFormatRule.Radius
+                        formatter: new IntFormatter("m")
                     ),
                     new Test(
                         calculateStat: (itemCount) => 3.5f * (1f + (itemCount - 1) * 0.8f),
@@ -283,7 +278,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 8f + 4f * itemCount,
                         statText: "Radius Increase",
-                        formattingRule: StatFormatRule.Radius
+                        formatter: new IntFormatter("m")
                     ),
                     new Test(
                         calculateStat: (itemCount) => 1.5f + 1.5f * itemCount,
@@ -295,7 +290,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 8f + 8f * itemCount,
                         statText: "Radius Increase",
-                        formattingRule: StatFormatRule.Radius
+                        formatter: new IntFormatter("m")
                     ),
                 },
                 [ItemIndex.NovaOnHeal] = new List<Test>()
@@ -310,7 +305,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 4f + itemCount * 4f,
                         statText: "Health per Crit",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("HP")
                     ),
                 },
                 [ItemIndex.BleedOnHit] = new List<Test>()
@@ -325,7 +320,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount,
                         statText: "Slow Duration",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("s")
                     ),
                 },
                 [ItemIndex.EquipmentMagazine] = new List<Test>()
@@ -333,7 +328,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount,
                         statText: "Bonus Charges",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                     new Test(
                         calculateStat: (itemCount) => 0.15f + 0.15f * itemCount,
@@ -345,7 +340,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount * 2f * Run.instance.difficultyCoefficient,
                         statText: "Gold per Hit(*)",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.IncreaseHealing] = new List<Test>()
@@ -360,7 +355,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount * 25f,
                         statText: "Shield Health Increase",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("SP")
                     ),
                 },
                 [ItemIndex.ChainLightning] = new List<Test>()
@@ -368,12 +363,12 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount * 2f,
                         statText: "Total Bounces",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                     new Test(
                         calculateStat: (itemCount) => 20f + 2f * (itemCount),
                         statText: "Bounce Range",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("m")
                     ),
                 },
                 [ItemIndex.TreasureCache] = new List<Test>()
@@ -381,7 +376,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount,
                         statText: "Crate Count",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.BounceNearby] = new List<Test>()
@@ -393,7 +388,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 5f + itemCount * 5f,
                         statText: "Max Enemies Hooked",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.SprintBonus] = new List<Test>()
@@ -407,8 +402,8 @@ namespace ItemStatsMod
                 {
                     new Test(
                         calculateStat: (itemCount) => 30f * itemCount,
-                        statText: "Armor Point Increase",
-                        formattingRule: StatFormatRule.Count
+                        statText: "Shield Point Increase",
+                        formatter: new IntFormatter("SP")
                     ),
                 },
                 [ItemIndex.ShockNearby] = new List<Test>()
@@ -416,7 +411,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 2f * itemCount,
                         statText: "Total Bounces",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.BeetleGland] = new List<Test>()
@@ -424,7 +419,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount,
                         statText: "Total Guards",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.ShieldOnly] = new List<Test>()
@@ -469,14 +464,15 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => itemCount,
                         statText: "Extra Lives",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.AlienHead] = new List<Test>()
                 {
                     new Test(
                         calculateStat: (itemCount) => Mathf.Round(1 - Mathf.Pow(0.75f, itemCount)),
-                        statText: "Cooldown Reduction"
+                        statText: "Cooldown Reduction",
+                        formatter: new PercentageFormatter(decimalPlaces: 0)
                     ),
                 },
                 [ItemIndex.Firework] = new List<Test>()
@@ -484,7 +480,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 4 + itemCount * 4,
                         statText: "Firework Count",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.Missile] = new List<Test>()
@@ -492,7 +488,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 3 * itemCount,
                         statText: "Missile Damage Increase",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter()
                     ),
                 },
                 [ItemIndex.Infusion] = new List<Test>()
@@ -500,7 +496,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 100 * itemCount,
                         statText: "Max Possible Health",
-                        formattingRule: StatFormatRule.Count
+                        formatter: new IntFormatter("HP")
                     ),
                 },
                 [ItemIndex.JumpBoost] = new List<Test>()
@@ -508,7 +504,7 @@ namespace ItemStatsMod
                     new Test(
                         calculateStat: (itemCount) => 10 * itemCount,
                         statText: "Boost Length",
-                        formattingRule: StatFormatRule.Radius
+                        formatter: new IntFormatter("m")
                     ),
                 },
             };
@@ -519,16 +515,17 @@ namespace ItemStatsMod
 
     public class Test
     {
-        public Test(Func<int, float> calculateStat, string statText = "Proc Chance",
-            StatFormatRule formattingRule = StatFormatRule.Percentage)
+        public Test(Func<int, float> calculateStat, string statText,
+            IStatFormatter formatter = null)
         {
             CalculateStat = calculateStat;
             StatText = statText;
-            FormattingRule = formattingRule;
+            Formatter = formatter ?? new PercentageFormatter();
         }
 
         public readonly Func<int, float> CalculateStat;
-        public readonly StatFormatRule FormattingRule;
+        public readonly IStatFormatter Formatter;
+
         public string StatText { get; }
     }
 

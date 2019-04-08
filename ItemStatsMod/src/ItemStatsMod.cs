@@ -7,7 +7,7 @@ namespace ItemStatsMod
 {
     public class ItemStatsMod
     {
-        [ModEntry("Tooltip Item Stats", "0.1", "ontrigger")]
+        [ModEntry("Tooltip Item Stats", "0.2", "ontrigger")]
         public static void Init()
         {
             var harmony = HarmonyInstance.Create("ontrigger.itemstats");
