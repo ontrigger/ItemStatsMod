@@ -40,8 +40,7 @@ namespace ItemStatsMod
             return $"{fullStatText}\n<align=right>({itemCount} stacks)<line-height=1em>";
         }
 
-        static ItemStatProvider()
-        {
+        static ItemStatProvider() {
             testDefs = new Dictionary<ItemIndex, List<Test>>
             {
                 [ItemIndex.Bear] = new List<Test>()
