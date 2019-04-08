@@ -17,14 +17,15 @@ namespace ItemStatsMod.ValueFormatters
 
         public string Format(float value)
         {
-            var maxStackMessage = value > _maxValue ? "(Max Stack)" : "";
+            // color light blue
+            var maxStackMessage = value > _maxValue ? "(Max Stack)".SetColor("#ADD8E6") : "";
 
             // amount of ###
             var trailFormatStr = new string('#', _decimalPlaces);
             var valueStr = Math.Round(value * _scale, _decimalPlaces).ToString($"0.{trailFormatStr}");
             valueStr += "%";
             
-            return $"{valueStr.SetColor("green")} {maxStackMessage.SetColor("blue")}";
+            return $"{valueStr.SetColor("green")} {maxStackMessage}";
         }
     }
 }

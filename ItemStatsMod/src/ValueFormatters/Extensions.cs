@@ -11,7 +11,7 @@ namespace ItemStatsMod.ValueFormatters
 
         public static string SetColor(this string str, string color)
         {
-            return $"<color=\"{color}\">" + str;
+            return str.WrapIn($"<color=\"{color}\">", "</color>");
         }
     }
 }
