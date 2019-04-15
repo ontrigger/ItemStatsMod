@@ -462,7 +462,8 @@ namespace ItemStatsMod
                 {
                     new Test(
                         calculateStat: (itemCount) => 3f + 5f * itemCount,
-                        statText: "Empowering Duration"
+                        statText: "Empowering Duration",
+                        formatter: new IntFormatter("s")
                     ),
                 },
                 [ItemIndex.ExtraLife] = new List<Test>()

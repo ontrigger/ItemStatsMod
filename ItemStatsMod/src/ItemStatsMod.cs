@@ -1,36 +1,30 @@
 ﻿using System.Reflection;
+using BepInEx;
 using Harmony;
 using RoR2;
-using RoR2.Mods;
 
 namespace ItemStatsMod
 {
-    public class ItemStatsMod
+    [BepInDependency("com.bepis.r2api")]
+    [BepInPlugin("dev.ontrigger.itemstats", "ItemStats", "1.0")]
+    public class ItemStatsMod : BaseUnityPlugin
     {
-        [ModEntry("Tooltip Item Stats", "0.2", "ontrigger")]
-        public static void Init()
+        public void Awake()
         {
-            var harmony = HarmonyInstance.Create("ontrigger.itemstats");
-
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
-        }
-    }
-
-    [HarmonyPatch(typeof(RoR2.UI.ItemIcon))]
-    [HarmonyPatch("SetItemIndex")]
-    class ItemIconPatch
-    {
-        //TODO: use a transpiler instead
-        static void Postfix(RoR2.UI.ItemIcon __instance, RoR2.ItemIndex newItemIndex, int newItemCount)
-        {
-            var itemDef = ItemCatalog.GetItemDef(newItemIndex);
-            if (__instance.tooltipProvider != null && itemDef != null)
+            // TODO: Use IL instead
+            On.RoR2.UI.ItemIcon.SetItemIndex += (orig, self, newIndex, newCount) =>
             {
-                var itemDescription = Language.GetString(itemDef.descriptionToken);
-                itemDescription += "\n\n" + ItemStatProvider.ProvideStatsForItem(newItemIndex, newItemCount);
+                orig(self, newIndex, newCount);
                 
-                __instance.tooltipProvider.overrideBodyText = itemDescription;
-            }
+                var itemDef = ItemCatalog.GetItemDef(newIndex);
+                if (self.tooltipProvider != null && itemDef != null)
+                {
+                    var itemDescription = Language.GetString(itemDef.descriptionToken);
+                    itemDescription += "\n\n" + ItemStatProvider.ProvideStatsForItem(newIndex, newCount);
+                
+                    self.tooltipProvider.overrideBodyText = itemDescription;
+                }
+            };
         }
     }
 }

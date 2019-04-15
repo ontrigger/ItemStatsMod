@@ -13,7 +13,7 @@ namespace ItemStatsMod.ValueFormatters
 
         public string Format(float value)
         {
-            return Math.Round(value, 0) + _prefix;
+            return $"{Math.Round(value, 0)}{_prefix}".SetColor("green");
         }
     }
 }
