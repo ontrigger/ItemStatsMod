@@ -336,7 +336,7 @@ namespace ItemStatsMod
                         formatter: new IntFormatter()
                     ),
                     new Test(
-                        calculateStat: (itemCount) => 0.15f + 0.15f * itemCount,
+                        calculateStat: (itemCount) => 1 - Mathf.Pow(0.85f, itemCount),
                         statText: "Cooldown Decrease"
                     ),
                 },
