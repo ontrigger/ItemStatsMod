@@ -6,7 +6,7 @@ Provides current stack bonuses for an item in the tooltip
 # Installation
 First thing you'll need is the BepInExPack. If you don't have it, get it [here](https://thunderstore.io/package/bbepis/BepInExPack/) and follow the installation instructions.
 
-Afterwards, get the zip file from releases and extract the dll in your mods folder. That's it!
+Afterwards, get the zip file from releases and extract the ItemStats folder in BepInEx/plugins. That's it!
 
 # Building
 
