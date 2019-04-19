@@ -7,6 +7,7 @@ using ItemStatsMod.ValueFormatters;
 using RoR2;
 using UnityEngine;
 using static ItemStats.ContextProvider;
+using Console = RoR2.Console;
 
 namespace ItemStats
 {
@@ -31,9 +32,9 @@ namespace ItemStats
                 statValueStr += subItemStat.FormatSubStats(count);
 
 
-                if (itemStatList.IndexOf(subItemStat) == 0)
+                if (itemStatList.IndexOf(subItemStat) == itemStatList.Count - 1)
                 {
-                    // this is the first line
+                    // this is the last line
                     // TextMeshPro richtext modifier that allows me to align the stack counter on the right
                     fullStatText += $"<align=left>{subItemStat.StatText}: {statValueStr}<line-height=0>";
                 }
@@ -124,7 +125,6 @@ namespace ItemStats
                     new ItemStat(
                         formula: new Formula(itemCount => 0.1f),
                         statText: "Ghost Chance",
-                        formatter: new IntFormatter("s"),
                         modifiers: Modifiers.Clover
                     ),
                 },
@@ -195,8 +195,9 @@ namespace ItemStats
                         statText: "Damage Increase"
                     ),
                     new ItemStat(
-                        formula: new Formula((itemCount) => 1f - Mathf.Pow(0.92f, 1f + CountItems(ItemIndex.Clover))),
-                        statText: "Proc Chance"
+                        formula: new Formula((itemCount) => 0.08f),
+                        statText: "Proc Chance",
+                        modifiers: Modifiers.Clover
                     ),
                 },
                 [ItemIndex.FireRing] = new List<ItemStat>()
@@ -206,8 +207,9 @@ namespace ItemStats
                         statText: "Damage Increase"
                     ),
                     new ItemStat(
-                        formula: new Formula((itemCount) => 1f - Mathf.Pow(0.92f, 1f + CountItems(ItemIndex.Clover))),
-                        statText: "Proc Chance"
+                        formula: new Formula((itemCount) => 0.08f),
+                        statText: "Proc Chance",
+                        modifiers: Modifiers.Clover
                     ),
                 },
                 [ItemIndex.WarCryOnMultiKill] = new List<ItemStat>()
@@ -228,7 +230,7 @@ namespace ItemStats
                 [ItemIndex.StunChanceOnHit] = new List<ItemStat>()
                 {
                     new ItemStat(
-                        formula: new Formula((itemCount) => 1f - 1f / (0.05f * itemCount + 1f)),
+                        formula: new Formula((itemCount) => 1f - 1f / (0.05f * (itemCount + 1f))),
                         statText: "Stun Chance Increase",
                         formatter: new PercentageFormatter(maxValue: 1f),
                         modifiers: Modifiers.Clover
@@ -366,13 +368,15 @@ namespace ItemStats
                 [ItemIndex.GoldOnHit] = new List<ItemStat>()
                 {
                     new ItemStat(
+                        //TODO: make run a modifier
                         formula: new Formula((itemCount) => itemCount * 3f * Run.instance.difficultyCoefficient),
                         statText: "Gold per Hit(*)",
                         formatter: new IntFormatter()
                     ),
                     new ItemStat(
-                        formula: new Formula((itemCount) => 1f - Mathf.Pow(0.70f, 1 + CountItems(ItemIndex.Clover))),
-                        statText: "Proc Chance"
+                        formula: new Formula((itemCount) => 0.3f),
+                        statText: "Proc Chance",
+                        modifiers: Modifiers.Clover
                     ),
                 },
                 [ItemIndex.IncreaseHealing] = new List<ItemStat>()
@@ -382,8 +386,9 @@ namespace ItemStats
                         statText: "Healing Increase"
                     ),
                     new ItemStat(
-                        formula: new Formula((itemCount) => 1f - Mathf.Pow(0.75f, 1 + CountItems(ItemIndex.Clover))),
-                        statText: "Proc Chance"
+                        formula: new Formula((itemCount) => 0.25f),
+                        statText: "Proc Chance",
+                        modifiers: Modifiers.Clover
                     ),
                 },
                 [ItemIndex.PersonalShield] = new List<ItemStat>()
@@ -543,7 +548,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                     new ItemStat(
-                        formula: new Formula((itemCount) => 1 - Mathf.Pow(0.90f, 1f + CountItems(ItemIndex.Clover))),
+                        formula: new Formula((itemCount) => 0.1f),
                         statText: "Proc Chance",
                         formatter: new IntFormatter()
                     ),
@@ -643,7 +648,8 @@ namespace ItemStats
             foreach (var stat in StatModifiers)
             {
                 var valueDiff = stat.GetModifiedValue(originalValue) - originalValue;
-                if (valueDiff > 0)
+                Debug.Log("Value diff is " + valueDiff);
+                if (Math.Round(valueDiff, 3) > 0)
                 {
                     formattedValue += stat.GetFormattedValue(valueDiff);
                 }

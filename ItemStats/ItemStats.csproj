@@ -66,6 +66,7 @@
     <Compile Include="src\ContextProvider.cs" />
     <Compile Include="src\ItemStatProvider.cs" />
     <Compile Include="src\ItemStatsMod.cs" />
+    <Compile Include="src\ValueFormatters\Colors.cs" />
     <Compile Include="src\ValueFormatters\Decorators\DecoratorBase.cs" />
     <Compile Include="src\ValueFormatters\Decorators\ModifierDecorator.cs" />
     <Compile Include="src\ValueFormatters\Extensions.cs" />

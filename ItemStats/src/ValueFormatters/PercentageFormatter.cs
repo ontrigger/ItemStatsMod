@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace ItemStats.ValueFormatters
 {
@@ -9,8 +10,8 @@ namespace ItemStats.ValueFormatters
         private readonly float _maxValue;
         private readonly string _color;
 
-        public PercentageFormatter(int decimalPlaces = 2, float scale = 100f, float maxValue = 0f,
-            string color = "green")
+        public PercentageFormatter(int decimalPlaces = 1, float scale = 100f, float maxValue = 0f,
+            string color = Colors.Green)
         {
             _decimalPlaces = decimalPlaces;
             _scale = scale;
