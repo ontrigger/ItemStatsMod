@@ -1,4 +1,6 @@
 
+using ItemStats.ValueFormatters;
+
 namespace ItemStatsMod.ValueFormatters.Decorators
 {
     public abstract class DecoratorBase : IStatFormatter

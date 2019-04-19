@@ -1,9 +1,7 @@
-﻿using System.Reflection;
-using BepInEx;
-using Harmony;
+﻿using BepInEx;
 using RoR2;
 
-namespace ItemStatsMod
+namespace ItemStats
 {
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("dev.ontrigger.itemstats", "ItemStats", "1.0")]

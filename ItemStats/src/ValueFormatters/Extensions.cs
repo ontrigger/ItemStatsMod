@@ -1,6 +1,6 @@
 using System;
 
-namespace ItemStatsMod.ValueFormatters
+namespace ItemStats.ValueFormatters
 {
     public static class Extensions
     {

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemStatsMod", "ItemStatsMod\ItemStatsMod.csproj", "{35991648-A109-4E7A-A120-08C4FA3780F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemStats", "ItemStats\ItemStats.csproj", "{35991648-A109-4E7A-A120-08C4FA3780F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

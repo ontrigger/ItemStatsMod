@@ -1,6 +1,7 @@
 using System;
+using ItemStatsMod.ValueFormatters;
 
-namespace ItemStatsMod.ValueFormatters
+namespace ItemStats.ValueFormatters
 {
     public class IntFormatter : IStatFormatter
     {

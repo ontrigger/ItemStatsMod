@@ -1,4 +1,4 @@
-namespace ItemStatsMod.ValueFormatters
+namespace ItemStats.ValueFormatters
 {
     public interface IStatFormatter
     {
