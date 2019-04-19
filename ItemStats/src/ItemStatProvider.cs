@@ -55,7 +55,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: new Formula((count) => (1f - 1f / (0.15f * count + 1f))),
-                        statText: "Proc Chance"
+                        statText: "Block Chance"
                     ),
                 },
 
@@ -64,7 +64,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: new Formula((itemCount) => itemCount * 0.14f),
-                        statText: "Walk Speed Increase"
+                        statText: "Movement Speed Increase"
                     )
                 },
 
@@ -81,7 +81,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: new Formula(count => 0.0225f + 0.0225f * count),
-                        statText: "Healing Increase",
+                        statText: "Healing Per Second",
                         // TODO: use a decorator instead of additional param for the formatter
                         formatter: new PercentageFormatter(maxValue: 1f)
                     ),
@@ -95,7 +95,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: new Formula((itemCount) => itemCount * 0.1f),
-                        statText: "Crit Chance",
+                        statText: "Additional Crit Chance",
                         formatter: new PercentageFormatter(maxValue: 1f)
                     )
                 },
@@ -103,7 +103,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: new Formula((itemCount) => itemCount),
-                        statText: "Total Jumps",
+                        statText: "Total Additional  Jumps",
                         formatter: new IntFormatter()
                     )
                 },
@@ -132,12 +132,12 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: new Formula((itemCount) => itemCount * 40f),
-                        statText: "Maximum Health",
+                        statText: "Bonus Health",
                         formatter: new IntFormatter("HP")
                     ),
                     new ItemStat(
                         formula: new Formula((itemCount) => itemCount * 1.6f),
-                        statText: "Regeneration",
+                        statText: "Additional Regeneration",
                         formatter: new IntFormatter("HP/s")
                     ),
                 },
@@ -326,7 +326,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: new Formula((itemCount) => itemCount),
-                        statText: "Soul Energy Increase"
+                        statText: "Soul Energy"
                     ),
                 },
                 [ItemIndex.HealOnCrit] = new List<ItemStat>()
@@ -557,7 +557,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: new Formula((itemCount) => 100 * itemCount),
-                        statText: "Max Possible Health",
+                        statText: "Max Additional Health",
                         formatter: new IntFormatter("HP")
                     ),
                 },
