@@ -230,7 +230,7 @@ namespace ItemStats
                 [ItemIndex.StunChanceOnHit] = new List<ItemStat>()
                 {
                     new ItemStat(
-                        formula: new Formula((itemCount) => 1f - 1f / (0.05f * (itemCount + 1f))),
+                        formula: new Formula((itemCount) => 1f - 1f / (0.05f * itemCount + 1f)),
                         statText: "Stun Chance Increase",
                         formatter: new PercentageFormatter(maxValue: 1f),
                         modifiers: Modifiers.Clover
@@ -574,6 +574,13 @@ namespace ItemStats
                     new ItemStat(
                         formula: new Formula((itemCount) => 0.3f * itemCount),
                         statText: "Max Attack Speed"
+                    )
+                },
+                [ItemIndex.Icicle] = new List<ItemStat>()
+                {
+                    new ItemStat(
+                        formula: new Formula((itemCount) => 0.25f * (0.5f + 0.5f * itemCount)),
+                        statText: "Icicle Damage"
                     )
                 }
             };
