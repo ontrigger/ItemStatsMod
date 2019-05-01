@@ -534,6 +534,14 @@ namespace ItemStats
                         formula: itemCount => 0.25f * (0.5f + 0.5f * itemCount),
                         statText: "Icicle Damage"
                     )
+                },
+                [ItemIndex.Behemoth] = new List<ItemStat>()
+                {
+                    new ItemStat(
+                        formula: itemCount => 1.5f + 2.5f * itemCount,
+                        statText: "Explosion Radius",
+                        formatter: new IntFormatter("m")
+                    )
                 }
             };
         }
