@@ -527,9 +527,9 @@ namespace ItemStats
                 [ItemIndex.AlienHead] = new List<ItemStat>()
                 {
                     new ItemStat(
-                        formula: new Formula((itemCount) => Mathf.Round(1 - Mathf.Pow(0.75f, itemCount))),
+                        formula: new Formula((itemCount) => 1 - Mathf.Pow(0.75f, itemCount)),
                         statText: "Cooldown Reduction",
-                        formatter: new PercentageFormatter(decimalPlaces: 0)
+                        formatter: new PercentageFormatter(decimalPlaces: 2)
                     ),
                 },
                 [ItemIndex.Firework] = new List<ItemStat>()
@@ -544,13 +544,12 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: new Formula((itemCount) => 3 * itemCount),
-                        statText: "Missile Damage Increase",
-                        formatter: new IntFormatter()
+                        statText: "Missile Damage Increase"
                     ),
                     new ItemStat(
                         formula: new Formula((itemCount) => 0.1f),
                         statText: "Proc Chance",
-                        formatter: new IntFormatter()
+                        modifiers: Modifiers.Clover
                     ),
                 },
                 [ItemIndex.Infusion] = new List<ItemStat>()
@@ -582,7 +581,57 @@ namespace ItemStats
                         formula: new Formula((itemCount) => 0.25f * (0.5f + 0.5f * itemCount)),
                         statText: "Icicle Damage"
                     )
-                }
+                },
+                [ItemIndex.Dagger] = new List<ItemStat>()
+                {
+                    new ItemStat(
+                        formula: new Formula((itemCount) => 3 * itemCount),
+                        statText: "Dagger Count",
+                        formatter: new IntFormatter()
+                    ),
+                },
+                [ItemIndex.FallBoots] = new List<ItemStat>()
+                {
+                        new ItemStat(
+                        formula: new Formula((itemCount) =>  10 * Mathf.Pow(0.5f, itemCount-1)),
+                        statText: "Cooldown",
+                        formatter: new FloatFormatter("s", decimalPlaces: 2)
+                    ),
+                    new ItemStat(
+                        formula: new Formula((itemCount) =>  1 - Mathf.Pow(0.5f, itemCount-1)),
+                        statText: "Cooldown Reduction",
+                        formatter: new PercentageFormatter(decimalPlaces: 2)
+                    ),
+                },
+                [ItemIndex.Phasing] = new List<ItemStat>()
+                {
+                    new ItemStat(
+                        formula: new Formula((itemCount) => 1.5f + 1.5f * itemCount),
+                        statText: "Invisibility Duration",
+                        formatter: new FloatFormatter("s")
+                    ),
+                },
+                [ItemIndex.LunarDagger] = new List<ItemStat>()
+                {
+                    new ItemStat(
+                        formula: new Formula((itemCount) => Mathf.Pow(2f, itemCount)),
+                        statText: "Damage Increase",
+                        formatter: new PercentageFormatter()
+                    ),
+                    new ItemStat(
+                        formula: new Formula((itemCount) => Mathf.Pow(0.5f, itemCount)),
+                        statText: "Health Reduced",
+                        formatter: new PercentageFormatter(decimalPlaces: 2)
+                    ),
+                },
+                [ItemIndex.Behemoth] = new List<ItemStat>()
+                {
+                    new ItemStat(
+                        formula: new Formula((itemCount) => 2.5f + 1.5f * itemCount),
+                        statText: "Explosion Radius",
+                        formatter: new FloatFormatter("m")
+                    ),
+                },
             };
         }
 
