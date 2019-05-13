@@ -70,6 +70,7 @@
     <Compile Include="src\ValueFormatters\Decorators\DecoratorBase.cs" />
     <Compile Include="src\ValueFormatters\Decorators\ModifierDecorator.cs" />
     <Compile Include="src\ValueFormatters\Extensions.cs" />
+    <Compile Include="src\ValueFormatters\FloatFormatter.cs" />
     <Compile Include="src\ValueFormatters\IStatFormatter.cs" />
     <Compile Include="src\ValueFormatters\ModifierFormatter.cs" />
     <Compile Include="src\ValueFormatters\PercentageFormatter.cs" />
