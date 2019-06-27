@@ -11,14 +11,14 @@ namespace ItemStats
         {
             ItemDefs = new Dictionary<ItemIndex, List<ItemStat>>
             {
-                [ItemIndex.Bear] = new List<ItemStat>()
+                [ItemIndex.Bear] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: count => 1f - 1f / (0.15f * count + 1f),
                         statText: "Block Chance"
                     )
                 },
-                [ItemIndex.Hoof] = new List<ItemStat>()
+                [ItemIndex.Hoof] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount * 0.14f,
@@ -27,14 +27,14 @@ namespace ItemStats
                 },
 
 
-                [ItemIndex.Syringe] = new List<ItemStat>()
+                [ItemIndex.Syringe] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: count => count * 0.15f,
                         statText: "Attack Speed Increase"
                     )
                 },
-                [ItemIndex.Mushroom] = new List<ItemStat>()
+                [ItemIndex.Mushroom] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: count => 0.0225f + 0.0225f * count,
@@ -48,7 +48,7 @@ namespace ItemStats
                         formatter: new IntFormatter("m")
                     )
                 },
-                [ItemIndex.CritGlasses] = new List<ItemStat>()
+                [ItemIndex.CritGlasses] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount * 0.1f,
@@ -56,7 +56,7 @@ namespace ItemStats
                         formatter: new PercentageFormatter(maxValue: 1f)
                     )
                 },
-                [ItemIndex.Feather] = new List<ItemStat>()
+                [ItemIndex.Feather] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount,
@@ -64,7 +64,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     )
                 },
-                [ItemIndex.Seed] = new List<ItemStat>()
+                [ItemIndex.Seed] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount,
@@ -72,7 +72,7 @@ namespace ItemStats
                         formatter: new IntFormatter("HP")
                     )
                 },
-                [ItemIndex.GhostOnKill] = new List<ItemStat>()
+                [ItemIndex.GhostOnKill] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount * 30f,
@@ -80,7 +80,7 @@ namespace ItemStats
                         formatter: new IntFormatter("s")
                     )
                 },
-                [ItemIndex.Knurl] = new List<ItemStat>()
+                [ItemIndex.Knurl] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount * 40f,
@@ -93,7 +93,7 @@ namespace ItemStats
                         formatter: new IntFormatter("HP/s")
                     ),
                 },
-                [ItemIndex.Clover] = new List<ItemStat>()
+                [ItemIndex.Clover] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount,
@@ -101,7 +101,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.Medkit] = new List<ItemStat>()
+                [ItemIndex.Medkit] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount * 10f,
@@ -109,14 +109,14 @@ namespace ItemStats
                         formatter: new IntFormatter("HP")
                     ),
                 },
-                [ItemIndex.Crowbar] = new List<ItemStat>()
+                [ItemIndex.Crowbar] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 1.5f + 0.3f * (itemCount - 1),
                         statText: "Damage Increase"
                     ),
                 },
-                [ItemIndex.Tooth] = new List<ItemStat>()
+                [ItemIndex.Tooth] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 4 * itemCount,
@@ -124,7 +124,7 @@ namespace ItemStats
                         formatter: new IntFormatter("HP")
                     ),
                 },
-                [ItemIndex.Talisman] = new List<ItemStat>()
+                [ItemIndex.Talisman] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 2f + itemCount * 2f,
@@ -132,7 +132,7 @@ namespace ItemStats
                         formatter: new IntFormatter("s")
                     ),
                 },
-                [ItemIndex.Bandolier] = new List<ItemStat>()
+                [ItemIndex.Bandolier] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 1f - 1f / Mathf.Pow(itemCount + 1, 0.33f),
@@ -140,7 +140,7 @@ namespace ItemStats
                         modifiers: Modifiers.Clover
                     ),
                 },
-                [ItemIndex.IceRing] = new List<ItemStat>()
+                [ItemIndex.IceRing] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 1.25f + 1.25f * itemCount,
@@ -152,7 +152,7 @@ namespace ItemStats
                         modifiers: Modifiers.Clover
                     ),
                 },
-                [ItemIndex.FireRing] = new List<ItemStat>()
+                [ItemIndex.FireRing] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 2.5f + 2.5f * itemCount,
@@ -164,7 +164,7 @@ namespace ItemStats
                         modifiers: Modifiers.Clover
                     ),
                 },
-                [ItemIndex.WarCryOnMultiKill] = new List<ItemStat>()
+                [ItemIndex.WarCryOnMultiKill] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 2f + 4f * itemCount,
@@ -172,14 +172,14 @@ namespace ItemStats
                         formatter: new IntFormatter("s")
                     ),
                 },
-                [ItemIndex.SprintOutOfCombat] = new List<ItemStat>()
+                [ItemIndex.SprintOutOfCombat] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount * 0.3f,
                         statText: "Speed Increase"
                     ),
                 },
-                [ItemIndex.StunChanceOnHit] = new List<ItemStat>()
+                [ItemIndex.StunChanceOnHit] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 1f - 1f / (0.05f * itemCount + 1f),
@@ -188,7 +188,7 @@ namespace ItemStats
                         modifiers: Modifiers.Clover
                     ),
                 },
-                [ItemIndex.WarCryOnCombat] = new List<ItemStat>()
+                [ItemIndex.WarCryOnCombat] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 2f + 4f * itemCount,
@@ -196,7 +196,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.SecondarySkillMagazine] = new List<ItemStat>()
+                [ItemIndex.SecondarySkillMagazine] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount,
@@ -204,7 +204,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.UtilitySkillMagazine] = new List<ItemStat>()
+                [ItemIndex.UtilitySkillMagazine] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount * 2f,
@@ -212,7 +212,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.AutoCastEquipment] = new List<ItemStat>()
+                [ItemIndex.AutoCastEquipment] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 1 - Mathf.Pow(0.5f, itemCount),
@@ -220,7 +220,7 @@ namespace ItemStats
                         formatter: new PercentageFormatter(0)
                     ),
                 },
-                [ItemIndex.KillEliteFrenzy] = new List<ItemStat>()
+                [ItemIndex.KillEliteFrenzy] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 1f + itemCount * 2f,
@@ -228,14 +228,14 @@ namespace ItemStats
                         formatter: new IntFormatter("s")
                     ),
                 },
-                [ItemIndex.BossDamageBonus] = new List<ItemStat>()
+                [ItemIndex.BossDamageBonus] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 0.2f + 0.1f * (itemCount - 1),
                         statText: "Damage Increase"
                     ),
                 },
-                [ItemIndex.ExplodeOnDeath] = new List<ItemStat>()
+                [ItemIndex.ExplodeOnDeath] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 12f + 2.4f * (itemCount - 1f),
@@ -247,14 +247,14 @@ namespace ItemStats
                         statText: "Damage Increase"
                     ),
                 },
-                [ItemIndex.HealWhileSafe] = new List<ItemStat>()
+                [ItemIndex.HealWhileSafe] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 2.5f + (itemCount - 1) * 1.5f,
                         statText: "Regeneration Increase"
                     ),
                 },
-                [ItemIndex.IgniteOnKill] = new List<ItemStat>()
+                [ItemIndex.IgniteOnKill] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 8f + 4f * itemCount,
@@ -266,7 +266,7 @@ namespace ItemStats
                         statText: "Duration Increase"
                     ),
                 },
-                [ItemIndex.WardOnLevel] = new List<ItemStat>()
+                [ItemIndex.WardOnLevel] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 8f + 8f * itemCount,
@@ -274,14 +274,14 @@ namespace ItemStats
                         formatter: new IntFormatter("m")
                     ),
                 },
-                [ItemIndex.NovaOnHeal] = new List<ItemStat>()
+                [ItemIndex.NovaOnHeal] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount,
                         statText: "Soul Energy"
                     ),
                 },
-                [ItemIndex.HealOnCrit] = new List<ItemStat>()
+                [ItemIndex.HealOnCrit] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 4f + itemCount * 4f,
@@ -289,7 +289,7 @@ namespace ItemStats
                         formatter: new IntFormatter("HP")
                     ),
                 },
-                [ItemIndex.BleedOnHit] = new List<ItemStat>()
+                [ItemIndex.BleedOnHit] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 0.15f * itemCount,
@@ -297,7 +297,7 @@ namespace ItemStats
                         formatter: new PercentageFormatter(maxValue: 1f)
                     ),
                 },
-                [ItemIndex.SlowOnHit] = new List<ItemStat>()
+                [ItemIndex.SlowOnHit] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount,
@@ -305,7 +305,7 @@ namespace ItemStats
                         formatter: new IntFormatter("s")
                     ),
                 },
-                [ItemIndex.EquipmentMagazine] = new List<ItemStat>()
+                [ItemIndex.EquipmentMagazine] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount,
@@ -317,7 +317,7 @@ namespace ItemStats
                         statText: "Cooldown Decrease"
                     ),
                 },
-                [ItemIndex.GoldOnHit] = new List<ItemStat>()
+                [ItemIndex.GoldOnHit] = new List<ItemStat>
                 {
                     new ItemStat(
                         //TODO: make run a modifier
@@ -331,7 +331,7 @@ namespace ItemStats
                         modifiers: Modifiers.Clover
                     ),
                 },
-                [ItemIndex.IncreaseHealing] = new List<ItemStat>()
+                [ItemIndex.IncreaseHealing] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount,
@@ -343,7 +343,7 @@ namespace ItemStats
                         modifiers: Modifiers.Clover
                     ),
                 },
-                [ItemIndex.PersonalShield] = new List<ItemStat>()
+                [ItemIndex.PersonalShield] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount * 25f,
@@ -351,7 +351,7 @@ namespace ItemStats
                         formatter: new IntFormatter("SP")
                     ),
                 },
-                [ItemIndex.ChainLightning] = new List<ItemStat>()
+                [ItemIndex.ChainLightning] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount * 2f,
@@ -364,27 +364,30 @@ namespace ItemStats
                         formatter: new IntFormatter("m")
                     ),
                 },
-                [ItemIndex.TreasureCache] = new List<ItemStat>()
+                [ItemIndex.TreasureCache] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 80f / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
                         statText: "Common Chance",
-                        formatter: new PercentageFormatter(maxValue: 1f)
+                        formatter: new PercentageFormatter(maxValue: 1f),
+                        modifiers: Modifiers.TreasureCache
                     ),
                     new ItemStat(
                         formula: itemCount =>
                             20f * itemCount / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
                         statText: "Uncommon Chance",
-                        formatter: new PercentageFormatter(maxValue: 1f)
+                        formatter: new PercentageFormatter(maxValue: 1f),
+                        modifiers: Modifiers.TreasureCache
                     ),
                     new ItemStat(
                         formula: itemCount =>
                             Mathf.Pow(itemCount, 2f) / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
                         statText: "Rare Chance",
-                        formatter: new PercentageFormatter(maxValue: 1f)
+                        formatter: new PercentageFormatter(maxValue: 1f),
+                        modifiers: Modifiers.TreasureCache
                     ),
                 },
-                [ItemIndex.BounceNearby] = new List<ItemStat>()
+                [ItemIndex.BounceNearby] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 1f - 100f / (100f + 20f * itemCount),
@@ -397,14 +400,14 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.SprintBonus] = new List<ItemStat>()
+                [ItemIndex.SprintBonus] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 0.1f + 0.2f * itemCount,
                         statText: "Speed Increase"
                     ),
                 },
-                [ItemIndex.SprintArmor] = new List<ItemStat>()
+                [ItemIndex.SprintArmor] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 30f * itemCount,
@@ -412,7 +415,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.ShockNearby] = new List<ItemStat>()
+                [ItemIndex.ShockNearby] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 2f * itemCount,
@@ -420,7 +423,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.BeetleGland] = new List<ItemStat>()
+                [ItemIndex.BeetleGland] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount,
@@ -428,14 +431,14 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.ShieldOnly] = new List<ItemStat>()
+                [ItemIndex.ShieldOnly] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 0.5f + (itemCount - 1) * 0.25f,
                         statText: "Max Health Increase"
                     ),
                 },
-                [ItemIndex.StickyBomb] = new List<ItemStat>()
+                [ItemIndex.StickyBomb] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 1.25f + 1.25f * itemCount,
@@ -448,7 +451,7 @@ namespace ItemStats
                         modifiers: Modifiers.Clover
                     ),
                 },
-                [ItemIndex.RepeatHeal] = new List<ItemStat>()
+                [ItemIndex.RepeatHeal] = new List<ItemStat>
                 {
                     //TODO: need to get masters maxhealth to get actual heal amount
                     new ItemStat(
@@ -460,7 +463,7 @@ namespace ItemStats
                         statText: "Healing per Heal Increase"
                     ),
                 },
-                [ItemIndex.HeadHunter] = new List<ItemStat>()
+                [ItemIndex.HeadHunter] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 3f + 5f * itemCount,
@@ -468,7 +471,7 @@ namespace ItemStats
                         formatter: new IntFormatter("s")
                     ),
                 },
-                [ItemIndex.ExtraLife] = new List<ItemStat>()
+                [ItemIndex.ExtraLife] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => itemCount,
@@ -476,7 +479,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.AlienHead] = new List<ItemStat>()
+                [ItemIndex.AlienHead] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => Mathf.Round(1 - Mathf.Pow(0.75f, itemCount)),
@@ -484,7 +487,7 @@ namespace ItemStats
                         formatter: new PercentageFormatter(decimalPlaces: 0)
                     ),
                 },
-                [ItemIndex.Firework] = new List<ItemStat>()
+                [ItemIndex.Firework] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 4 + itemCount * 4,
@@ -492,7 +495,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.Missile] = new List<ItemStat>()
+                [ItemIndex.Missile] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 3 * itemCount,
@@ -505,7 +508,7 @@ namespace ItemStats
                         formatter: new IntFormatter()
                     ),
                 },
-                [ItemIndex.Infusion] = new List<ItemStat>()
+                [ItemIndex.Infusion] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 100 * itemCount,
@@ -513,7 +516,7 @@ namespace ItemStats
                         formatter: new IntFormatter("HP")
                     ),
                 },
-                [ItemIndex.JumpBoost] = new List<ItemStat>()
+                [ItemIndex.JumpBoost] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 10 * itemCount,
@@ -521,21 +524,21 @@ namespace ItemStats
                         formatter: new IntFormatter("m")
                     ),
                 },
-                [ItemIndex.AttackSpeedOnCrit] = new List<ItemStat>()
+                [ItemIndex.AttackSpeedOnCrit] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 0.3f * itemCount,
                         statText: "Max Attack Speed"
                     )
                 },
-                [ItemIndex.Icicle] = new List<ItemStat>()
+                [ItemIndex.Icicle] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 0.25f * (0.5f + 0.5f * itemCount),
                         statText: "Icicle Damage"
                     )
                 },
-                [ItemIndex.Behemoth] = new List<ItemStat>()
+                [ItemIndex.Behemoth] = new List<ItemStat>
                 {
                     new ItemStat(
                         formula: itemCount => 1.5f + 2.5f * itemCount,

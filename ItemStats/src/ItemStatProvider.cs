@@ -2,12 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ItemStats.ValueFormatters;
-using ItemStats.ValueFormatters.Decorators;
-using ItemStatsMod.ValueFormatters;
 using RoR2;
 using UnityEngine;
-using static ItemStats.ContextProvider;
-using Console = RoR2.Console;
 
 namespace ItemStats
 {
@@ -25,24 +21,24 @@ namespace ItemStats
             }
 
             var fullStatText = string.Empty;
-            foreach (ItemStat subItemStat in itemStatList)
+            foreach (var itemStat in itemStatList)
             {
-                var statValue = subItemStat.GetInitialStat(count) + subItemStat.GetIndividualStats(count).Sum();
+                var statValue = itemStat.GetInitialStat(count) + itemStat.GetIndividualStats(count).Sum();
 
-                var statValueStr = subItemStat.Format(statValue);
+                var statValueStr = itemStat.Format(statValue);
 
-                statValueStr += subItemStat.FormatSubStats(count);
+                statValueStr += itemStat.FormatSubStats(count);
 
 
-                if (itemStatList.IndexOf(subItemStat) == itemStatList.Count - 1)
+                if (itemStatList.IndexOf(itemStat) == itemStatList.Count - 1)
                 {
                     // this is the last line
                     // TextMeshPro richtext modifier that allows me to align the stack counter on the right
-                    fullStatText += $"<align=left>{subItemStat.StatText}: {statValueStr}<line-height=0>";
+                    fullStatText += $"<align=left>{itemStat.StatText}: {statValueStr}<line-height=0>";
                 }
                 else
                 {
-                    fullStatText += $"{subItemStat.StatText}: {statValueStr}\n";
+                    fullStatText += $"{itemStat.StatText}: {statValueStr}\n";
                 }
             }
 
@@ -55,11 +51,11 @@ namespace ItemStats
         private readonly Func<float, float> _formula;
         public readonly IStatFormatter Formatter;
         public string StatText { get; }
-        private Modifier[] StatModifiers { get; }
+        public IModifier[] StatModifiers { get; }
 
 
         public ItemStat(Func<float, float> formula, string statText,
-            IStatFormatter formatter = null, params Modifier[] modifiers)
+            IStatFormatter formatter = null, params IModifier[] modifiers)
         {
             _formula = formula;
             StatText = statText;
@@ -77,7 +73,7 @@ namespace ItemStats
             var originalValue = GetInitialStat(count);
             foreach (var stat in StatModifiers)
             {
-                yield return stat.GetModifiedValue(originalValue) - originalValue;
+                yield return stat.Func(originalValue) - originalValue;
             }
         }
 
@@ -88,50 +84,18 @@ namespace ItemStats
 
         public string FormatSubStats(float count)
         {
-            var originalValue = _formula(count);
-
             var formattedValue = String.Empty;
             foreach (var stat in StatModifiers)
             {
-                var valueDiff = stat.GetModifiedValue(originalValue) - originalValue;
+                var valueDiff = stat.Func(count) - _formula(count);
                 Debug.Log("Value diff is " + valueDiff);
                 if (Math.Round(valueDiff, 3) > 0)
                 {
-                    formattedValue += stat.GetFormattedValue(valueDiff);
+                    formattedValue += "\n" + stat.Formatter.Format(valueDiff);
                 }
             }
 
             return formattedValue;
-        }
-    }
-
-    static class Modifiers
-    {
-        public static readonly Modifier Clover = new Modifier(
-            result => 1 - Mathf.Pow(1 - result, 1 + CountItems(ItemIndex.Clover)),
-            new ModifierFormatter("from Clover")
-        );
-    }
-
-    public class Modifier
-    {
-        private readonly Func<float, float> _func;
-        private readonly IStatFormatter _formatter;
-
-        public Modifier(Func<float, float> func, IStatFormatter formatter)
-        {
-            _func = func;
-            _formatter = formatter;
-        }
-
-        public float GetModifiedValue(float originalValue)
-        {
-            return _func(originalValue);
-        }
-
-        public string GetFormattedValue(float value)
-        {
-            return _formatter.Format(value);
         }
     }
 }

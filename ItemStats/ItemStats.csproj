@@ -48,6 +48,9 @@
     <Reference Include="R2API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>D:\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\plugins\R2API\R2API.dll</HintPath>
     </Reference>
+    <Reference Include="Rewired_Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>D:\SteamLibrary\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\Rewired_Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -67,6 +70,7 @@
     <Compile Include="src\ItemStatDefinitions.cs" />
     <Compile Include="src\ItemStatProvider.cs" />
     <Compile Include="src\ItemStatsMod.cs" />
+    <Compile Include="src\Modifiers.cs"/>
     <Compile Include="src\ValueFormatters\Colors.cs" />
     <Compile Include="src\ValueFormatters\Decorators\DecoratorBase.cs" />
     <Compile Include="src\ValueFormatters\Decorators\ModifierDecorator.cs" />
