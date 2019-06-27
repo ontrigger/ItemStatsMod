@@ -363,6 +363,12 @@ namespace ItemStats
                         statText: "Bounce Range",
                         formatter: new IntFormatter("m")
                     ),
+                    new ItemStat(
+                        formula: itemCount => 0.25f,
+                        statText: "Proc Chance",
+                        formatter: new PercentageFormatter(),
+                        modifiers: Modifiers.Clover
+                    ),
                 },
                 [ItemIndex.TreasureCache] = new List<ItemStat>
                 {
@@ -500,12 +506,13 @@ namespace ItemStats
                     new ItemStat(
                         formula: itemCount => 3 * itemCount,
                         statText: "Missile Damage Increase",
-                        formatter: new IntFormatter()
+                        formatter: new PercentageFormatter()
                     ),
                     new ItemStat(
-                        formula: itemCount => 0.1f,
+                        formula: itemCount => 0.1f * itemCount,
                         statText: "Proc Chance",
-                        formatter: new IntFormatter()
+                        formatter: new PercentageFormatter(),
+                        modifiers: Modifiers.Clover
                     ),
                 },
                 [ItemIndex.Infusion] = new List<ItemStat>

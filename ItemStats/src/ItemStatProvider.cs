@@ -93,7 +93,7 @@ namespace ItemStats
                 Debug.Log("Value diff is " + valueDiff);
                 if (Math.Round(valueDiff, 3) > 0)
                 {
-                    formattedValue += "\n" + stat.Formatter.Format(valueDiff);
+                    formattedValue += stat.Formatter.Format(valueDiff);
                 }
             }
 
