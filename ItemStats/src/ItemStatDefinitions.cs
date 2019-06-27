@@ -119,7 +119,7 @@ namespace ItemStats
                 [ItemIndex.Tooth] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 4 * itemCount,
+                        formula: itemCount => 6 * itemCount,
                         statText: "Heal Amount",
                         formatter: new IntFormatter("HP")
                     ),
@@ -144,7 +144,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: itemCount => 1.25f + 1.25f * itemCount,
-                        statText: "Damage Increase"
+                        statText: "Total Damage"
                     ),
                     new ItemStat(
                         formula: itemCount => 0.08f,
@@ -156,7 +156,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: itemCount => 2.5f + 2.5f * itemCount,
-                        statText: "Damage Increase"
+                        statText: "Total Damage"
                     ),
                     new ItemStat(
                         formula: itemCount => 0.08f,
@@ -215,9 +215,9 @@ namespace ItemStats
                 [ItemIndex.AutoCastEquipment] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 1 - Mathf.Pow(0.5f, itemCount),
+                        formula: itemCount => 0.5f * Mathf.Pow(0.85f, (itemCount - 1)),
                         statText: "Cooldown Decrease",
-                        formatter: new PercentageFormatter(0)
+                        formatter: new PercentageFormatter()
                     ),
                 },
                 [ItemIndex.KillEliteFrenzy] = new List<ItemStat>
@@ -231,7 +231,7 @@ namespace ItemStats
                 [ItemIndex.BossDamageBonus] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 0.2f + 0.1f * (itemCount - 1),
+                        formula: itemCount => 0.2f + 0.2f * (itemCount - 1),
                         statText: "Damage Increase"
                     ),
                 },
@@ -300,7 +300,7 @@ namespace ItemStats
                 [ItemIndex.SlowOnHit] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => itemCount,
+                        formula: itemCount => 2 * itemCount,
                         statText: "Slow Duration",
                         formatter: new IntFormatter("s")
                     ),
@@ -447,10 +447,6 @@ namespace ItemStats
                 [ItemIndex.StickyBomb] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 1.25f + 1.25f * itemCount,
-                        statText: "Damage Increase"
-                    ),
-                    new ItemStat(
                         formula: itemCount => 0.025f + 0.025f * itemCount,
                         statText: "Proc Chance Increase",
                         formatter: new PercentageFormatter(maxValue: 1f),
@@ -505,7 +501,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         formula: itemCount => 3 * itemCount,
-                        statText: "Missile Damage Increase",
+                        statText: "Missile Total Damage",
                         formatter: new PercentageFormatter()
                     ),
                     new ItemStat(
@@ -541,12 +537,12 @@ namespace ItemStats
                 [ItemIndex.Icicle] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 0.25f * (0.5f + 0.5f * itemCount),
+                        formula: itemCount => 1.5f * itemCount,
                         statText: "Icicle Damage"
                     ),
                     new ItemStat(
                         formula: itemCount => 6 + (itemCount - 1) * 3,
-                        statText: "Max Icicles"
+                        statText: "Max Possible Icicles"
                     )
                 },
                 [ItemIndex.Behemoth] = new List<ItemStat>
