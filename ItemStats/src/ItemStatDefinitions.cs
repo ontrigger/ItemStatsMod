@@ -545,7 +545,70 @@ namespace ItemStats
                         statText: "Explosion Radius",
                         formatter: new IntFormatter("m")
                     )
-                }
+                },
+                [ItemIndex.BarrierOnKill] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount => 0.2f * itemCount,
+                        statText: "Barrier Health",
+                        formatter: new IntFormatter("HP")
+                    )
+                },
+                [ItemIndex.BarrierOnOverHeal] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount => 0.2f * itemCount,
+                        statText: "Barrier Health Fraction",
+                        formatter: new PercentageFormatter(1)
+                    )
+                },
+                [ItemIndex.ExecuteLowHealthElite] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount => 0.2f * itemCount,
+                        statText: "Kill Health Treshold",
+                        formatter: new PercentageFormatter()
+                    )
+                },
+                [ItemIndex.EnergizedOnEquipmentUse] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount => 8f + 4f * (itemCount - 1),
+                        statText: "Attack Speed Duration",
+                        formatter: new IntFormatter("s")
+                    )
+                },
+                [ItemIndex.TitanGoldDuringTP] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount =>
+                        {
+                            var num = 1f + Run.instance.difficultyCoefficient / 2f;
+                            num *= Mathf.Pow(itemCount, 1f);
+                            return 0.1f * Mathf.RoundToInt((num - 1f) * 10f);
+                        },
+                        statText: "Health Boost",
+                        formatter: new PercentageFormatter()
+                    ),
+                    new ItemStat(
+                        formula: itemCount =>
+                        {
+                            var num = 1f + Run.instance.difficultyCoefficient / 8f;
+                            num *= Mathf.Pow(itemCount, 0.5f);
+                            return 0.1f * Mathf.RoundToInt((num - 1f) * 10f);
+                        },
+                        statText: "Damage Boost",
+                        formatter: new PercentageFormatter()
+                    )
+                },
+                [ItemIndex.SprintWisp] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount => itemCount,
+                        statText: "Damage Boost",
+                        formatter: new PercentageFormatter()
+                    )
+                },
             };
         }
     }

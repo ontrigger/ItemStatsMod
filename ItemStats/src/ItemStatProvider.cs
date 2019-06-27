@@ -34,7 +34,7 @@ namespace ItemStats
                 {
                     // this is the last line
                     // TextMeshPro richtext modifier that allows me to align the stack counter on the right
-                    fullStatText += $"<align=left>{itemStat.StatText}: {statValueStr}<line-height=0>";
+                    fullStatText += $"<align=left>{itemStat.StatText}: {statValueStr}";
                 }
                 else
                 {
@@ -85,9 +85,11 @@ namespace ItemStats
         public string FormatSubStats(float count)
         {
             var formattedValue = String.Empty;
+            var result = _formula(count);
+
             foreach (var stat in StatModifiers)
             {
-                var valueDiff = stat.Func(count) - _formula(count);
+                var valueDiff = stat.Func(result) - result;
                 Debug.Log("Value diff is " + valueDiff);
                 if (Math.Round(valueDiff, 3) > 0)
                 {
