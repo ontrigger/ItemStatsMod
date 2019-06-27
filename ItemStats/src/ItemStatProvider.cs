@@ -13,6 +13,7 @@ namespace ItemStats
 
         public static string ProvideStatsForItem(ItemIndex index, int count)
         {
+            //TODO: refactor this so it isnt shit
             var itemStatList = ItemDefs.ContainsKey(index) ? ItemDefs[index] : null;
 
             if (itemStatList == null)
@@ -34,7 +35,7 @@ namespace ItemStats
                 {
                     // this is the last line
                     // TextMeshPro richtext modifier that allows me to align the stack counter on the right
-                    fullStatText += $"<align=left>{itemStat.StatText}: {statValueStr}";
+                    fullStatText += $"<align=left>{itemStat.StatText}: {statValueStr}<line-height=0>";
                 }
                 else
                 {
@@ -42,12 +43,13 @@ namespace ItemStats
                 }
             }
 
-            return $"{fullStatText}\n<align=right>({count} stacks)<line-height=1em>";
+            return $"{fullStatText}<align=right>({count} stacks)<line-height=1em>";
         }
     }
 
     public class ItemStat
     {
+        //TODO: refactor
         private readonly Func<float, float> _formula;
         public readonly IStatFormatter Formatter;
         public string StatText { get; }

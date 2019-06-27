@@ -543,6 +543,10 @@ namespace ItemStats
                     new ItemStat(
                         formula: itemCount => 0.25f * (0.5f + 0.5f * itemCount),
                         statText: "Icicle Damage"
+                    ),
+                    new ItemStat(
+                        formula: itemCount => 6 + (itemCount - 1) * 3,
+                        statText: "Max Icicles"
                     )
                 },
                 [ItemIndex.Behemoth] = new List<ItemStat>
@@ -613,6 +617,14 @@ namespace ItemStats
                     new ItemStat(
                         formula: itemCount => itemCount,
                         statText: "Damage Boost",
+                        formatter: new PercentageFormatter()
+                    )
+                },
+                [ItemIndex.Dagger] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount => 1.5f * itemCount,
+                        statText: "Dagger Damage",
                         formatter: new PercentageFormatter()
                     )
                 },
