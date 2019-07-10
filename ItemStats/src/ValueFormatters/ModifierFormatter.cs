@@ -20,8 +20,8 @@ namespace ItemStats.ValueFormatters
             var trailFormatStr = new string('#', 1);
             var valueStr = Math.Round(value * 100f, 1).ToString($"0.{trailFormatStr}");
             valueStr += "%";
-            
-            return "\n  " + $"{sign}{valueStr} ".SetColor(_color) + _statText;
+
+            return "  " + $"{sign}{valueStr} ".SetColor(_color) + _statText;
         }
     }
 }

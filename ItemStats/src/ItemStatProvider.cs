@@ -34,10 +34,9 @@ namespace ItemStats
                     .Zip(itemStat.StatModifiers, Tuple.Create)
                     .Aggregate("", (s, tuple) =>
                     {
-                        var (subStatValue, modifier) = tuple;
-                        if (Math.Round(subStatValue, 3) > 0)
+                        if (Math.Round(tuple.Item1, 3) > 0)
                         {
-                            return "\n" + modifier.Format(subStatValue);
+                            return "\n" + tuple.Item2.Format(tuple.Item1);
                         }
 
                         return "";
