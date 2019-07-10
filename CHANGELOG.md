@@ -1,3 +1,14 @@
+# Changes in 1.2.1
+
+* Tri-tip Dagger is now affected by clover
+* Halcyon Seed now has stats more accurate to the description
+* Missile proc chance is now affected by clover
+* Predatory Instincts now has proper attack speed stats
+* Fixed turtle hp stat
+* Aegis is now capped at 100% health
+* Kill health threshold for old guiliotine is fixed
+* Rej-rack no longer has proc chance lmao
+
 # Changes in 1.2.0
 
 * Support for new/updated items
