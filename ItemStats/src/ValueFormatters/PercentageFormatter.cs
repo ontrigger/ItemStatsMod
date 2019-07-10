@@ -22,7 +22,8 @@ namespace ItemStats.ValueFormatters
         public string Format(float value)
         {
             // color light blue
-            var maxStackMessage = value > _maxValue ? "(Max Stack)".SetColor("#ADD8E6") : "";
+            var maxStackMessage = value >= _maxValue ? "(Max Stack)".SetColor("#ADD8E6") : "";
+            value = Mathf.Min(value, _maxValue);
 
             // amount of ###
             var trailFormatStr = new string('#', _decimalPlaces);
