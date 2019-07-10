@@ -40,17 +40,17 @@ namespace ItemStats
         );*/
     }
 
-    class Clover : IModifier
+    class Clover : AbstractModifier
     {
-        public Func<float, float> Func =>
+        protected override Func<float, float> Func =>
             result => 1 - Mathf.Pow(1 - result, 1 + ContextProvider.CountItems(ItemIndex.Clover));
 
-        public IStatFormatter Formatter => new ModifierFormatter("from Clover");
+        protected override IStatFormatter Formatter => new ModifierFormatter("from Clover");
     }
 
-    class TreasureCache : IModifier
+    class TreasureCache : AbstractModifier
     {
-        public Func<float, float> Func =>
+        protected override Func<float, float> Func =>
             count =>
             {
                 Debug.Log("player body list");
@@ -63,13 +63,17 @@ namespace ItemStats
                            .Sum(body => body.CountItems(ItemIndex.TreasureCache)) + count;
             };
 
-        public IStatFormatter Formatter => new ModifierFormatter("from other players");
+        protected override IStatFormatter Formatter => new ModifierFormatter("from other players");
     }
 
-    public interface IModifier
+    public abstract class AbstractModifier
     {
-        Func<float, float> Func { get; }
+        protected abstract Func<float, float> Func { get; }
 
-        IStatFormatter Formatter { get; }
+        protected abstract IStatFormatter Formatter { get; }
+
+        public float GetInitialStat(float count) => Func(count);
+
+        public string Format(float statValue) => Formatter.Format(statValue);
     }
 }

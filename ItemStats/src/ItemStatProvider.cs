@@ -24,18 +24,31 @@ namespace ItemStats
             var fullStatText = string.Empty;
             foreach (var itemStat in itemStatList)
             {
-                var statValue = itemStat.GetInitialStat(count) + itemStat.GetIndividualStats(count).Sum();
+                var statValue = itemStat.GetInitialStat(count) + itemStat.GetSubStats(count).Sum();
 
                 var statValueStr = itemStat.Format(statValue);
 
-                statValueStr += itemStat.FormatSubStats(count);
+                // TODO: this is smart but not very readable;
+                // either make getsubstat return a pair or do something better
+                statValueStr += itemStat.GetSubStats(count)
+                    .Zip(itemStat.StatModifiers, Tuple.Create)
+                    .Aggregate("", (s, tuple) =>
+                    {
+                        var (subStatValue, modifier) = tuple;
+                        if (Math.Round(subStatValue, 3) > 0)
+                        {
+                            return "\n" + modifier.Format(subStatValue);
+                        }
+
+                        return "";
+                    });
 
 
                 if (itemStatList.IndexOf(itemStat) == itemStatList.Count - 1)
                 {
                     // this is the last line
                     // TextMeshPro richtext modifier that allows me to align the stack counter on the right
-                    fullStatText += $"<align=left>{itemStat.StatText}: {statValueStr}<line-height=0>";
+                    fullStatText += $"<align=left>{itemStat.StatText}: {statValueStr}";
                 }
                 else
                 {
@@ -43,7 +56,7 @@ namespace ItemStats
                 }
             }
 
-            return $"{fullStatText}<align=right>({count} stacks)<line-height=1em>";
+            return $"{fullStatText}<br><align=right>({count} stacks)";
         }
     }
 
@@ -53,11 +66,11 @@ namespace ItemStats
         private readonly Func<float, float> _formula;
         public readonly IStatFormatter Formatter;
         public string StatText { get; }
-        public IModifier[] StatModifiers { get; }
+        public AbstractModifier[] StatModifiers { get; }
 
 
         public ItemStat(Func<float, float> formula, string statText,
-            IStatFormatter formatter = null, params IModifier[] modifiers)
+            IStatFormatter formatter = null, params AbstractModifier[] modifiers)
         {
             _formula = formula;
             StatText = statText;
@@ -70,12 +83,12 @@ namespace ItemStats
             return _formula(count);
         }
 
-        public IEnumerable<float> GetIndividualStats(float count)
+        public IEnumerable<float> GetSubStats(float count)
         {
             var originalValue = GetInitialStat(count);
             foreach (var stat in StatModifiers)
             {
-                yield return stat.Func(originalValue) - originalValue;
+                yield return stat.GetInitialStat(originalValue) - originalValue;
             }
         }
 
@@ -91,11 +104,11 @@ namespace ItemStats
 
             foreach (var stat in StatModifiers)
             {
-                var valueDiff = stat.Func(result) - result;
+                var valueDiff = stat.GetInitialStat(result) - result;
                 Debug.Log("Value diff is " + valueDiff);
                 if (Math.Round(valueDiff, 3) > 0)
                 {
-                    formattedValue += stat.Formatter.Format(valueDiff);
+                    formattedValue += stat.Format(valueDiff);
                 }
             }
 
