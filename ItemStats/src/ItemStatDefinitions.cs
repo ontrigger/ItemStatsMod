@@ -25,8 +25,6 @@ namespace ItemStats
                         statText: "Movement Speed Increase"
                     )
                 },
-
-
                 [ItemIndex.Syringe] = new List<ItemStat>
                 {
                     new ItemStat(
@@ -294,7 +292,8 @@ namespace ItemStats
                     new ItemStat(
                         formula: itemCount => 0.15f * itemCount,
                         statText: "Bleed Chance Increase",
-                        formatter: new PercentageFormatter(maxValue: 1f)
+                        formatter: new PercentageFormatter(maxValue: 1f),
+                        modifiers: Modifiers.Clover
                     ),
                 },
                 [ItemIndex.SlowOnHit] = new List<ItemStat>
@@ -336,11 +335,6 @@ namespace ItemStats
                     new ItemStat(
                         formula: itemCount => itemCount,
                         statText: "Healing Increase"
-                    ),
-                    new ItemStat(
-                        formula: itemCount => 0.25f,
-                        statText: "Proc Chance",
-                        modifiers: Modifiers.Clover
                     ),
                 },
                 [ItemIndex.PersonalShield] = new List<ItemStat>
@@ -484,9 +478,9 @@ namespace ItemStats
                 [ItemIndex.AlienHead] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => Mathf.Round(1 - Mathf.Pow(0.75f, itemCount)),
+                        formula: itemCount => 1 - Mathf.Pow(0.75f, itemCount),
                         statText: "Cooldown Reduction",
-                        formatter: new PercentageFormatter(decimalPlaces: 0)
+                        formatter: new PercentageFormatter(2)
                     ),
                 },
                 [ItemIndex.Firework] = new List<ItemStat>
@@ -505,7 +499,7 @@ namespace ItemStats
                         formatter: new PercentageFormatter()
                     ),
                     new ItemStat(
-                        formula: itemCount => 0.1f * itemCount,
+                        formula: itemCount => 0.1f,
                         statText: "Proc Chance",
                         formatter: new PercentageFormatter(),
                         modifiers: Modifiers.Clover
@@ -530,9 +524,9 @@ namespace ItemStats
                 [ItemIndex.AttackSpeedOnCrit] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 0.3f * itemCount,
+                        formula: itemCount => 0.1f + 0.2f * itemCount,
                         statText: "Max Attack Speed"
-                    )
+                    ),
                 },
                 [ItemIndex.Icicle] = new List<ItemStat>
                 {
@@ -556,7 +550,7 @@ namespace ItemStats
                 [ItemIndex.BarrierOnKill] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 0.2f * itemCount,
+                        formula: itemCount => 20f * itemCount,
                         statText: "Barrier Health",
                         formatter: new IntFormatter("HP")
                     )
@@ -566,14 +560,14 @@ namespace ItemStats
                     new ItemStat(
                         formula: itemCount => 0.2f * itemCount,
                         statText: "Barrier Health Fraction",
-                        formatter: new PercentageFormatter(1)
+                        formatter: new PercentageFormatter(maxValue: 1f)
                     )
                 },
                 [ItemIndex.ExecuteLowHealthElite] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 0.2f * itemCount,
-                        statText: "Kill Health Treshold",
+                        formula: itemCount => 1f - 1f / (0.2f * itemCount + 1),
+                        statText: "Kill Health Threshold",
                         formatter: new PercentageFormatter()
                     )
                 },
@@ -588,22 +582,12 @@ namespace ItemStats
                 [ItemIndex.TitanGoldDuringTP] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount =>
-                        {
-                            var num = 1f + Run.instance.difficultyCoefficient / 2f;
-                            num *= Mathf.Pow(itemCount, 1f);
-                            return 0.1f * Mathf.RoundToInt((num - 1f) * 10f);
-                        },
+                        formula: itemCount => itemCount,
                         statText: "Health Boost",
                         formatter: new PercentageFormatter()
                     ),
                     new ItemStat(
-                        formula: itemCount =>
-                        {
-                            var num = 1f + Run.instance.difficultyCoefficient / 8f;
-                            num *= Mathf.Pow(itemCount, 0.5f);
-                            return 0.1f * Mathf.RoundToInt((num - 1f) * 10f);
-                        },
+                        formula: itemCount => 0.5f + 0.5f * itemCount,
                         statText: "Damage Boost",
                         formatter: new PercentageFormatter()
                     )

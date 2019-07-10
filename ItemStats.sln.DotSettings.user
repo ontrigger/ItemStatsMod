@@ -2,4 +2,5 @@
 	<s:Int64 x:Key="/Default/CodeStyle/Naming/CSharpAutoNaming/AutoNamingCompletedVersion/@EntryValue">2</s:Int64>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\MAX\RiderProjects\ItemStats\ItemStatsMod\bin\Release\UnityEngine.dll" /&gt;&#xD;
-&lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=ba9427b4_002D0a6f_002D47fe_002Dbcd7_002Dce65c1f3b03a_0023Assembly_002DCSharp/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
