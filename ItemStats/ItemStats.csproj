@@ -45,7 +45,7 @@
     <Reference Include="MMHOOK_Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>D:\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\plugins\R2API\MMHOOK_Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="R2API, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="R2API, Version=2.1.11.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>D:\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\plugins\R2API\R2API.dll</HintPath>
     </Reference>
     <Reference Include="Rewired_Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">

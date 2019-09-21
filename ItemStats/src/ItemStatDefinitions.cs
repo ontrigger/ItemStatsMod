@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using EntityStates;
 using ItemStats.ValueFormatters;
 using RoR2;
 using UnityEngine;
@@ -606,6 +607,53 @@ namespace ItemStats
                         formula: itemCount => 1.5f * itemCount,
                         statText: "Dagger Damage",
                         formatter: new PercentageFormatter()
+                    )
+                },
+                [ItemIndex.LunarUtilityReplacement] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount => 3f * itemCount,
+                        statText: "Skill Duration",
+                        formatter: new IntFormatter("s")
+                    ),
+                    new ItemStat(
+                        formula: itemCount =>
+                        {
+                            var maxHealth = LocalUserManager.FindLocalUser(0).cachedBody.maxHealth;
+                            var healingPerSecond = maxHealth
+                                                   * GhostUtilitySkillState.healFractionPerTick
+                                                   * GhostUtilitySkillState.healFrequency;
+
+                            Debug.Log(healingPerSecond);
+                            return healingPerSecond;
+                        },
+                        statText: "Health Healed",
+                        formatter: new IntFormatter("HP/s")
+                    )
+                },
+                [ItemIndex.NearbyDamageBonus] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount => 0.15f * itemCount,
+                        statText: "Damage Increase",
+                        formatter: new PercentageFormatter()
+                    )
+                },
+                [ItemIndex.TPHealingNova] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount => 0.15f * itemCount,
+                        statText: "Max Occurrences",
+                        formatter: new IntFormatter(),
+                        modifiers: Modifiers.TpHealingNova
+                    )
+                },
+                [ItemIndex.ArmorReductionOnHit] = new List<ItemStat>
+                {
+                    new ItemStat(
+                        formula: itemCount => 8f * itemCount,
+                        statText: "Duration",
+                        formatter: new IntFormatter("s")
                     )
                 },
             };

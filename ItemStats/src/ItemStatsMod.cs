@@ -4,7 +4,7 @@ using RoR2;
 namespace ItemStats
 {
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("dev.ontrigger.itemstats", "ItemStats", "1.2.0")]
+    [BepInPlugin("dev.ontrigger.itemstats", "ItemStats", "1.3.0")]
     public class ItemStatsMod : BaseUnityPlugin
     {
         public void Awake()
@@ -19,6 +19,7 @@ namespace ItemStats
                 {
                     var itemDescription = Language.GetString(itemDef.descriptionToken);
                     itemDescription += "\n\n" + ItemStatProvider.ProvideStatsForItem(newIndex, newCount);
+
 
                     self.tooltipProvider.overrideBodyText = itemDescription;
                 }

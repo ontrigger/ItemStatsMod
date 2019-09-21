@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using ItemStats.ValueFormatters;
 using RoR2;
 
 namespace ItemStats
@@ -32,6 +33,12 @@ namespace ItemStats
         {
             var body = userId == 0 ? LocalCachedBody : LocalUserManager.FindLocalUser(userId).cachedBody;
             return body != null ? body.inventory.GetItemCount(item) : 0;
+        }
+
+        public static Dictionary<int, int> GetPlayerIdToItemCountMap(ItemIndex index)
+        {
+            return LocalUserManager.readOnlyLocalUsersList
+                .ToDictionary(user => user.id, user => user.cachedBody.CountItems(index));
         }
 
         public static IEnumerable<CharacterBody> GetPlayerBodiesExcept(int userId)

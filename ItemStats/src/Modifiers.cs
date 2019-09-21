@@ -10,11 +10,13 @@ namespace ItemStats
     {
         public static readonly Clover Clover;
         public static readonly TreasureCache TreasureCache;
+        public static readonly TpHealingNova TpHealingNova;
 
         static Modifiers()
         {
             Clover = new Clover();
             TreasureCache = new TreasureCache();
+            TpHealingNova = new TpHealingNova();
         }
         /*public static readonly Modifier Clover = new Modifier(
             ModificationType.ReturnValue,
@@ -56,6 +58,7 @@ namespace ItemStats
                 Debug.Log("player body list");
                 foreach (var user in NetworkUser.readOnlyInstancesList)
                 {
+                    Debug.Log(user.id);
                     Debug.Log(user.id.Equals(LocalUserManager.GetFirstLocalUser().currentNetworkUser.id));
                 }
 
@@ -63,7 +66,19 @@ namespace ItemStats
                            .Sum(body => body.CountItems(ItemIndex.TreasureCache)) + count;
             };
 
-        protected override IStatFormatter Formatter => new ModifierFormatter("from other players");
+        protected override IStatFormatter Formatter =>
+            new ModifierFormatter("from other players");
+    }
+
+    class TpHealingNova : AbstractModifier
+    {
+        protected override Func<float, float> Func =>
+            count => ContextProvider.GetPlayerIdToItemCountMap(ItemIndex.TPHealingNova)
+                         .Where(pair => pair.Key != 0)
+                         .Sum(pair => pair.Value) + count;
+
+        protected override IStatFormatter Formatter =>
+            new ModifierFormatter("from other players");
     }
 
     public abstract class AbstractModifier
