@@ -1,3 +1,7 @@
+# Changes in 1.3
+
+* Support for new/updated items from the skills 2.0 update
+
 # Changes in 1.2.1
 
 * Tri-tip Dagger is now affected by clover

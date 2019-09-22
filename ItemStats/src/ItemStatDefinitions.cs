@@ -111,7 +111,7 @@ namespace ItemStats
                 [ItemIndex.Crowbar] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 1.5f + 0.3f * (itemCount - 1),
+                        formula: itemCount => 1f + 0.5f * itemCount,
                         statText: "Damage Increase"
                     ),
                 },
@@ -249,7 +249,7 @@ namespace ItemStats
                 [ItemIndex.HealWhileSafe] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 2.5f + (itemCount - 1) * 1.5f,
+                        formula: itemCount => 3f * itemCount,
                         statText: "Regeneration Increase"
                     ),
                 },
@@ -442,7 +442,7 @@ namespace ItemStats
                 [ItemIndex.StickyBomb] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 0.025f + 0.025f * itemCount,
+                        formula: itemCount => 0.05f * itemCount,
                         statText: "Proc Chance Increase",
                         formatter: new PercentageFormatter(maxValue: 1f),
                         modifiers: Modifiers.Clover
@@ -551,7 +551,7 @@ namespace ItemStats
                 [ItemIndex.BarrierOnKill] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 20f * itemCount,
+                        formula: itemCount => 15f * itemCount,
                         statText: "Barrier Health",
                         formatter: new IntFormatter("HP")
                     )
@@ -559,9 +559,9 @@ namespace ItemStats
                 [ItemIndex.BarrierOnOverHeal] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 0.2f * itemCount,
-                        statText: "Barrier Health Fraction",
-                        formatter: new PercentageFormatter(maxValue: 1f)
+                        formula: itemCount => 0.5f * itemCount,
+                        statText: "Barrier From Overheal",
+                        formatter: new PercentageFormatter()
                     )
                 },
                 [ItemIndex.ExecuteLowHealthElite] = new List<ItemStat>
@@ -624,7 +624,6 @@ namespace ItemStats
                                                    * GhostUtilitySkillState.healFractionPerTick
                                                    * GhostUtilitySkillState.healFrequency;
 
-                            Debug.Log(healingPerSecond);
                             return healingPerSecond;
                         },
                         statText: "Health Healed",
@@ -642,7 +641,7 @@ namespace ItemStats
                 [ItemIndex.TPHealingNova] = new List<ItemStat>
                 {
                     new ItemStat(
-                        formula: itemCount => 0.15f * itemCount,
+                        formula: itemCount => itemCount,
                         statText: "Max Occurrences",
                         formatter: new IntFormatter(),
                         modifiers: Modifiers.TpHealingNova
