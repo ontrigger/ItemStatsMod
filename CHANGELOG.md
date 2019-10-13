@@ -1,3 +1,10 @@
+# Changes in 1.3.1
+
+* Fixed the lunar ability 
+ replacement thingy from crashing when spectating in multiplayer
+
+* Updated the Tooth healing amount
+
 # Changes in 1.3
 
 * Support for new/updated items from the skills 2.0 update
