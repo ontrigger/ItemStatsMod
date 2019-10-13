@@ -158,7 +158,7 @@ namespace ItemStats
                     stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 6 * itemCount,
+                            itemCount => 8 * itemCount,
                             "Heal Amount",
                             new IntFormatter("HP")
                         )
