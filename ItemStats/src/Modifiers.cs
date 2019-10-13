@@ -1,12 +1,13 @@
 using System;
 using System.Linq;
+using ItemStats.Stat;
 using ItemStats.ValueFormatters;
 using RoR2;
 using UnityEngine;
 
 namespace ItemStats
 {
-    static class Modifiers
+    public static class Modifiers
     {
         public static readonly Clover Clover;
         public static readonly TreasureCache TreasureCache;
@@ -42,7 +43,7 @@ namespace ItemStats
         );*/
     }
 
-    class Clover : AbstractModifier
+    public class Clover : AbstractModifier
     {
         protected override Func<float, float> Func =>
             result => 1 - Mathf.Pow(1 - result, 1 + ContextProvider.CountItems(ItemIndex.Clover));
@@ -50,7 +51,7 @@ namespace ItemStats
         protected override IStatFormatter Formatter => new ModifierFormatter("from Clover");
     }
 
-    class TreasureCache : AbstractModifier
+    public class TreasureCache : AbstractModifier
     {
         protected override Func<float, float> Func =>
             count =>
@@ -68,7 +69,7 @@ namespace ItemStats
             new ModifierFormatter("from other players");
     }
 
-    class TpHealingNova : AbstractModifier
+    public class TpHealingNova : AbstractModifier
     {
         protected override Func<float, float> Func =>
             count => ContextProvider.GetPlayerIdToItemCountMap(ItemIndex.TPHealingNova)
