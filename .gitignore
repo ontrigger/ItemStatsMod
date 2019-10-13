@@ -1,1 +1,4 @@
 *.dll
+.idea/
+bin/
+obj/
