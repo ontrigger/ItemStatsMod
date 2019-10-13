@@ -15,12 +15,7 @@ namespace ItemStats
             //TODO: refactor this so it isnt shit
             var itemStatDef = ItemDefs.ContainsKey(index) ? ItemDefs[index] : null;
 
-            if (itemStatDef == null)
-            {
-                return "NOT IMPL";
-            }
-
-            return itemStatDef.ProcessItem(count);
+            return itemStatDef == null ? "NOT IMPL" : itemStatDef.ProcessItem(count);
         }
     }
 

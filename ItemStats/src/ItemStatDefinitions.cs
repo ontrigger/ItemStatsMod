@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using EntityStates;
 using ItemStats.ValueFormatters;
 using RoR2;
@@ -880,8 +881,9 @@ namespace ItemStats
 
     internal class ItemStatDef
     {
-        private readonly IStatCalculationStrategy _strategy = new DefaultStatCalculationStrategy();
         public List<ItemStat> stats;
+
+        private readonly IStatCalculationStrategy _strategy = new DefaultStatCalculationStrategy();
 
         public string ProcessItem(int count)
         {
@@ -893,7 +895,7 @@ namespace ItemStats
     {
         public string ProcessItem(List<ItemStat> stats, int count)
         {
-            var fullStatText = String.Empty;
+            var fullStatText = new StringBuilder();
             foreach (var stat in stats)
             {
                 var m = stat.GetInitialStat(count);
@@ -901,7 +903,7 @@ namespace ItemStats
                 var originalValue = m.Value;
 
                 var modifiedValueSum = 0f;
-                var formattedContributions = String.Empty;
+                var formattedContributions = new StringBuilder();
                 foreach (var statModifier in stat.StatModifiers)
                 {
                     m = stat.GetInitialStat(originalValue);
@@ -911,29 +913,27 @@ namespace ItemStats
                     // skip modifiers that contrib less that 1% to the final value
                     if (!ContributionSignificant(modifierContribution)) continue;
 
-                    formattedContributions += statModifier.Format(modifierContribution) + "\n";
+                    formattedContributions.AppendLine(statModifier.Format(modifierContribution));
 
                     modifiedValueSum += modifierContribution;
                 }
 
-                var finalStatValue = originalValue + modifiedValueSum;
-                var finalFormattedValue = stat.Format(finalStatValue) + "\n";
-
-                var finalStatInfo = finalFormattedValue + formattedContributions;
+                var finalFormattedValue = stat.Format(originalValue + modifiedValueSum);
 
                 if (stats.IndexOf(stat) == stats.Count - 1)
                 {
                     // this is the last line
                     // TextMeshPro richtext modifier that allows me to align the stack counter on the right
-                    fullStatText += $"<align=left>{stat.StatText}: {finalStatInfo}";
+                    fullStatText.Append($"<align=left>{stat.StatText}: {finalFormattedValue}");
+                    fullStatText.Append(formattedContributions);
                 }
                 else
                 {
-                    fullStatText += $"{stat.StatText}: {finalStatInfo}";
+                    fullStatText.AppendLine($"{stat.StatText}: {finalFormattedValue}");
                 }
             }
 
-            return $"{fullStatText}<br><align=right>({count} stacks)";
+            return fullStatText.Append($"<br><align=right>({count} stacks)").ToString();
         }
 
         private static bool ContributionSignificant(float contrib)
