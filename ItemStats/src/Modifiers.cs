@@ -55,11 +55,9 @@ namespace ItemStats
         protected override Func<float, float> Func =>
             count =>
             {
-                Debug.Log("player body list");
                 foreach (var user in NetworkUser.readOnlyInstancesList)
                 {
                     Debug.Log(user.id);
-                    Debug.Log(user.id.Equals(LocalUserManager.GetFirstLocalUser().currentNetworkUser.id));
                 }
 
                 return ContextProvider.GetPlayerBodiesExcept(0)
@@ -81,13 +79,13 @@ namespace ItemStats
             new ModifierFormatter("from other players");
     }
 
-    public abstract class AbstractModifier
+    public abstract class AbstractModifier : IStat
     {
         protected abstract Func<float, float> Func { get; }
 
         protected abstract IStatFormatter Formatter { get; }
 
-        public float GetInitialStat(float count) => Func(count);
+        public float? GetInitialStat(float count) => Func(count);
 
         public string Format(float statValue) => Formatter.Format(statValue);
     }

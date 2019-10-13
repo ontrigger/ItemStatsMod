@@ -72,8 +72,6 @@
     <Compile Include="src\ItemStatsMod.cs" />
     <Compile Include="src\Modifiers.cs"/>
     <Compile Include="src\ValueFormatters\Colors.cs" />
-    <Compile Include="src\ValueFormatters\Decorators\DecoratorBase.cs" />
-    <Compile Include="src\ValueFormatters\Decorators\ModifierDecorator.cs" />
     <Compile Include="src\ValueFormatters\Extensions.cs" />
     <Compile Include="src\ValueFormatters\IStatFormatter.cs" />
     <Compile Include="src\ValueFormatters\ModifierFormatter.cs" />
