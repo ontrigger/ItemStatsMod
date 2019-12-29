@@ -874,7 +874,115 @@ namespace ItemStats
                             new IntFormatter("s")
                         )
                     }
-                }
+                },
+                [ItemIndex.Thorns] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 5 + 2 * (itemCount - 1),
+                            "Max Targets",
+                            new IntFormatter()
+                        ),
+                        new ItemStat(
+                            itemCount => 25f + 10f * (itemCount - 1),
+                            "Radius",
+                            new IntFormatter("m")
+                        )
+                    }
+                },
+                [ItemIndex.RegenOnKill] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 3f * itemCount,
+                            "Duration",
+                            new IntFormatter("s")
+                        )
+                    }
+                },
+                [ItemIndex.Pearl] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 0.1f * itemCount,
+                            "Health Increase",
+                            new PercentageFormatter()
+                        )
+                    }
+                },
+                [ItemIndex.ShinyPearl] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 0.1f * itemCount,
+                            "Stat Increase",
+                            new PercentageFormatter()
+                        )
+                    }
+                },
+                [ItemIndex.BonusGoldPackOnKill] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 0.04f * itemCount,
+                            "Drop Chance",
+                            new PercentageFormatter()
+                        )
+                    }
+                },
+                [ItemIndex.LaserTurbine] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 1f * itemCount,
+                            "Damage Increase",
+                            new PercentageFormatter()
+                        )
+                    }
+                },
+                [ItemIndex.LunarPrimaryReplacement] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 12f * itemCount,
+                            "Max Charges",
+                            new IntFormatter()
+                        ),
+                        new ItemStat(
+                            itemCount => 2f * itemCount,
+                            "Recharge Delay",
+                            new IntFormatter("s")
+                        )
+                    }
+                },
+                [ItemIndex.LaserTurbine] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 3f * itemCount,
+                            "Pierce Damage",
+                            new PercentageFormatter()
+                        ),
+                        new ItemStat(
+                            itemCount => 10f * itemCount,
+                            "Explosion Damage",
+                            new PercentageFormatter()
+                        ),
+                        new ItemStat(
+                            itemCount => 3f * itemCount,
+                            "On Return Damage",
+                            new PercentageFormatter()
+                        )
+                    }
+                },
             };
         }
     }
