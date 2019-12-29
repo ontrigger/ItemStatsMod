@@ -298,7 +298,7 @@ namespace ItemStats
                     stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1f + itemCount * 2f,
+                            itemCount => itemCount * 4f,
                             "Frenzy Duration",
                             new IntFormatter("s")
                         )
@@ -456,9 +456,9 @@ namespace ItemStats
                     stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 25f,
+                            itemCount => 0.08f * itemCount,
                             "Shield Health Increase",
-                            new IntFormatter("SP")
+                            new PercentageFormatter()
                         )
                     }
                 },
