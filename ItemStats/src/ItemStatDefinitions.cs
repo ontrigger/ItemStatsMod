@@ -970,7 +970,8 @@ namespace ItemStats
                     stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 30f / (itemCount + 1),
+                            // baseDuration seems to be set in the editor so i just assume they set it to 60
+                            itemCount => 60f / (itemCount + 1),
                             "Recharge Delay",
                             new IntFormatter("s")
                         ),
