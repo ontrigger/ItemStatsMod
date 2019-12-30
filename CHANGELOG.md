@@ -1,3 +1,7 @@
+# Changes in 1.4.0
+
+* Support for new/updated items from the newest update
+
 # Changes in 1.3.1
 
 * Fixed the lunar ability 

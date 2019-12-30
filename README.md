@@ -1,4 +1,4 @@
-# ItemStats BepInEx Version
+# ItemStats 1.4.0
 Provides current stack bonuses for an item in the tooltip
 
 ![demo](https://i.nyah.moe/VvsO.png)
