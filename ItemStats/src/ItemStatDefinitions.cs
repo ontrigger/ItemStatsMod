@@ -864,17 +864,6 @@ namespace ItemStats
                         )
                     }
                 },
-                [ItemIndex.ArmorReductionOnHit] = new ItemStatDef
-                {
-                    stats = new List<ItemStat>
-                    {
-                        new ItemStat(
-                            itemCount => 8f * itemCount,
-                            "Duration",
-                            new IntFormatter("s")
-                        )
-                    }
-                },
                 [ItemIndex.Thorns] = new ItemStatDef
                 {
                     stats = new List<ItemStat>
@@ -935,17 +924,6 @@ namespace ItemStats
                         )
                     }
                 },
-                [ItemIndex.LaserTurbine] = new ItemStatDef
-                {
-                    stats = new List<ItemStat>
-                    {
-                        new ItemStat(
-                            itemCount => 1f * itemCount,
-                            "Damage Increase",
-                            new PercentageFormatter()
-                        )
-                    }
-                },
                 [ItemIndex.LunarPrimaryReplacement] = new ItemStatDef
                 {
                     stats = new List<ItemStat>
@@ -981,6 +959,21 @@ namespace ItemStats
                             "On Return Damage",
                             new PercentageFormatter()
                         )
+                    }
+                },
+                [ItemIndex.LunarTrinket] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>()
+                },
+                [ItemIndex.NovaOnLowHealth] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 30f / (itemCount + 1),
+                            "Recharge Delay",
+                            new IntFormatter("s")
+                        ),
                     }
                 },
             };
