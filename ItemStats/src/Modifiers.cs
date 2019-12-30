@@ -56,11 +56,6 @@ namespace ItemStats
         protected override Func<float, float> Func =>
             count =>
             {
-                foreach (var user in NetworkUser.readOnlyInstancesList)
-                {
-                    Debug.Log(user.id);
-                }
-
                 return ContextProvider.GetPlayerBodiesExcept(0)
                            .Sum(body => body.CountItems(ItemIndex.TreasureCache)) + count;
             };
