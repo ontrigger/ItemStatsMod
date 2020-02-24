@@ -335,7 +335,8 @@ namespace ItemStats
                     {
                         new ItemStat(
                             itemCount => 3f * itemCount,
-                            "Regeneration Increase"
+                            "Bonus Health Regen",
+                            new IntFormatter("hp/s")
                         )
                     }
                 },
@@ -430,7 +431,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             //TODO: make run a modifier
-                            itemCount => itemCount * 3f * Run.instance.difficultyCoefficient,
+                            itemCount => itemCount * 2f * Run.instance.difficultyCoefficient,
                             "Gold per Hit(*)",
                             new IntFormatter()
                         ),
@@ -918,6 +919,11 @@ namespace ItemStats
                     stats = new List<ItemStat>
                     {
                         new ItemStat(
+                            itemCount => Run.instance.GetDifficultyScaledCost(25),
+                            "per Drop",
+                            new IntFormatter("$")
+                        ),
+                        new ItemStat(
                             itemCount => 0.04f * itemCount,
                             "Drop Chance",
                             new PercentageFormatter()
@@ -970,8 +976,7 @@ namespace ItemStats
                     stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            // baseDuration seems to be set in the editor so i just assume they set it to 60
-                            itemCount => 60f / (itemCount + 1),
+                            itemCount => 30f / (itemCount + 1),
                             "Recharge Delay",
                             new IntFormatter("s")
                         ),
