@@ -1,3 +1,11 @@
+# Changes in 1.5.0
+
+* Support for new/updated items from the Artifacts update
+
+* Added scaling gold information to Ghor's Tome
+
+* Fixed Genesis Loop recharge duration
+
 # Changes in 1.4.0
 
 * Support for new/updated items from the newest update

@@ -4,7 +4,7 @@ using RoR2;
 namespace ItemStats
 {
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("dev.ontrigger.itemstats", "ItemStats", "1.4.0")]
+    [BepInPlugin("dev.ontrigger.itemstats", "ItemStats", "1.5.0")]
     public class ItemStatsMod : BaseUnityPlugin
     {
         public void Awake()

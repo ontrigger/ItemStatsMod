@@ -1,4 +1,4 @@
-# ItemStats 1.4.0
+# ItemStats 1.5.0
 Provides current stack bonuses for an item in the tooltip
 
 ![demo](https://i.nyah.moe/VvsO.png)
@@ -20,3 +20,7 @@ You will first need the following libraries:
 * R2API
 
 Open the solution, link the libraries in the Lib folder, DL the required NuGet package and compile.
+
+# Contributors
+
+* kylewill0725
