@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using EntityStates;
 using ItemStats.Stat;
@@ -137,7 +138,7 @@ namespace ItemStats
                     stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 10f,
+                            itemCount => itemCount * 25f,
                             "Health Healed",
                             new IntFormatter("HP")
                         )
@@ -335,7 +336,8 @@ namespace ItemStats
                     {
                         new ItemStat(
                             itemCount => 3f * itemCount,
-                            "Regeneration Increase"
+                            "Bonus Health Regen",
+                            new IntFormatter("hp/s")
                         )
                     }
                 },
@@ -430,7 +432,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             //TODO: make run a modifier
-                            itemCount => itemCount * 3f * Run.instance.difficultyCoefficient,
+                            itemCount => itemCount * 2f * Run.instance.difficultyCoefficient,
                             "Gold per Hit(*)",
                             new IntFormatter()
                         ),
@@ -675,6 +677,10 @@ namespace ItemStats
                             itemCount => 100 * itemCount,
                             "Max Additional Health",
                             new IntFormatter("HP")
+                        ),
+                        new ItemStat(
+                            itemCount => itemCount,
+                            "HP Gained Per Kill"
                         )
                     }
                 },
@@ -720,7 +726,7 @@ namespace ItemStats
                         new ItemStat(
                             itemCount => 1.5f + 2.5f * itemCount,
                             "Explosion Radius",
-                            new IntFormatter("m")
+                            new IntFormatter("m", 1)
                         )
                     }
                 },
@@ -918,6 +924,11 @@ namespace ItemStats
                     stats = new List<ItemStat>
                     {
                         new ItemStat(
+                            itemCount => Run.instance.GetDifficultyScaledCost(25),
+                            "per Drop",
+                            new IntFormatter("$")
+                        ),
+                        new ItemStat(
                             itemCount => 0.04f * itemCount,
                             "Drop Chance",
                             new PercentageFormatter()
@@ -970,11 +981,70 @@ namespace ItemStats
                     stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            // baseDuration seems to be set in the editor so i just assume they set it to 60
-                            itemCount => 60f / (itemCount + 1),
+                            itemCount => 30f / (itemCount + 1),
                             "Recharge Delay",
                             new IntFormatter("s")
+                        )
+                    }
+                },
+                [ItemIndex.ArmorPlate] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => itemCount * 5,
+                            "Reduced damage",
+                            new IntFormatter()
+                        )
+                    }
+                },
+                [ItemIndex.Squid] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => itemCount,
+                            "Attack Speed",
+                            new PercentageFormatter(0)
+                        )
+                    }
+                },
+                [ItemIndex.DeathMark] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => itemCount * 0.5f,
+                            "Increased Damage",
+                            new PercentageFormatter()
+                        )
+                    }
+                },
+                [ItemIndex.Plant] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 3 + 1.5f * (itemCount - 1),
+                            "Radius",
+                            new IntFormatter("m", 1)
+                        )
+                    }
+                },
+                [ItemIndex.FocusConvergence] = new ItemStatDef
+                {
+                    stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 1 + 0.3f * Math.Min(itemCount, 3),
+                            "Bonus Charge Speed",
+                            new PercentageFormatter()
                         ),
+                        new ItemStat(
+                            itemCount => 1f / (2 * Math.Min(itemCount, 3)),
+                            "Radius",
+                            new PercentageFormatter( 2)
+                        )
                     }
                 },
             };
