@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using EntityStates;
 using ItemStats.Stat;
-using ItemStats.StatCalculation;
 using ItemStats.ValueFormatters;
 using RoR2;
 using UnityEngine;
@@ -13,11 +12,13 @@ namespace ItemStats
     {
         static ItemStatProvider()
         {
+            CustomItemDefs = new Dictionary<ItemIndex, ItemStatDef>();
+
             ItemDefs = new Dictionary<ItemIndex, ItemStatDef>
             {
                 [ItemIndex.Bear] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             count => 1f - 1f / (0.15f * count + 1f),
@@ -27,7 +28,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Hoof] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 0.14f,
@@ -37,7 +38,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Syringe] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             count => count * 0.15f,
@@ -47,7 +48,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Mushroom] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             count => 0.0225f + 0.0225f * count,
@@ -64,7 +65,7 @@ namespace ItemStats
                 },
                 [ItemIndex.CritGlasses] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 0.1f,
@@ -75,7 +76,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Feather] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -86,7 +87,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Seed] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -97,7 +98,7 @@ namespace ItemStats
                 },
                 [ItemIndex.GhostOnKill] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 30f,
@@ -108,7 +109,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Knurl] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 40f,
@@ -124,7 +125,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Clover] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -135,7 +136,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Medkit] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 25f,
@@ -146,7 +147,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Crowbar] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 1f + 0.5f * itemCount,
@@ -156,7 +157,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Tooth] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 8 * itemCount,
@@ -167,7 +168,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Talisman] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 2f + itemCount * 2f,
@@ -178,7 +179,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Bandolier] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             formula: itemCount => 1f - 1f / Mathf.Pow(itemCount + 1, 0.33f),
@@ -189,7 +190,7 @@ namespace ItemStats
                 },
                 [ItemIndex.IceRing] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 1.25f + 1.25f * itemCount,
@@ -204,7 +205,7 @@ namespace ItemStats
                 },
                 [ItemIndex.FireRing] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 2.5f + 2.5f * itemCount,
@@ -219,7 +220,7 @@ namespace ItemStats
                 },
                 [ItemIndex.WarCryOnMultiKill] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 2f + 4f * itemCount,
@@ -230,7 +231,7 @@ namespace ItemStats
                 },
                 [ItemIndex.SprintOutOfCombat] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 0.3f,
@@ -240,7 +241,7 @@ namespace ItemStats
                 },
                 [ItemIndex.StunChanceOnHit] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             formula: itemCount => 1f - 1f / (0.05f * itemCount + 1f),
@@ -252,7 +253,7 @@ namespace ItemStats
                 },
                 [ItemIndex.WarCryOnCombat] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 2f + 4f * itemCount,
@@ -263,7 +264,7 @@ namespace ItemStats
                 },
                 [ItemIndex.SecondarySkillMagazine] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -274,7 +275,7 @@ namespace ItemStats
                 },
                 [ItemIndex.UtilitySkillMagazine] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 2f,
@@ -285,7 +286,7 @@ namespace ItemStats
                 },
                 [ItemIndex.AutoCastEquipment] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 0.5f * Mathf.Pow(0.85f, itemCount - 1),
@@ -296,7 +297,7 @@ namespace ItemStats
                 },
                 [ItemIndex.KillEliteFrenzy] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 4f,
@@ -307,7 +308,7 @@ namespace ItemStats
                 },
                 [ItemIndex.BossDamageBonus] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 0.2f + 0.2f * (itemCount - 1),
@@ -317,7 +318,7 @@ namespace ItemStats
                 },
                 [ItemIndex.ExplodeOnDeath] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 12f + 2.4f * (itemCount - 1f),
@@ -332,7 +333,7 @@ namespace ItemStats
                 },
                 [ItemIndex.HealWhileSafe] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 3f * itemCount,
@@ -343,7 +344,7 @@ namespace ItemStats
                 },
                 [ItemIndex.IgniteOnKill] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 8f + 4f * itemCount,
@@ -358,7 +359,7 @@ namespace ItemStats
                 },
                 [ItemIndex.WardOnLevel] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 8f + 8f * itemCount,
@@ -369,7 +370,7 @@ namespace ItemStats
                 },
                 [ItemIndex.NovaOnHeal] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -379,7 +380,7 @@ namespace ItemStats
                 },
                 [ItemIndex.HealOnCrit] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 4f + itemCount * 4f,
@@ -390,7 +391,7 @@ namespace ItemStats
                 },
                 [ItemIndex.BleedOnHit] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             formula: itemCount => 0.15f * itemCount,
@@ -402,7 +403,7 @@ namespace ItemStats
                 },
                 [ItemIndex.SlowOnHit] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 2 * itemCount,
@@ -413,7 +414,7 @@ namespace ItemStats
                 },
                 [ItemIndex.EquipmentMagazine] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -428,7 +429,7 @@ namespace ItemStats
                 },
                 [ItemIndex.GoldOnHit] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             //TODO: make run a modifier
@@ -445,7 +446,7 @@ namespace ItemStats
                 },
                 [ItemIndex.IncreaseHealing] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -455,7 +456,7 @@ namespace ItemStats
                 },
                 [ItemIndex.PersonalShield] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 0.08f * itemCount,
@@ -466,7 +467,7 @@ namespace ItemStats
                 },
                 [ItemIndex.ChainLightning] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 2f,
@@ -488,7 +489,7 @@ namespace ItemStats
                 },
                 [ItemIndex.TreasureCache] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             formula: itemCount => 80f / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
@@ -514,7 +515,7 @@ namespace ItemStats
                 },
                 [ItemIndex.BounceNearby] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             formula: itemCount => 1f - 100f / (100f + 20f * itemCount),
@@ -530,7 +531,7 @@ namespace ItemStats
                 },
                 [ItemIndex.SprintBonus] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 0.1f + 0.2f * itemCount,
@@ -540,7 +541,7 @@ namespace ItemStats
                 },
                 [ItemIndex.SprintArmor] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 30f * itemCount,
@@ -551,7 +552,7 @@ namespace ItemStats
                 },
                 [ItemIndex.ShockNearby] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 2f * itemCount,
@@ -562,7 +563,7 @@ namespace ItemStats
                 },
                 [ItemIndex.BeetleGland] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -573,7 +574,7 @@ namespace ItemStats
                 },
                 [ItemIndex.ShieldOnly] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 0.5f + (itemCount - 1) * 0.25f,
@@ -583,7 +584,7 @@ namespace ItemStats
                 },
                 [ItemIndex.StickyBomb] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             formula: itemCount => 0.05f * itemCount,
@@ -595,7 +596,7 @@ namespace ItemStats
                 },
                 [ItemIndex.RepeatHeal] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         //TODO: need to get masters maxhealth to get actual heal amount
                         new ItemStat(
@@ -610,7 +611,7 @@ namespace ItemStats
                 },
                 [ItemIndex.HeadHunter] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 3f + 5f * itemCount,
@@ -621,7 +622,7 @@ namespace ItemStats
                 },
                 [ItemIndex.ExtraLife] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -632,7 +633,7 @@ namespace ItemStats
                 },
                 [ItemIndex.AlienHead] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 1 - Mathf.Pow(0.75f, itemCount),
@@ -643,7 +644,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Firework] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 4 + itemCount * 4,
@@ -654,7 +655,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Missile] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 3 * itemCount,
@@ -671,7 +672,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Infusion] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 100 * itemCount,
@@ -686,7 +687,7 @@ namespace ItemStats
                 },
                 [ItemIndex.JumpBoost] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 10 * itemCount,
@@ -697,7 +698,7 @@ namespace ItemStats
                 },
                 [ItemIndex.AttackSpeedOnCrit] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 0.1f + 0.2f * itemCount,
@@ -707,7 +708,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Icicle] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 1.5f * itemCount,
@@ -721,7 +722,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Behemoth] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 1.5f + 2.5f * itemCount,
@@ -732,7 +733,7 @@ namespace ItemStats
                 },
                 [ItemIndex.BarrierOnKill] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 15f * itemCount,
@@ -743,7 +744,7 @@ namespace ItemStats
                 },
                 [ItemIndex.BarrierOnOverHeal] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 0.5f * itemCount,
@@ -754,7 +755,7 @@ namespace ItemStats
                 },
                 [ItemIndex.ExecuteLowHealthElite] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 1f - 1f / (0.2f * itemCount + 1),
@@ -765,7 +766,7 @@ namespace ItemStats
                 },
                 [ItemIndex.EnergizedOnEquipmentUse] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 8f + 4f * (itemCount - 1),
@@ -776,7 +777,7 @@ namespace ItemStats
                 },
                 [ItemIndex.TitanGoldDuringTP] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -792,7 +793,7 @@ namespace ItemStats
                 },
                 [ItemIndex.SprintWisp] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -803,7 +804,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Dagger] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 1.5f * itemCount,
@@ -814,7 +815,7 @@ namespace ItemStats
                 },
                 [ItemIndex.LunarUtilityReplacement] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 3f * itemCount,
@@ -838,7 +839,7 @@ namespace ItemStats
                 },
                 [ItemIndex.NearbyDamageBonus] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 0.15f * itemCount,
@@ -849,7 +850,7 @@ namespace ItemStats
                 },
                 [ItemIndex.TPHealingNova] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             formula: itemCount => itemCount,
@@ -861,7 +862,7 @@ namespace ItemStats
                 },
                 [ItemIndex.ArmorReductionOnHit] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 8f * itemCount,
@@ -872,7 +873,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Thorns] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 5 + 2 * (itemCount - 1),
@@ -888,7 +889,7 @@ namespace ItemStats
                 },
                 [ItemIndex.RegenOnKill] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 3f * itemCount,
@@ -899,7 +900,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Pearl] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 0.1f * itemCount,
@@ -910,7 +911,7 @@ namespace ItemStats
                 },
                 [ItemIndex.ShinyPearl] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 0.1f * itemCount,
@@ -921,7 +922,7 @@ namespace ItemStats
                 },
                 [ItemIndex.BonusGoldPackOnKill] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => Run.instance.GetDifficultyScaledCost(25),
@@ -937,7 +938,7 @@ namespace ItemStats
                 },
                 [ItemIndex.LunarPrimaryReplacement] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 12f * itemCount,
@@ -953,7 +954,7 @@ namespace ItemStats
                 },
                 [ItemIndex.LaserTurbine] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 3f * itemCount,
@@ -974,11 +975,11 @@ namespace ItemStats
                 },
                 [ItemIndex.LunarTrinket] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>()
+                    Stats = new List<ItemStat>()
                 },
                 [ItemIndex.NovaOnLowHealth] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 30f / (itemCount + 1),
@@ -989,7 +990,7 @@ namespace ItemStats
                 },
                 [ItemIndex.ArmorPlate] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 5,
@@ -1000,7 +1001,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Squid] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount,
@@ -1011,7 +1012,7 @@ namespace ItemStats
                 },
                 [ItemIndex.DeathMark] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => itemCount * 0.5f,
@@ -1022,7 +1023,7 @@ namespace ItemStats
                 },
                 [ItemIndex.Plant] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 3 + 1.5f * (itemCount - 1),
@@ -1033,7 +1034,7 @@ namespace ItemStats
                 },
                 [ItemIndex.FocusConvergence] = new ItemStatDef
                 {
-                    stats = new List<ItemStat>
+                    Stats = new List<ItemStat>
                     {
                         new ItemStat(
                             itemCount => 1 + 0.3f * Math.Min(itemCount, 3),
@@ -1043,23 +1044,11 @@ namespace ItemStats
                         new ItemStat(
                             itemCount => 1f / (2 * Math.Min(itemCount, 3)),
                             "Radius",
-                            new PercentageFormatter( 2)
+                            new PercentageFormatter(2)
                         )
                     }
                 },
             };
-        }
-    }
-
-    internal class ItemStatDef
-    {
-        public List<ItemStat> stats;
-
-        private readonly IStatCalculationStrategy _strategy = new DefaultStatCalculationStrategy();
-
-        public string ProcessItem(int count)
-        {
-            return _strategy.ProcessItem(stats, count);
         }
     }
 }
