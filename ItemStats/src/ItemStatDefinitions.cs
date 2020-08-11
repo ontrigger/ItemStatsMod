@@ -139,9 +139,8 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 25f,
-                            "Health Healed",
-                            new IntFormatter("HP")
+                            itemCount => 0.05f * itemCount,
+                            "Health Healed"
                         )
                     }
                 },
@@ -160,9 +159,8 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 8 * itemCount,
-                            "Heal Amount",
-                            new IntFormatter("HP")
+                            itemCount => 0.02f * itemCount,
+                            "Heal Amount"
                         )
                     }
                 },
@@ -193,13 +191,13 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1.25f + 1.25f * itemCount,
-                            "Total Damage"
+                            itemCount => 2.5f * itemCount,
+                            "Ice Blast Damage"
                         ),
                         new ItemStat(
-                            formula: itemCount => 0.08f,
-                            statText: "Proc Chance",
-                            modifiers: Modifiers.Clover
+                            formula: itemCount => 3f * itemCount,
+                            statText: "Ice Debuff Duration",
+                            formatter: new IntFormatter("s")
                         )
                     }
                 },
@@ -208,8 +206,8 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 2.5f + 2.5f * itemCount,
-                            "Total Damage"
+                            itemCount => 3f * itemCount,
+                            "Fire Tornado Damage"
                         ),
                         new ItemStat(
                             formula: itemCount => 0.08f,
@@ -758,7 +756,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1f - 1f / (0.2f * itemCount + 1),
+                            itemCount => 1 - 1 / (1 + 0.13f * itemCount),
                             "Kill Health Threshold",
                             new PercentageFormatter()
                         )
@@ -796,7 +794,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            itemCount => 3f * itemCount,
                             "Damage Boost",
                             new PercentageFormatter()
                         )
@@ -1045,6 +1043,28 @@ namespace ItemStats
                             itemCount => 1f / (2 * Math.Min(itemCount, 3)),
                             "Radius",
                             new PercentageFormatter(2)
+                        )
+                    }
+                },
+                [ItemIndex.DeathMark] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 7f * itemCount,
+                            "Debuff Duration",
+                            new IntFormatter("s")
+                        )
+                    }
+                },
+                [ItemIndex.Plant] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 5f * itemCount,
+                            "Healing Radius",
+                            new IntFormatter("m")
                         )
                     }
                 },
