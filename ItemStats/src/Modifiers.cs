@@ -19,28 +19,6 @@ namespace ItemStats
             TreasureCache = new TreasureCache();
             TpHealingNova = new TpHealingNova();
         }
-        /*public static readonly Modifier Clover = new Modifier(
-            ModificationType.ReturnValue,
-            result => 1 - Mathf.Pow(1 - result, 1 + CountItems(ItemIndex.Clover)),
-            new ModifierFormatter("from Clover")
-        );*/
-
-        /*public static readonly Modifier TreasureCache = new Modifier(
-            Modifier.ModificationType.ItemCount,
-            count =>
-            {
-                Debug.Log("player body list");
-                foreach (var user in LocalUserManager.readOnlyLocalUsersList)
-                {
-                    Debug.Log(user.cachedBody);
-                    Debug.Log(user.cachedBody.CountItems(ItemIndex.TreasureCache));
-                }
-
-                return ContextProvider.GetPlayerBodiesExcept(0)
-                           .Sum(body => Extensions.CountItems(body, ItemIndex.TreasureCache)) + count;
-            },
-            new ModifierFormatter("from other players")
-        );*/
     }
 
     public class Clover : AbstractModifier
@@ -57,7 +35,7 @@ namespace ItemStats
             count =>
             {
                 return ContextProvider.GetPlayerBodiesExcept(0)
-                           .Sum(body => body.CountItems(ItemIndex.TreasureCache)) + count;
+                    .Sum(body => body.CountItems(ItemIndex.TreasureCache)) + count;
             };
 
         protected override IStatFormatter Formatter =>
@@ -68,8 +46,8 @@ namespace ItemStats
     {
         protected override Func<float, float> Func =>
             count => ContextProvider.GetPlayerIdToItemCountMap(ItemIndex.TPHealingNova)
-                         .Where(pair => pair.Key != 0)
-                         .Sum(pair => pair.Value) + count;
+                .Where(pair => pair.Key != 0)
+                .Sum(pair => pair.Value) + count;
 
         protected override IStatFormatter Formatter =>
             new ModifierFormatter("from other players");

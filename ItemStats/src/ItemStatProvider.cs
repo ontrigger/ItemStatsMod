@@ -18,8 +18,6 @@ namespace ItemStats
                 CustomItemDefs.TryGetValue(index, out itemStatDef);
             }
 
-            ;
-
             return itemStatDef != null ? itemStatDef.ProcessItem(count) : "";
         }
 

@@ -20,8 +20,7 @@ namespace ItemStats
                 if (self.tooltipProvider != null && itemDef != null)
                 {
                     var itemDescription = Language.GetString(itemDef.descriptionToken);
-                    itemDescription += "\n\n" + ItemStatProvider.ProvideStatsForItem(newIndex, newCount);
-
+                    itemDescription += ItemStatProvider.ProvideStatsForItem(newIndex, newCount);
 
                     self.tooltipProvider.overrideBodyText = itemDescription;
                 }

@@ -10,6 +10,8 @@ namespace ItemStats.StatCalculation
         public string ProcessItem(List<ItemStat> stats, int count)
         {
             var fullStatText = new StringBuilder();
+            fullStatText.Append("\n\n");
+
             foreach (var stat in stats)
             {
                 var m = stat.GetInitialStat(count);
@@ -24,6 +26,7 @@ namespace ItemStats.StatCalculation
                     if (!m.HasValue) continue;
 
                     var modifierContribution = (float) m - originalValue;
+
                     // skip modifiers that contrib less that 1% to the final value
                     if (!ContributionSignificant(modifierContribution)) continue;
 
@@ -34,17 +37,12 @@ namespace ItemStats.StatCalculation
 
                 var finalFormattedValue = stat.Format(originalValue + modifiedValueSum);
 
-                if (stats.IndexOf(stat) == stats.Count - 1)
-                {
-                    // this is the last line
-                    // TextMeshPro richtext modifier that allows me to align the stack counter on the right
-                    fullStatText.Append($"<align=left>{stat.StatText}: {finalFormattedValue}");
-                    fullStatText.Append(formattedContributions);
-                }
-                else
-                {
-                    fullStatText.AppendLine($"{stat.StatText}: {finalFormattedValue}");
-                }
+                // explicitly align left on the last line to fix the stack counter alignment
+                var lastLineAlignment = stats.IndexOf(stat) == stats.Count - 1 ? "<align=left>" : "";
+
+                fullStatText.Append(lastLineAlignment + $"{stat.StatText}: {finalFormattedValue} \n");
+                // if (modifiedValueSum > 0f) fullStatText.AppendLine();
+                fullStatText.Append(formattedContributions);
             }
 
             return fullStatText.Append($"<br><align=right>({count} stacks)").ToString();

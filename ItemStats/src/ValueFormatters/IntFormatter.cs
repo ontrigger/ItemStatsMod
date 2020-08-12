@@ -15,7 +15,7 @@ namespace ItemStats.ValueFormatters
 
         public string Format(float value)
         {
-            return $"{Math.Round(value, _decimals)} {_prefix}".SetColor("green");
+            return $"{Math.Round(value, _decimals)}{_prefix}".SetColor("green");
         }
     }
 }

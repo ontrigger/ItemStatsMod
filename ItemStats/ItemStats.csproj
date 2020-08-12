@@ -87,12 +87,6 @@
   <ItemGroup>
     <None Include="packages.config"/>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ItemStats.Api\ItemStats.Api.csproj">
-      <Project>{db035642-e220-4526-88a3-9b1de8ee3a42}</Project>
-      <Name>ItemStats.Api</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.

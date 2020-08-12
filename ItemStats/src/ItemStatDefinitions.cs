@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using EntityStates;
 using ItemStats.Stat;
 using ItemStats.ValueFormatters;
 using RoR2;
@@ -80,7 +78,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             itemCount => itemCount,
-                            "Total Additional  Jumps",
+                            "Total Additional Jumps",
                             new IntFormatter()
                         )
                     }
@@ -91,8 +89,8 @@ namespace ItemStats
                     {
                         new ItemStat(
                             itemCount => itemCount,
-                            "Total Heal Hp",
-                            new IntFormatter("HP")
+                            "Total Heal",
+                            new IntFormatter(" HP")
                         )
                     }
                 },
@@ -104,7 +102,13 @@ namespace ItemStats
                             itemCount => itemCount * 30f,
                             "Ghost Duration",
                             new IntFormatter("s")
-                        )
+                        ),
+                        new ItemStat(
+                            itemCount => 0.07f,
+                            "Proc Chance",
+                            new PercentageFormatter(),
+                            Modifiers.Clover
+                        ),
                     }
                 },
                 [ItemIndex.Knurl] = new ItemStatDef
@@ -119,7 +123,7 @@ namespace ItemStats
                         new ItemStat(
                             itemCount => itemCount * 1.6f,
                             "Additional Regeneration",
-                            new IntFormatter("HP/s")
+                            new IntFormatter("HP/s", 1)
                         )
                     }
                 },
@@ -195,10 +199,10 @@ namespace ItemStats
                             "Ice Blast Damage"
                         ),
                         new ItemStat(
-                            formula: itemCount => 3f * itemCount,
-                            statText: "Ice Debuff Duration",
-                            formatter: new IntFormatter("s")
-                        )
+                            itemCount => 3f * itemCount,
+                            "Ice Debuff Duration",
+                            new IntFormatter("s")
+                        ),
                     }
                 },
                 [ItemIndex.FireRing] = new ItemStatDef
@@ -478,10 +482,10 @@ namespace ItemStats
                             new IntFormatter("m")
                         ),
                         new ItemStat(
-                            formula: itemCount => 0.25f,
-                            statText: "Proc Chance",
-                            formatter: new PercentageFormatter(),
-                            modifiers: Modifiers.Clover
+                            itemCount => 0.25f,
+                            "Proc Chance",
+                            new PercentageFormatter(),
+                            Modifiers.Clover
                         )
                     }
                 },
@@ -602,7 +606,7 @@ namespace ItemStats
                             "Health Fraction/s"
                         ),
                         new ItemStat(
-                            itemCount => 1 + itemCount,
+                            itemCount => itemCount,
                             "Healing per Heal Increase"
                         )
                     }
@@ -661,10 +665,10 @@ namespace ItemStats
                             new PercentageFormatter()
                         ),
                         new ItemStat(
-                            formula: itemCount => 0.1f,
-                            statText: "Proc Chance",
-                            formatter: new PercentageFormatter(),
-                            modifiers: Modifiers.Clover
+                            itemCount => 0.1f,
+                            "Proc Chance",
+                            new PercentageFormatter(),
+                            Modifiers.Clover
                         )
                     }
                 },
@@ -679,18 +683,8 @@ namespace ItemStats
                         ),
                         new ItemStat(
                             itemCount => itemCount,
-                            "HP Gained Per Kill"
-                        )
-                    }
-                },
-                [ItemIndex.JumpBoost] = new ItemStatDef
-                {
-                    Stats = new List<ItemStat>
-                    {
-                        new ItemStat(
-                            itemCount => 10 * itemCount,
-                            "Boost Length",
-                            new IntFormatter("m")
+                            "Health Gained Per Kill",
+                            new IntFormatter("HP")
                         )
                     }
                 },
@@ -699,9 +693,13 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.1f + 0.2f * itemCount,
+                            itemCount => 0.12f + 0.24f * itemCount,
                             "Max Attack Speed"
-                        )
+                        ),
+                        new ItemStat(
+                            itemCount => 0.05f,
+                            "Crit Chance Bonus"
+                        ),
                     }
                 },
                 [ItemIndex.Icicle] = new ItemStatDef
@@ -709,8 +707,9 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1.5f * itemCount,
-                            "Icicle Damage"
+                            itemCount => 6f * itemCount,
+                            "Radius",
+                            new IntFormatter("m")
                         ),
                         new ItemStat(
                             itemCount => 6 + (itemCount - 1) * 3,
@@ -821,17 +820,8 @@ namespace ItemStats
                             new IntFormatter("s")
                         ),
                         new ItemStat(
-                            itemCount =>
-                            {
-                                var maxHealth = LocalUserManager.FindLocalUser(0)?.cachedBody.maxHealth;
-                                var healingPerSecond = maxHealth
-                                                       * GhostUtilitySkillState.healFractionPerTick
-                                                       * GhostUtilitySkillState.healFrequency;
-
-                                return healingPerSecond;
-                            },
-                            "Health Healed",
-                            new IntFormatter("HP/s")
+                            itemCount => Mathf.Min(1f, 0.25f * itemCount),
+                            "Health Healed"
                         )
                     }
                 },
@@ -930,7 +920,8 @@ namespace ItemStats
                         new ItemStat(
                             itemCount => 0.04f * itemCount,
                             "Drop Chance",
-                            new PercentageFormatter()
+                            new PercentageFormatter(),
+                            Modifiers.Clover
                         )
                     }
                 },
@@ -971,16 +962,12 @@ namespace ItemStats
                         )
                     }
                 },
-                [ItemIndex.LunarTrinket] = new ItemStatDef
-                {
-                    Stats = new List<ItemStat>()
-                },
                 [ItemIndex.NovaOnLowHealth] = new ItemStatDef
                 {
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 30f / (itemCount + 1),
+                            itemCount => 30f / itemCount,
                             "Recharge Delay",
                             new IntFormatter("s")
                         )
@@ -1035,13 +1022,13 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1 + 0.3f * Math.Min(itemCount, 3),
-                            "Bonus Charge Speed",
-                            new PercentageFormatter()
+                            itemCount => 90f / (1f + 0.3f * Mathf.Min(itemCount, 3f)),
+                            "Minimum Charge Time",
+                            new IntFormatter("s")
                         ),
                         new ItemStat(
-                            itemCount => 1f / (2 * Math.Min(itemCount, 3)),
-                            "Radius",
+                            itemCount => 1 / (2 * Mathf.Min(itemCount, 3f)),
+                            "Zone Size",
                             new PercentageFormatter(2)
                         )
                     }
@@ -1066,6 +1053,100 @@ namespace ItemStats
                             "Healing Radius",
                             new IntFormatter("m")
                         )
+                    }
+                },
+                [ItemIndex.Squid] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => itemCount,
+                            "Attack Speed"
+                        )
+                    }
+                },
+                [ItemIndex.CaptainDefenseMatrix] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => itemCount,
+                            "Projectile Count",
+                            new IntFormatter(" projectile(s)")
+                        )
+                    }
+                },
+                [ItemIndex.CutHp] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 1f / (itemCount + 1),
+                            "Health Reduction"
+                        )
+                    }
+                },
+                [ItemIndex.Phasing] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 1.5f + itemCount * 1.5f,
+                            "Cloak Duration",
+                            new IntFormatter("s")
+                        )
+                    }
+                },
+                [ItemIndex.FallBoots] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 10f * Mathf.Pow(0.5f, itemCount - 1),
+                            "Recharge Time",
+                            new IntFormatter("s", 2)
+                        )
+                    }
+                },
+                [ItemIndex.JumpBoost] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => 10f * itemCount,
+                            "Boost Length",
+                            new IntFormatter("m")
+                        )
+                    }
+                },
+                [ItemIndex.LunarDagger] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => Mathf.Pow(2f, itemCount),
+                            "Base Damage Increase"
+                        ),
+                        new ItemStat(
+                            itemCount => 1f / Mathf.Pow(2f, itemCount),
+                            "Max Health Reduction"
+                        ),
+                    }
+                },
+                [ItemIndex.Incubator] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            itemCount => (7f + 1f * itemCount) / 100f,
+                            "Summon Chance",
+                            new PercentageFormatter(),
+                            Modifiers.Clover
+                        ),
+                        new ItemStat(
+                            itemCount => itemCount,
+                            "Base Health"
+                        ),
                     }
                 },
             };
