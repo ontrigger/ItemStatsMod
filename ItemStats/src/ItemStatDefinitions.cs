@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ItemStats
 {
-    public partial class ItemStatProvider
+    internal partial class ItemStatProvider
     {
         static ItemStatProvider()
         {
