@@ -7,26 +7,26 @@ namespace ItemStats.Stat
     public class ItemStat : IStat
     {
         //TODO: refactor
-        private readonly Func<float, float?> _formula;
-        public readonly IStatFormatter formatter;
-        public string StatText { get; }
-        public AbstractModifier[] StatModifiers { get; }
+        private readonly Func<float, StatContext, float?> _formula;
+        public readonly IStatFormatter Formatter;
 
-
-        public ItemStat(Func<float, float?> formula, string statText,
+        public ItemStat(Func<float, StatContext, float?> formula, string statText,
             IStatFormatter formatter = null, params AbstractModifier[] modifiers)
         {
             _formula = formula;
             StatText = statText;
-            this.formatter = formatter ?? new PercentageFormatter();
+            Formatter = formatter ?? new PercentageFormatter();
             StatModifiers = modifiers;
         }
 
-        public float? GetInitialStat(float count)
+        public string StatText { get; }
+        public AbstractModifier[] StatModifiers { get; }
+
+        public float? GetInitialStat(float count, StatContext context)
         {
             try
             {
-                return _formula(count);
+                return _formula(count, context);
             }
             catch (NullReferenceException e)
             {
@@ -38,7 +38,7 @@ namespace ItemStats.Stat
 
         public string Format(float statValue)
         {
-            return formatter.Format(statValue);
+            return Formatter.Format(statValue);
         }
     }
 }

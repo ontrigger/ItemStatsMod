@@ -5,10 +5,10 @@ namespace ItemStats.ValueFormatters
 {
     public class PercentageFormatter : IStatFormatter
     {
-        private readonly int _decimalPlaces;
-        private readonly float _scale;
-        private readonly float _maxValue;
         private readonly string _color;
+        private readonly int _decimalPlaces;
+        private readonly float _maxValue;
+        private readonly float _scale;
 
         public PercentageFormatter(int decimalPlaces = 1, float scale = 100f, float maxValue = 0f,
             string color = Colors.Green)

@@ -19,7 +19,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            count => 1f - 1f / (0.15f * count + 1f),
+                            (itemCount, ctx) => 1f - 1f / (0.15f * itemCount + 1f),
                             "Block Chance"
                         )
                     }
@@ -29,7 +29,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 0.14f,
+                            (itemCount, ctx) => itemCount * 0.14f,
                             "Movement Speed Increase"
                         )
                     }
@@ -39,7 +39,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            count => count * 0.15f,
+                            (itemCount, ctx) => itemCount * 0.15f,
                             "Attack Speed Increase"
                         )
                     }
@@ -49,13 +49,13 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            count => 0.0225f + 0.0225f * count,
+                            (itemCount, ctx) => 0.0225f + 0.0225f * itemCount,
                             "Healing Per Second",
                             // TODO: use a decorator instead of additional param for the formatter
                             new PercentageFormatter(maxValue: 1f)
                         ),
                         new ItemStat(
-                            itemCount => 1.5f + 1.5f * itemCount,
+                            (itemCount, ctx) => 1.5f + 1.5f * itemCount,
                             "Area Increase",
                             new IntFormatter("m")
                         )
@@ -66,7 +66,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 0.1f,
+                            (itemCount, ctx) => itemCount * 0.1f,
                             "Additional Crit Chance",
                             new PercentageFormatter(maxValue: 1f)
                         )
@@ -77,7 +77,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Total Additional Jumps",
                             new IntFormatter()
                         )
@@ -88,7 +88,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Total Heal",
                             new IntFormatter(" HP")
                         )
@@ -99,16 +99,16 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 30f,
+                            (itemCount, ctx) => itemCount * 30f,
                             "Ghost Duration",
                             new IntFormatter("s")
                         ),
                         new ItemStat(
-                            itemCount => 0.07f,
+                            (itemCount, ctx) => 0.07f,
                             "Proc Chance",
                             new PercentageFormatter(),
-                            Modifiers.Clover
-                        ),
+                            Modifiers.Luck
+                        )
                     }
                 },
                 [ItemIndex.Knurl] = new ItemStatDef
@@ -116,12 +116,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 40f,
+                            (itemCount, ctx) => itemCount * 40f,
                             "Bonus Health",
                             new IntFormatter("HP")
                         ),
                         new ItemStat(
-                            itemCount => itemCount * 1.6f,
+                            (itemCount, ctx) => itemCount * 1.6f,
                             "Additional Regeneration",
                             new IntFormatter("HP/s", 1)
                         )
@@ -132,7 +132,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Additional Rerolls",
                             new IntFormatter()
                         )
@@ -143,7 +143,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.05f * itemCount,
+                            (itemCount, ctx) => 0.05f * itemCount,
                             "Health Healed"
                         )
                     }
@@ -153,7 +153,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1f + 0.5f * itemCount,
+                            (itemCount, ctx) => 1f + 0.5f * itemCount,
                             "Damage Increase"
                         )
                     }
@@ -163,7 +163,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.02f * itemCount,
+                            (itemCount, ctx) => 0.02f * itemCount,
                             "Heal Amount"
                         )
                     }
@@ -173,7 +173,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 2f + itemCount * 2f,
+                            (itemCount, ctx) => 2f + itemCount * 2f,
                             "Cooldown Reduction",
                             new IntFormatter("s")
                         )
@@ -184,9 +184,9 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            formula: itemCount => 1f - 1f / Mathf.Pow(itemCount + 1, 0.33f),
-                            statText: "Drop Chance",
-                            modifiers: Modifiers.Clover
+                            (itemCount, ctx) => 1f - 1f / Mathf.Pow(itemCount + 1, 0.33f),
+                            "Drop Chance",
+                            modifiers: Modifiers.Luck
                         )
                     }
                 },
@@ -195,14 +195,14 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 2.5f * itemCount,
+                            (itemCount, ctx) => 2.5f * itemCount,
                             "Ice Blast Damage"
                         ),
                         new ItemStat(
-                            itemCount => 3f * itemCount,
+                            (itemCount, ctx) => 3f * itemCount,
                             "Ice Debuff Duration",
                             new IntFormatter("s")
-                        ),
+                        )
                     }
                 },
                 [ItemIndex.FireRing] = new ItemStatDef
@@ -210,13 +210,13 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 3f * itemCount,
+                            (itemCount, ctx) => 3f * itemCount,
                             "Fire Tornado Damage"
                         ),
                         new ItemStat(
-                            formula: itemCount => 0.08f,
-                            statText: "Proc Chance",
-                            modifiers: Modifiers.Clover
+                            (itemCount, ctx) => 0.08f,
+                            "Proc Chance",
+                            modifiers: Modifiers.Luck
                         )
                     }
                 },
@@ -225,7 +225,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 2f + 4f * itemCount,
+                            (itemCount, ctx) => 2f + 4f * itemCount,
                             "Frenzy Duration",
                             new IntFormatter("s")
                         )
@@ -236,7 +236,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 0.3f,
+                            (itemCount, ctx) => itemCount * 0.3f,
                             "Speed Increase"
                         )
                     }
@@ -246,10 +246,10 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            formula: itemCount => 1f - 1f / (0.05f * itemCount + 1f),
-                            statText: "Stun Chance Increase",
-                            formatter: new PercentageFormatter(maxValue: 1f),
-                            modifiers: Modifiers.Clover
+                            (itemCount, ctx) => 1f - 1f / (0.05f * itemCount + 1f),
+                            "Stun Chance Increase",
+                            new PercentageFormatter(maxValue: 1f),
+                            Modifiers.Luck
                         )
                     }
                 },
@@ -258,7 +258,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 2f + 4f * itemCount,
+                            (itemCount, ctx) => 2f + 4f * itemCount,
                             "Frenzy Duration",
                             new IntFormatter()
                         )
@@ -269,7 +269,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Bonus Stock",
                             new IntFormatter()
                         )
@@ -280,7 +280,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 2f,
+                            (itemCount, ctx) => itemCount * 2f,
                             "Bonus Charges",
                             new IntFormatter()
                         )
@@ -291,7 +291,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.5f * Mathf.Pow(0.85f, itemCount - 1),
+                            (itemCount, ctx) => 0.5f * Mathf.Pow(0.85f, itemCount - 1),
                             "Cooldown Decrease",
                             new PercentageFormatter()
                         )
@@ -302,7 +302,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 4f,
+                            (itemCount, ctx) => itemCount * 4f,
                             "Frenzy Duration",
                             new IntFormatter("s")
                         )
@@ -313,7 +313,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.2f + 0.2f * (itemCount - 1),
+                            (itemCount, ctx) => 0.2f + 0.2f * (itemCount - 1),
                             "Damage Increase"
                         )
                     }
@@ -323,12 +323,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 12f + 2.4f * (itemCount - 1f),
+                            (itemCount, ctx) => 12f + 2.4f * (itemCount - 1f),
                             "Radius Increase",
                             new IntFormatter("m")
                         ),
                         new ItemStat(
-                            itemCount => 3.5f * (1f + (itemCount - 1) * 0.8f),
+                            (itemCount, ctx) => 3.5f * (1f + (itemCount - 1) * 0.8f),
                             "Damage Increase"
                         )
                     }
@@ -338,7 +338,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 3f * itemCount,
+                            (itemCount, ctx) => 3f * itemCount,
                             "Bonus Health Regen",
                             new IntFormatter("hp/s")
                         )
@@ -349,12 +349,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 8f + 4f * itemCount,
+                            (itemCount, ctx) => 8f + 4f * itemCount,
                             "Radius Increase",
                             new IntFormatter("m")
                         ),
                         new ItemStat(
-                            itemCount => 1.5f + 1.5f * itemCount,
+                            (itemCount, ctx) => 1.5f + 1.5f * itemCount,
                             "Duration Increase"
                         )
                     }
@@ -364,7 +364,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 8f + 8f * itemCount,
+                            (itemCount, ctx) => 8f + 8f * itemCount,
                             "Radius Increase",
                             new IntFormatter("m")
                         )
@@ -375,7 +375,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Soul Energy"
                         )
                     }
@@ -385,7 +385,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 4f + itemCount * 4f,
+                            (itemCount, ctx) => 4f + itemCount * 4f,
                             "Health per Crit",
                             new IntFormatter("HP")
                         )
@@ -396,10 +396,10 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            formula: itemCount => 0.15f * itemCount,
-                            statText: "Bleed Chance Increase",
-                            formatter: new PercentageFormatter(maxValue: 1f),
-                            modifiers: Modifiers.Clover
+                            (itemCount, ctx) => 0.15f * itemCount,
+                            "Bleed Chance Increase",
+                            new PercentageFormatter(maxValue: 1f),
+                            Modifiers.Luck
                         )
                     }
                 },
@@ -408,7 +408,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 2 * itemCount,
+                            (itemCount, ctx) => 2 * itemCount,
                             "Slow Duration",
                             new IntFormatter("s")
                         )
@@ -419,12 +419,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Bonus Charges",
                             new IntFormatter()
                         ),
                         new ItemStat(
-                            itemCount => 1 - Mathf.Pow(0.85f, itemCount),
+                            (itemCount, ctx) => 1 - Mathf.Pow(0.85f, itemCount),
                             "Cooldown Decrease"
                         )
                     }
@@ -435,14 +435,14 @@ namespace ItemStats
                     {
                         new ItemStat(
                             //TODO: make run a modifier
-                            itemCount => itemCount * 2f * Run.instance.difficultyCoefficient,
+                            (itemCount, ctx) => itemCount * 2f * Run.instance.difficultyCoefficient,
                             "Gold per Hit(*)",
                             new IntFormatter()
                         ),
                         new ItemStat(
-                            formula: itemCount => 0.3f,
-                            statText: "Proc Chance",
-                            modifiers: Modifiers.Clover
+                            (itemCount, ctx) => 0.3f,
+                            "Proc Chance",
+                            modifiers: Modifiers.Luck
                         )
                     }
                 },
@@ -451,7 +451,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Healing Increase"
                         )
                     }
@@ -461,7 +461,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.08f * itemCount,
+                            (itemCount, ctx) => 0.08f * itemCount,
                             "Shield Health Increase",
                             new PercentageFormatter()
                         )
@@ -472,20 +472,20 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 2f,
+                            (itemCount, ctx) => itemCount * 2f,
                             "Total Bounces",
                             new IntFormatter()
                         ),
                         new ItemStat(
-                            itemCount => 20f + 2f * itemCount,
+                            (itemCount, ctx) => 20f + 2f * itemCount,
                             "Bounce Range",
                             new IntFormatter("m")
                         ),
                         new ItemStat(
-                            itemCount => 0.25f,
+                            (itemCount, ctx) => 0.25f,
                             "Proc Chance",
                             new PercentageFormatter(),
-                            Modifiers.Clover
+                            Modifiers.Luck
                         )
                     }
                 },
@@ -494,24 +494,24 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            formula: itemCount => 80f / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
-                            statText: "Common Chance",
-                            formatter: new PercentageFormatter(maxValue: 1f),
-                            modifiers: Modifiers.TreasureCache
+                            (itemCount, ctx) => 80f / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
+                            "Common Chance",
+                            new PercentageFormatter(maxValue: 1f),
+                            Modifiers.TreasureCache
                         ),
                         new ItemStat(
-                            formula: itemCount =>
+                            (itemCount, ctx) =>
                                 20f * itemCount / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
-                            statText: "Uncommon Chance",
-                            formatter: new PercentageFormatter(maxValue: 1f),
-                            modifiers: Modifiers.TreasureCache
+                            "Uncommon Chance",
+                            new PercentageFormatter(maxValue: 1f),
+                            Modifiers.TreasureCache
                         ),
                         new ItemStat(
-                            formula: itemCount =>
+                            (itemCount, ctx) =>
                                 Mathf.Pow(itemCount, 2f) / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
-                            statText: "Rare Chance",
-                            formatter: new PercentageFormatter(maxValue: 1f),
-                            modifiers: Modifiers.TreasureCache
+                            "Rare Chance",
+                            new PercentageFormatter(maxValue: 1f),
+                            Modifiers.TreasureCache
                         )
                     }
                 },
@@ -520,12 +520,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            formula: itemCount => 1f - 100f / (100f + 20f * itemCount),
-                            statText: "Hook Chance",
-                            modifiers: Modifiers.Clover
+                            (itemCount, ctx) => 1f - 100f / (100f + 20f * itemCount),
+                            "Hook Chance",
+                            modifiers: Modifiers.Luck
                         ),
                         new ItemStat(
-                            itemCount => 5f + itemCount * 5f,
+                            (itemCount, ctx) => 5f + itemCount * 5f,
                             "Max Enemies Hooked",
                             new IntFormatter()
                         )
@@ -536,7 +536,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.1f + 0.2f * itemCount,
+                            (itemCount, ctx) => 0.1f + 0.2f * itemCount,
                             "Speed Increase"
                         )
                     }
@@ -546,7 +546,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 30f * itemCount,
+                            (itemCount, ctx) => 30f * itemCount,
                             "Sprint Bonus Armor",
                             new IntFormatter()
                         )
@@ -557,7 +557,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 2f * itemCount,
+                            (itemCount, ctx) => 2f * itemCount,
                             "Total Bounces",
                             new IntFormatter()
                         )
@@ -568,7 +568,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Total Guards",
                             new IntFormatter()
                         )
@@ -579,7 +579,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.5f + (itemCount - 1) * 0.25f,
+                            (itemCount, ctx) => 0.5f + (itemCount - 1) * 0.25f,
                             "Max Health Increase"
                         )
                     }
@@ -589,10 +589,10 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            formula: itemCount => 0.05f * itemCount,
-                            statText: "Proc Chance Increase",
-                            formatter: new PercentageFormatter(maxValue: 1f),
-                            modifiers: Modifiers.Clover
+                            (itemCount, ctx) => 0.05f * itemCount,
+                            "Proc Chance Increase",
+                            new PercentageFormatter(maxValue: 1f),
+                            Modifiers.Luck
                         )
                     }
                 },
@@ -602,11 +602,11 @@ namespace ItemStats
                     {
                         //TODO: need to get masters maxhealth to get actual heal amount
                         new ItemStat(
-                            itemCount => 0.1f / itemCount,
+                            (itemCount, ctx) => 0.1f / itemCount,
                             "Health Fraction/s"
                         ),
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Healing per Heal Increase"
                         )
                     }
@@ -616,7 +616,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 3f + 5f * itemCount,
+                            (itemCount, ctx) => 3f + 5f * itemCount,
                             "Empowering Duration",
                             new IntFormatter("s")
                         )
@@ -627,7 +627,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Extra Lives",
                             new IntFormatter()
                         )
@@ -638,7 +638,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1 - Mathf.Pow(0.75f, itemCount),
+                            (itemCount, ctx) => 1 - Mathf.Pow(0.75f, itemCount),
                             "Cooldown Reduction",
                             new PercentageFormatter(2)
                         )
@@ -649,7 +649,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 4 + itemCount * 4,
+                            (itemCount, ctx) => 4 + itemCount * 4,
                             "Firework Count",
                             new IntFormatter()
                         )
@@ -660,15 +660,15 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 3 * itemCount,
+                            (itemCount, ctx) => 3 * itemCount,
                             "Missile Total Damage",
                             new PercentageFormatter()
                         ),
                         new ItemStat(
-                            itemCount => 0.1f,
+                            (itemCount, ctx) => 0.1f,
                             "Proc Chance",
                             new PercentageFormatter(),
-                            Modifiers.Clover
+                            Modifiers.Luck
                         )
                     }
                 },
@@ -677,12 +677,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 100 * itemCount,
+                            (itemCount, ctx) => 100 * itemCount,
                             "Max Additional Health",
                             new IntFormatter("HP")
                         ),
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Health Gained Per Kill",
                             new IntFormatter("HP")
                         )
@@ -693,13 +693,13 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.12f + 0.24f * itemCount,
+                            (itemCount, ctx) => 0.12f + 0.24f * itemCount,
                             "Max Attack Speed"
                         ),
                         new ItemStat(
-                            itemCount => 0.05f,
+                            (itemCount, ctx) => 0.05f,
                             "Crit Chance Bonus"
-                        ),
+                        )
                     }
                 },
                 [ItemIndex.Icicle] = new ItemStatDef
@@ -707,12 +707,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 6f * itemCount,
+                            (itemCount, ctx) => 6f * itemCount,
                             "Radius",
                             new IntFormatter("m")
                         ),
                         new ItemStat(
-                            itemCount => 6 + (itemCount - 1) * 3,
+                            (itemCount, ctx) => 6 + (itemCount - 1) * 3,
                             "Max Possible Icicles"
                         )
                     }
@@ -722,7 +722,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1.5f + 2.5f * itemCount,
+                            (itemCount, ctx) => 1.5f + 2.5f * itemCount,
                             "Explosion Radius",
                             new IntFormatter("m", 1)
                         )
@@ -733,7 +733,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 15f * itemCount,
+                            (itemCount, ctx) => 15f * itemCount,
                             "Barrier Health",
                             new IntFormatter("HP")
                         )
@@ -744,7 +744,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.5f * itemCount,
+                            (itemCount, ctx) => 0.5f * itemCount,
                             "Barrier From Overheal",
                             new PercentageFormatter()
                         )
@@ -755,7 +755,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1 - 1 / (1 + 0.13f * itemCount),
+                            (itemCount, ctx) => 1 - 1 / (1 + 0.13f * itemCount),
                             "Kill Health Threshold",
                             new PercentageFormatter()
                         )
@@ -766,7 +766,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 8f + 4f * (itemCount - 1),
+                            (itemCount, ctx) => 8f + 4f * (itemCount - 1),
                             "Attack Speed Duration",
                             new IntFormatter("s")
                         )
@@ -777,12 +777,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Health Boost",
                             new PercentageFormatter()
                         ),
                         new ItemStat(
-                            itemCount => 0.5f + 0.5f * itemCount,
+                            (itemCount, ctx) => 0.5f + 0.5f * itemCount,
                             "Damage Boost",
                             new PercentageFormatter()
                         )
@@ -793,7 +793,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 3f * itemCount,
+                            (itemCount, ctx) => 3f * itemCount,
                             "Damage Boost",
                             new PercentageFormatter()
                         )
@@ -804,7 +804,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1.5f * itemCount,
+                            (itemCount, ctx) => 1.5f * itemCount,
                             "Dagger Damage",
                             new PercentageFormatter()
                         )
@@ -815,12 +815,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 3f * itemCount,
+                            (itemCount, ctx) => 3f * itemCount,
                             "Skill Duration",
                             new IntFormatter("s")
                         ),
                         new ItemStat(
-                            itemCount => Mathf.Min(1f, 0.25f * itemCount),
+                            (itemCount, ctx) => Mathf.Min(1f, 0.25f * itemCount),
                             "Health Healed"
                         )
                     }
@@ -830,7 +830,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.15f * itemCount,
+                            (itemCount, ctx) => 0.15f * itemCount,
                             "Damage Increase",
                             new PercentageFormatter()
                         )
@@ -841,10 +841,10 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            formula: itemCount => itemCount,
-                            statText: "Max Occurrences",
-                            formatter: new IntFormatter(),
-                            modifiers: Modifiers.TpHealingNova
+                            (itemCount, ctx) => itemCount,
+                            "Max Occurrences",
+                            new IntFormatter(),
+                            Modifiers.TpHealingNova
                         )
                     }
                 },
@@ -853,7 +853,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 8f * itemCount,
+                            (itemCount, ctx) => 8f * itemCount,
                             "Duration",
                             new IntFormatter("s")
                         )
@@ -864,12 +864,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 5 + 2 * (itemCount - 1),
+                            (itemCount, ctx) => 5 + 2 * (itemCount - 1),
                             "Max Targets",
                             new IntFormatter()
                         ),
                         new ItemStat(
-                            itemCount => 25f + 10f * (itemCount - 1),
+                            (itemCount, ctx) => 25f + 10f * (itemCount - 1),
                             "Radius",
                             new IntFormatter("m")
                         )
@@ -880,7 +880,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 3f * itemCount,
+                            (itemCount, ctx) => 3f * itemCount,
                             "Duration",
                             new IntFormatter("s")
                         )
@@ -891,7 +891,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.1f * itemCount,
+                            (itemCount, ctx) => 0.1f * itemCount,
                             "Health Increase",
                             new PercentageFormatter()
                         )
@@ -902,7 +902,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 0.1f * itemCount,
+                            (itemCount, ctx) => 0.1f * itemCount,
                             "Stat Increase",
                             new PercentageFormatter()
                         )
@@ -913,15 +913,15 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => Run.instance.GetDifficultyScaledCost(25),
+                            (itemCount, ctx) => Run.instance.GetDifficultyScaledCost(25),
                             "per Drop",
                             new IntFormatter("$")
                         ),
                         new ItemStat(
-                            itemCount => 0.04f * itemCount,
+                            (itemCount, ctx) => 0.04f * itemCount,
                             "Drop Chance",
                             new PercentageFormatter(),
-                            Modifiers.Clover
+                            Modifiers.Luck
                         )
                     }
                 },
@@ -930,12 +930,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 12f * itemCount,
+                            (itemCount, ctx) => 12f * itemCount,
                             "Max Charges",
                             new IntFormatter()
                         ),
                         new ItemStat(
-                            itemCount => 2f * itemCount,
+                            (itemCount, ctx) => 2f * itemCount,
                             "Recharge Delay",
                             new IntFormatter("s")
                         )
@@ -946,17 +946,17 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 3f * itemCount,
+                            (itemCount, ctx) => 3f * itemCount,
                             "Pierce Damage",
                             new PercentageFormatter()
                         ),
                         new ItemStat(
-                            itemCount => 10f * itemCount,
+                            (itemCount, ctx) => 10f * itemCount,
                             "Explosion Damage",
                             new PercentageFormatter()
                         ),
                         new ItemStat(
-                            itemCount => 3f * itemCount,
+                            (itemCount, ctx) => 3f * itemCount,
                             "On Return Damage",
                             new PercentageFormatter()
                         )
@@ -967,7 +967,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 30f / itemCount,
+                            (itemCount, ctx) => 30f / itemCount,
                             "Recharge Delay",
                             new IntFormatter("s")
                         )
@@ -978,7 +978,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 5,
+                            (itemCount, ctx) => itemCount * 5,
                             "Reduced damage",
                             new IntFormatter()
                         )
@@ -989,7 +989,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Attack Speed",
                             new PercentageFormatter(0)
                         )
@@ -1000,7 +1000,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount * 0.5f,
+                            (itemCount, ctx) => itemCount * 0.5f,
                             "Increased Damage",
                             new PercentageFormatter()
                         )
@@ -1011,7 +1011,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 3 + 1.5f * (itemCount - 1),
+                            (itemCount, ctx) => 3 + 1.5f * (itemCount - 1),
                             "Radius",
                             new IntFormatter("m", 1)
                         )
@@ -1022,12 +1022,12 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 90f / (1f + 0.3f * Mathf.Min(itemCount, 3f)),
+                            (itemCount, ctx) => 90f / (1f + 0.3f * Mathf.Min(itemCount, 3f)),
                             "Minimum Charge Time",
                             new IntFormatter("s")
                         ),
                         new ItemStat(
-                            itemCount => 1 / (2 * Mathf.Min(itemCount, 3f)),
+                            (itemCount, ctx) => 1 / (2 * Mathf.Min(itemCount, 3f)),
                             "Zone Size",
                             new PercentageFormatter(2)
                         )
@@ -1038,7 +1038,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 7f * itemCount,
+                            (itemCount, ctx) => 7f * itemCount,
                             "Debuff Duration",
                             new IntFormatter("s")
                         )
@@ -1049,7 +1049,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 5f * itemCount,
+                            (itemCount, ctx) => 5f * itemCount,
                             "Healing Radius",
                             new IntFormatter("m")
                         )
@@ -1060,7 +1060,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Attack Speed"
                         )
                     }
@@ -1070,7 +1070,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Projectile Count",
                             new IntFormatter(" projectile(s)")
                         )
@@ -1081,7 +1081,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1f / (itemCount + 1),
+                            (itemCount, ctx) => 1f / (itemCount + 1),
                             "Health Reduction"
                         )
                     }
@@ -1091,7 +1091,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 1.5f + itemCount * 1.5f,
+                            (itemCount, ctx) => 1.5f + itemCount * 1.5f,
                             "Cloak Duration",
                             new IntFormatter("s")
                         )
@@ -1102,7 +1102,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 10f * Mathf.Pow(0.5f, itemCount - 1),
+                            (itemCount, ctx) => 10f * Mathf.Pow(0.5f, itemCount - 1),
                             "Recharge Time",
                             new IntFormatter("s", 2)
                         )
@@ -1113,7 +1113,7 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => 10f * itemCount,
+                            (itemCount, ctx) => 10f * itemCount,
                             "Boost Length",
                             new IntFormatter("m")
                         )
@@ -1124,13 +1124,13 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => Mathf.Pow(2f, itemCount),
+                            (itemCount, ctx) => Mathf.Pow(2f, itemCount),
                             "Base Damage Increase"
                         ),
                         new ItemStat(
-                            itemCount => 1f / Mathf.Pow(2f, itemCount),
+                            (itemCount, ctx) => 1f / Mathf.Pow(2f, itemCount),
                             "Max Health Reduction"
-                        ),
+                        )
                     }
                 },
                 [ItemIndex.Incubator] = new ItemStatDef
@@ -1138,17 +1138,17 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            itemCount => (7f + 1f * itemCount) / 100f,
+                            (itemCount, ctx) => (7f + 1f * itemCount) / 100f,
                             "Summon Chance",
                             new PercentageFormatter(),
-                            Modifiers.Clover
+                            Modifiers.Luck
                         ),
                         new ItemStat(
-                            itemCount => itemCount,
+                            (itemCount, ctx) => itemCount,
                             "Base Health"
-                        ),
+                        )
                     }
-                },
+                }
             };
         }
     }

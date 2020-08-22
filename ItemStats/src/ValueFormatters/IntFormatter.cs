@@ -4,8 +4,8 @@ namespace ItemStats.ValueFormatters
 {
     public class IntFormatter : IStatFormatter
     {
-        private readonly string _prefix;
         private readonly int _decimals;
+        private readonly string _prefix;
 
         public IntFormatter(string prefix = "", int decimals = 0)
         {

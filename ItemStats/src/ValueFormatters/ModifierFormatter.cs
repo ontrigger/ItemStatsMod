@@ -4,8 +4,8 @@ namespace ItemStats.ValueFormatters
 {
     public class ModifierFormatter : IStatFormatter
     {
-        private readonly string _statText;
         private readonly string _color;
+        private readonly string _statText;
 
         public ModifierFormatter(string statText = "", string color = "#FFB6C1")
         {

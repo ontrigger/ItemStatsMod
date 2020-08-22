@@ -7,14 +7,14 @@ namespace ItemStats.StatCalculation
 {
     public class DefaultStatCalculationStrategy : IStatCalculationStrategy
     {
-        public string ProcessItem(List<ItemStat> stats, int count)
+        public string ProcessItem(List<ItemStat> stats, int count, StatContext context)
         {
             var fullStatText = new StringBuilder();
             fullStatText.Append("\n\n");
 
             foreach (var stat in stats)
             {
-                var m = stat.GetInitialStat(count);
+                var m = stat.GetInitialStat(count, context);
                 if (!m.HasValue) continue;
                 var originalValue = m.Value;
 
@@ -22,7 +22,7 @@ namespace ItemStats.StatCalculation
                 var formattedContributions = new StringBuilder();
                 foreach (var statModifier in stat.StatModifiers)
                 {
-                    m = statModifier.GetInitialStat(originalValue);
+                    m = statModifier.GetInitialStat(originalValue, context);
                     if (!m.HasValue) continue;
 
                     var modifierContribution = (float) m - originalValue;

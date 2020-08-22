@@ -63,6 +63,9 @@
     <Reference Include="UnityEngine.Networking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>D:\SteamLibrary\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>D:\SteamLibrary\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs"/>
@@ -75,6 +78,7 @@
     <Compile Include="src\Modifiers.cs"/>
     <Compile Include="src\StatCalculation\DefaultStatCalculationStrategy.cs"/>
     <Compile Include="src\StatCalculation\IStatCalculationStrategy.cs"/>
+    <Compile Include="src\StatContext.cs"/>
     <Compile Include="src\Stat\IStat.cs"/>
     <Compile Include="src\Stat\ItemStat.cs"/>
     <Compile Include="src\ValueFormatters\Colors.cs"/>

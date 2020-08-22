@@ -5,6 +5,6 @@ namespace ItemStats.StatCalculation
 {
     public interface IStatCalculationStrategy
     {
-        string ProcessItem(List<ItemStat> stats, int count);
+        string ProcessItem(List<ItemStat> stats, int count, StatContext context);
     }
 }

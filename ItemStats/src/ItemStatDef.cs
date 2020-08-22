@@ -6,13 +6,12 @@ namespace ItemStats
 {
     public class ItemStatDef
     {
+        private readonly IStatCalculationStrategy _strategy = new DefaultStatCalculationStrategy();
         public List<ItemStat> Stats;
 
-        private readonly IStatCalculationStrategy _strategy = new DefaultStatCalculationStrategy();
-
-        public string ProcessItem(int count)
+        public string ProcessItem(int count, StatContext context)
         {
-            return _strategy.ProcessItem(Stats, count);
+            return _strategy.ProcessItem(Stats, count, context);
         }
     }
 }
