@@ -1148,7 +1148,92 @@ namespace ItemStats
                             "Base Health"
                         )
                     }
-                }
+                },
+                [ItemIndex.SiphonOnLowHealth] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            (itemCount, ctx) => itemCount,
+                            "Additional Enemies",
+                            new IntFormatter()
+                        )
+                    }
+                },
+                [ItemIndex.FireballsOnHit] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            (itemCount, ctx) => 3 * itemCount,
+                            "Damage Increase",
+                            new PercentageFormatter()
+                        ),
+                        new ItemStat(
+                            (itemCount, ctx) => 0.10f,
+                            "Proc Chance",
+                            new PercentageFormatter(),
+                            Modifiers.Luck
+                        ),
+                    }
+                },
+                [ItemIndex.BleedOnHitAndExplode] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            (itemCount, ctx) => 4 * itemCount,
+                            "Damage Increase",
+                            new PercentageFormatter()
+                        ),
+                        new ItemStat(
+                            (itemCount, ctx) => 0.15f * itemCount,
+                            "Explosion Damage Increase"
+                        )
+                    }
+                },
+                [ItemIndex.MonstersOnShrineUse] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            (itemCount, ctx) => itemCount,
+                            "Enemy Difficulty Increase",
+                            new PercentageFormatter()
+                        ),
+                    }
+                },
+                [ItemIndex.RandomDamageZone] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            (itemCount, ctx) =>
+                            {
+                                float num2 = 16f;
+                                for (int i = 0; i < itemCount - 1; i++)
+                                {
+                                    num2 *= 1.5f;
+                                }
+
+                                return num2;
+                            },
+                            "Radius Increase",
+                            new IntFormatter("m")
+                        ),
+                    }
+                },
+                [ItemIndex.LunarBadLuck] = new ItemStatDef
+                {
+                    Stats = new List<ItemStat>
+                    {
+                        new ItemStat(
+                            (itemCount, ctx) => itemCount,
+                            "Cooldown Reduction",
+                            new IntFormatter("s")
+                        ),
+                    }
+                },
             };
         }
     }
