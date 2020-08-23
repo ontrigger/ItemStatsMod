@@ -4,6 +4,7 @@ using BepInEx.Logging;
 using R2API.Utils;
 using RoR2;
 using RoR2.UI;
+using GenericNotification = On.RoR2.UI.GenericNotification;
 using HUD = On.RoR2.UI.HUD;
 using ScoreboardStrip = On.RoR2.UI.ScoreboardStrip;
 
@@ -32,6 +33,8 @@ namespace ItemStats
             HUD.Update += HudUpdateHook;
 
             ScoreboardStrip.SetMaster += ScoreboardSetMasterHook;
+
+            GenericNotification.SetItem += SetNotificationItemHook;
 
             On.RoR2.UI.ItemInventoryDisplay.AllocateIcons += ItemDisplayAllocateIconsHook;
 
@@ -94,6 +97,14 @@ namespace ItemStats
             {
                 _displayToMasterRef[self.itemInventoryDisplay] = self.targetMaster;
             }
+        }
+
+        private void SetNotificationItemHook(GenericNotification.orig_SetItem orig, RoR2.UI.GenericNotification self,
+            ItemDef itemDef)
+        {
+            orig(self, itemDef);
+
+            self.descriptionText.token = itemDef.descriptionToken;
         }
     }
 }
