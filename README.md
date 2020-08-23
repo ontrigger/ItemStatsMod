@@ -8,6 +8,15 @@ First thing you'll need is the BepInExPack. If you don't have it, get it [here](
 
 Afterwards, get the zip file from releases and extract the ItemStats folder in BepInEx/plugins. That's it!
 
+# Custom Item API
+In order to use API, add a Bepin SoftDependency to your BaseUnityPlugin annotations.
+
+Then, create an ItemStatDef for your item (see ItemStatDefinitions.cs for examples).
+
+Use the R2API ItemApi Submodule to add your item and get its ItemIndex.
+
+After that, simply call ItemStatsMod.AddCustomItemStatDef(myItemIndex, myItemStatDef)
+
 # Building
 
 You will first need the following libraries:
@@ -25,9 +34,3 @@ Open the solution, link the libraries in the Lib folder, DL the required NuGet p
 
 * kylewill0725
 * orare
-
-# Custom Item API
-In order to use API, add a Bepin SoftDependency to your BaseUnityPlugin annotations.
-Then, create an ItemStatDef for your item (see ItemStatDefinitions.cs for examples).
-Use the R2API ItemApi Submodule to add your item and get its ItemIndex.
-After that, simply call ItemStatsMod.AddCustomItemStatDef(myItemIndex, myItemStatDef)
