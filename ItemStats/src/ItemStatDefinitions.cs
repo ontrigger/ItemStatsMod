@@ -1210,13 +1210,13 @@ namespace ItemStats
                         new ItemStat(
                             (itemCount, ctx) =>
                             {
-                                float num2 = 16f;
-                                for (int i = 0; i < itemCount - 1; i++)
+                                var radius = 16f;
+                                for (var i = 0; i < itemCount - 1; i++)
                                 {
-                                    num2 *= 1.5f;
+                                    radius *= 1.5f;
                                 }
 
-                                return num2;
+                                return radius;
                             },
                             "Radius Increase",
                             new IntFormatter("m")
