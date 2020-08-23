@@ -11,6 +11,7 @@ namespace ItemStats
 {
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin("dev.ontrigger.itemstats", "ItemStats", "1.5.0")]
+    [NetworkCompatibility(CompatibilityLevel.NoNeedForSync, VersionStrictness.DifferentModVersionsAreOk)]
     public class ItemStatsMod : BaseUnityPlugin
     {
         private readonly Dictionary<ItemInventoryDisplay, CharacterMaster> _displayToMasterRef =

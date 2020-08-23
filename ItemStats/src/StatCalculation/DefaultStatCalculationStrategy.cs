@@ -2,15 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using ItemStats.Stat;
+using JetBrains.Annotations;
 
 namespace ItemStats.StatCalculation
 {
     public class DefaultStatCalculationStrategy : IStatCalculationStrategy
     {
-        public string ProcessItem(List<ItemStat> stats, int count, StatContext context)
+        public string ProcessItem(List<ItemStat> stats, int count, StatContext context,
+            [CanBeNull] string additionalText)
         {
             var fullStatText = new StringBuilder();
             fullStatText.Append("\n\n");
+
+            if (additionalText != null)
+            {
+                fullStatText.Append(additionalText);
+                fullStatText.Append("\n\n");
+            }
 
             foreach (var stat in stats)
             {

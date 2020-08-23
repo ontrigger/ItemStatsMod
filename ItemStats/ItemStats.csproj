@@ -69,18 +69,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs"/>
-    <Compile Include="src\Api\ProvidesItemStats.cs"/>
     <Compile Include="src\ContextProvider.cs"/>
-    <Compile Include="src\ItemStatDef.cs"/>
     <Compile Include="src\ItemStatDefinitions.cs"/>
     <Compile Include="src\ItemStatProvider.cs"/>
     <Compile Include="src\ItemStatsMod.cs"/>
     <Compile Include="src\Modifiers.cs"/>
     <Compile Include="src\StatCalculation\DefaultStatCalculationStrategy.cs"/>
     <Compile Include="src\StatCalculation\IStatCalculationStrategy.cs"/>
-    <Compile Include="src\StatContext.cs"/>
     <Compile Include="src\Stat\IStat.cs"/>
     <Compile Include="src\Stat\ItemStat.cs"/>
+    <Compile Include="src\Stat\ItemStatDef.cs"/>
+    <Compile Include="src\Stat\StatContext.cs"/>
     <Compile Include="src\ValueFormatters\Colors.cs"/>
     <Compile Include="src\ValueFormatters\Extensions.cs"/>
     <Compile Include="src\ValueFormatters\IStatFormatter.cs"/>
