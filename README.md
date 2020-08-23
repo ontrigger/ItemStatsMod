@@ -24,3 +24,10 @@ Open the solution, link the libraries in the Lib folder, DL the required NuGet p
 # Contributors
 
 * kylewill0725
+* orare
+
+# Custom Item API
+In order to use API, add a Bepin SoftDependency to your BaseUnityPlugin annotations.
+Then, create an ItemStatDef for your item (see ItemStatDefinitions.cs for examples).
+Use the R2API ItemApi Submodule to add your item and get its ItemIndex.
+After that, simply call ItemStatsMod.AddCustomItemStatDef(myItemIndex, myItemStatDef)
