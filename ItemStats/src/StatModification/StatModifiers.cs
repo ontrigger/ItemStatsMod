@@ -10,7 +10,10 @@ namespace ItemStats.StatModification
         static StatModifiers()
         {
             ModifierDefs = new Dictionary<ItemStatDef, List<IStatModifier>>();
+        }
 
+        public static void Init()
+        {
             AddStatModifier(new LuckModifier());
             AddStatModifier(new TreasureCacheModifier());
         }

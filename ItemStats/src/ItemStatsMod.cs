@@ -21,6 +21,8 @@ namespace ItemStats
 
         public void Awake()
         {
+            ItemStatProvider.Init();
+            StatModifiers.Init();
             Hooks.Init();
         }
 
