@@ -36,6 +36,11 @@ namespace ItemStats
             return ItemStatProvider.GetItemStatDef(index);
         }
 
+        public static string GetStatsForItem(ItemIndex index, int count, StatContext context)
+        {
+            return ItemStatProvider.ProvideStatsForItem(index, count, context);
+        }
+
         public static void AddStatModifier(AbstractStatModifier modifier)
         {
             StatModifiers.AddStatModifier(modifier);

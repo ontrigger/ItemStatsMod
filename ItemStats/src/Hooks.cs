@@ -10,6 +10,7 @@ namespace ItemStats
 {
     internal static class Hooks
     {
+        // TODO: prevent memleak
         private static readonly Dictionary<ItemInventoryDisplay, CharacterMaster> DisplayToMasterRef =
             new Dictionary<ItemInventoryDisplay, CharacterMaster>();
 
@@ -42,7 +43,7 @@ namespace ItemStats
                 IconToMasterRef.TryGetValue(self, out var master);
 
                 // TODO: use a pool to reduce StatContext allocations
-                itemDescription += ItemStatProvider.ProvideStatsForItem(newIndex, newCount, new StatContext(master));
+                itemDescription += ItemStatsMod.GetStatsForItem(newIndex, newCount, new StatContext(master));
 
                 self.tooltipProvider.overrideBodyText = itemDescription;
             }
