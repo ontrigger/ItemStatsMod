@@ -19,6 +19,7 @@ namespace ItemStats.StatCalculation
 
             var statList = statDef.Stats;
             var modifierList = statDef.GetStatModifiers();
+
             for (var statIndex = 0; statIndex < statList.Count; statIndex++)
             {
                 var stat = statList[statIndex];
@@ -26,7 +27,7 @@ namespace ItemStats.StatCalculation
                 if (!m.HasValue) continue;
                 var originalValue = m.Value;
 
-                var lastLine = statList.IndexOf(stat) == statList.Count - 1;
+                var lastLine = statIndex == statList.Count - 1;
 
                 var modifiedValueSum = 0f;
                 var formattedContributions = new StringBuilder();
@@ -49,7 +50,9 @@ namespace ItemStats.StatCalculation
                     modifiedValueSum += modifierContribution;
                 }
 
+                ItemStatsMod.Logger.LogInfo($"Formatting stat {originalValue} {modifiedValueSum}");
                 var finalFormattedValue = stat.Format(originalValue + modifiedValueSum, context);
+                ItemStatsMod.Logger.LogInfo($"final value {finalFormattedValue}");
 
                 // explicitly align left on the last line to fix the stack counter alignment
                 var lastLineAlignment = lastLine ? "<align=left>" : "";

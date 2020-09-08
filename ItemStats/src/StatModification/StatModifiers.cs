@@ -28,10 +28,12 @@ namespace ItemStats.StatModification
                     throw new KeyNotFoundException($"Affected ItemStatDef with ItemIndex ${itemIndex} not found");
                 }
 
-                var existingEntry = ModifierDefs[itemStatDef];
-                if (existingEntry != null && !existingEntry.Contains(modifier))
+                if (ModifierDefs.TryGetValue(itemStatDef, out var existingEntry))
                 {
-                    existingEntry.Add(modifier);
+                    if (!existingEntry.Contains(modifier))
+                    {
+                        existingEntry.Add(modifier);
+                    }
                 }
                 else
                 {
@@ -48,12 +50,13 @@ namespace ItemStats.StatModification
                 throw new KeyNotFoundException($"ItemStatDef with ItemIndex ${itemIndex} not found");
             }
 
-            return ModifierDefs[itemStatDef];
+            return GetModifiersForItemDef(itemStatDef);
         }
 
         public static List<IStatModifier> GetModifiersForItemDef(ItemStatDef itemStatDef)
         {
-            return ModifierDefs[itemStatDef];
+            ModifierDefs.TryGetValue(itemStatDef, out var existingEntry);
+            return existingEntry ?? new List<IStatModifier>();
         }
     }
 

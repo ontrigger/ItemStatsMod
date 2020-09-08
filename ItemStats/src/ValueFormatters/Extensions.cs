@@ -25,12 +25,12 @@ namespace ItemStats.ValueFormatters
             this float value, string postfix = "",
             int decimals = 0, string color = Colors.Green)
         {
-            return $"{Math.Round(value, decimals)}{postfix} {value:0}".SetColor(color);
+            return $"{Math.Round(value, decimals)}{postfix}".SetColor(color);
         }
 
         public static string FormatPercentage(
             this float value, int decimalPlaces = 1,
-            float scale = 100f, float maxValue = 0f,
+            float scale = 100f, float maxValue = float.MaxValue,
             string color = Colors.Green)
         {
             // color light blue

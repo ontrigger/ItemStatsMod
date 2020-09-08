@@ -4,10 +4,10 @@ namespace ItemStats.Stat
 {
     public class ItemStat : IStat
     {
-        public Func<float, StatContext, float?> Formula { get; }
+        public Func<float, StatContext, float> Formula { get; }
         public Func<float, StatContext, string> Formatter { get; }
 
-        public ItemStat(Func<float, StatContext, float?> formula, Func<float, StatContext, string> formatter)
+        public ItemStat(Func<float, StatContext, float> formula, Func<float, StatContext, string> formatter)
         {
             Formula = formula;
             Formatter = formatter;
