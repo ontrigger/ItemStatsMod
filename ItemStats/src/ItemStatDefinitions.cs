@@ -136,7 +136,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         (itemCount, ctx) =>
-                            0.05f * itemCount * (ctx.Master != null ? ctx.Master.GetBody().maxHealth : 1),
+                            20f + 0.05f * itemCount * (ctx.Master != null ? ctx.Master.GetBody().maxHealth : 1),
                         (value, ctx) =>
                         {
                             var statValue = ctx.Master != null
@@ -207,10 +207,6 @@ namespace ItemStats
                     new ItemStat(
                         (itemCount, ctx) => 3f * itemCount,
                         (value, ctx) => $"Fire Tornado Damage: {value.FormatPercentage()}"
-                    ),
-                    new ItemStat(
-                        (itemCount, ctx) => 0.08f,
-                        (value, ctx) => $"Proc Chance: {value.FormatPercentage()}"
                     )
                 }
             };

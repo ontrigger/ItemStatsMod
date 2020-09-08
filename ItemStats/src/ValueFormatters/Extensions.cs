@@ -53,7 +53,7 @@ namespace ItemStats.ValueFormatters
             var valueStr = Math.Round(value * 100f, 1).ToString($"0.{trailFormatStr}");
             valueStr += "%";
 
-            return "  " + $"{sign}{valueStr} ".SetColor(color) + statText;
+            return "  " + $"{sign}{valueStr} ".SetColor(color);
         }
     }
 }
