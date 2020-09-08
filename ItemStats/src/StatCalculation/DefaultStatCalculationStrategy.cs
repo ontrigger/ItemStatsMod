@@ -9,12 +9,13 @@ namespace ItemStats.StatCalculation
         public string ProcessItem(ItemStatDef statDef, ItemIndex itemIndex, int count, StatContext context)
         {
             var fullStatText = new StringBuilder();
-            fullStatText.Append("\n\n");
+            fullStatText.AppendLine();
 
             if (statDef.AdditionalText != null)
             {
+                fullStatText.AppendLine();
                 fullStatText.Append(statDef.AdditionalText);
-                fullStatText.Append("\n\n");
+                fullStatText.AppendLine();
             }
 
             var statList = statDef.Stats;
@@ -56,8 +57,8 @@ namespace ItemStats.StatCalculation
                 // explicitly align left on the last line to fix the stack counter alignment
                 var lastLineAlignment = lastLine ? "<align=left>" : "";
 
+                fullStatText.AppendLine();
                 fullStatText.Append(lastLineAlignment + finalFormattedValue);
-                if (!lastLine) fullStatText.Append("\n");
                 fullStatText.Append(formattedContributions);
             }
 
