@@ -12,9 +12,6 @@ namespace ItemStats.StatModification
             (result, itemIndex, itemStatIndex, context) =>
                 1 - Mathf.Pow(1 - result, 1 + context.CountItems(ItemIndex.Clover));
 
-        protected override Func<int, ItemIndex, int, StatContext, int> ModifyItemCountFunc =>
-            (itemCount, itemIndex, itemStatIndex, context) => itemCount;
-
         protected override Func<float, ItemIndex, int, StatContext, string> FormatFunc =>
             (result, itemIndex, itemStatIndex, ctx) => $"{result.FormatModifier()} from luck";
 
@@ -31,7 +28,7 @@ namespace ItemStats.StatModification
                 [ItemIndex.Missile] = new[] {1},
                 [ItemIndex.BonusGoldPackOnKill] = new[] {1},
                 [ItemIndex.Incubator] = new[] {0},
-                [ItemIndex.Incubator] = new[] {1}
+                [ItemIndex.Bear] = new[] {0}
             };
     }
 }

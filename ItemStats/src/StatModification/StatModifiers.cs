@@ -16,6 +16,7 @@ namespace ItemStats.StatModification
         {
             AddStatModifier(new LuckModifier());
             AddStatModifier(new TreasureCacheModifier());
+            AddStatModifier(new HealingIncreaseModifier());
         }
 
         public static void AddStatModifier(AbstractStatModifier modifier)

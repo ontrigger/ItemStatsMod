@@ -78,9 +78,10 @@
     <Compile Include="src\StatCalculation\IStatCalculationStrategy.cs"/>
     <Compile Include="src\StatModification\AbstractStatModifier.cs"/>
     <Compile Include="src\StatModification\IStatModifier.cs"/>
-    <Compile Include="src\StatModification\LuckModifier.cs"/>
+    <Compile Include="src\StatModification\Modifiers\HealingIncreaseModifier.cs"/>
+    <Compile Include="src\StatModification\Modifiers\LuckModifier.cs"/>
+    <Compile Include="src\StatModification\Modifiers\TreasureCacheModifier.cs"/>
     <Compile Include="src\StatModification\StatModifiers.cs"/>
-    <Compile Include="src\StatModification\TreasureCacheModifier.cs"/>
     <Compile Include="src\Stat\IStat.cs"/>
     <Compile Include="src\Stat\ItemStat.cs"/>
     <Compile Include="src\Stat\ItemStatDef.cs"/>

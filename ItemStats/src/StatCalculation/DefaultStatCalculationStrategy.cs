@@ -43,16 +43,15 @@ namespace ItemStats.StatCalculation
                     // skip modifiers that contrib less that 1% to the final value
                     if (!ContributionSignificant(modifierContribution)) continue;
 
-                    formattedContributions.AppendLine(
+                    formattedContributions.AppendLine();
+                    formattedContributions.Append(
                         statModifier.Format(modifierContribution, itemIndex, statIndex, context)
                     );
 
                     modifiedValueSum += modifierContribution;
                 }
 
-                ItemStatsMod.Logger.LogInfo($"Formatting stat {originalValue} {modifiedValueSum}");
                 var finalFormattedValue = stat.Format(originalValue + modifiedValueSum, context);
-                ItemStatsMod.Logger.LogInfo($"final value {finalFormattedValue}");
 
                 // explicitly align left on the last line to fix the stack counter alignment
                 var lastLineAlignment = lastLine ? "<align=left>" : "";

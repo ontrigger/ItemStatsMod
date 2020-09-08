@@ -8,7 +8,9 @@ namespace ItemStats.StatModification
     public abstract class AbstractStatModifier : IStatModifier
     {
         protected abstract Func<float, ItemIndex, int, StatContext, float> ModifyValueFunc { get; }
-        protected abstract Func<int, ItemIndex, int, StatContext, int> ModifyItemCountFunc { get; }
+
+        protected virtual Func<int, ItemIndex, int, StatContext, int> ModifyItemCountFunc =>
+            (itemCount, itemIndex, itemStatIndex, context) => itemCount;
 
         protected abstract Func<float, ItemIndex, int, StatContext, string> FormatFunc { get; }
 
