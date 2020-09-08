@@ -1,44 +1,35 @@
 using System;
-using ItemStats.ValueFormatters;
-using UnityEngine;
 
 namespace ItemStats.Stat
 {
     public class ItemStat : IStat
     {
-        //TODO: refactor
-        private readonly Func<float, StatContext, float?> _formula;
-        public readonly IStatFormatter Formatter;
+        public Func<float, StatContext, float?> Formula { get; }
+        public Func<float, StatContext, string> Formatter { get; }
 
-        public ItemStat(Func<float, StatContext, float?> formula, string statText,
-            IStatFormatter formatter = null, params AbstractModifier[] modifiers)
+        public ItemStat(Func<float, StatContext, float?> formula, Func<float, StatContext, string> formatter)
         {
-            _formula = formula;
-            StatText = statText;
-            Formatter = formatter ?? new PercentageFormatter();
-            StatModifiers = modifiers;
+            Formula = formula;
+            Formatter = formatter;
         }
-
-        public string StatText { get; }
-        public AbstractModifier[] StatModifiers { get; }
 
         public float? GetInitialStat(float count, StatContext context)
         {
             try
             {
-                return _formula(count, context);
+                return Formula(count, context);
             }
             catch (NullReferenceException e)
             {
-                Debug.Log("Caught " + e);
+                ItemStatsMod.Logger.LogError("Caught " + e);
             }
 
             return null;
         }
 
-        public string Format(float statValue)
+        public string Format(float statValue, StatContext context)
         {
-            return Formatter.Format(statValue);
+            return Formatter(statValue, context);
         }
     }
 }

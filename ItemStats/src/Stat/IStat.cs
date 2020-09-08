@@ -4,6 +4,6 @@ namespace ItemStats.Stat
     {
         float? GetInitialStat(float count, StatContext context);
 
-        string Format(float statValue);
+        string Format(float statValue, StatContext context);
     }
 }

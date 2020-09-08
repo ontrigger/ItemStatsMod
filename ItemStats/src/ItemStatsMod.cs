@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using BepInEx;
 using BepInEx.Logging;
+using ItemStats.StatModification;
 using R2API.Utils;
 using RoR2;
-using RoR2.UI;
-using GenericNotification = On.RoR2.UI.GenericNotification;
-using HUD = On.RoR2.UI.HUD;
-using ScoreboardStrip = On.RoR2.UI.ScoreboardStrip;
 
 namespace ItemStats
 {
@@ -15,12 +12,6 @@ namespace ItemStats
     [NetworkCompatibility(CompatibilityLevel.NoNeedForSync, VersionStrictness.DifferentModVersionsAreOk)]
     public class ItemStatsMod : BaseUnityPlugin
     {
-        private readonly Dictionary<ItemInventoryDisplay, CharacterMaster> _displayToMasterRef =
-            new Dictionary<ItemInventoryDisplay, CharacterMaster>();
-
-        private readonly Dictionary<ItemIcon, CharacterMaster> _iconToMasterRef =
-            new Dictionary<ItemIcon, CharacterMaster>();
-
         private ItemStatsMod()
         {
             Logger = base.Logger;
@@ -30,15 +21,7 @@ namespace ItemStats
 
         public void Awake()
         {
-            HUD.Update += HudUpdateHook;
-
-            ScoreboardStrip.SetMaster += ScoreboardSetMasterHook;
-
-            GenericNotification.SetItem += SetNotificationItemHook;
-
-            On.RoR2.UI.ItemInventoryDisplay.AllocateIcons += ItemDisplayAllocateIconsHook;
-
-            On.RoR2.UI.ItemIcon.SetItemIndex += ItemIconSetItemIndexHook;
+            Hooks.Init();
         }
 
         public static void AddCustomItemStatDef(ItemIndex index, ItemStatDef customDef)
@@ -46,65 +29,24 @@ namespace ItemStats
             ItemStatProvider.AddCustomItemDef(index, customDef);
         }
 
-        private void ItemIconSetItemIndexHook(On.RoR2.UI.ItemIcon.orig_SetItemIndex orig, ItemIcon self,
-            ItemIndex newIndex, int newCount)
+        public static ItemStatDef GetItemStatDef(ItemIndex index)
         {
-            orig(self, newIndex, newCount);
-
-            var itemDef = ItemCatalog.GetItemDef(newIndex);
-            if (self.tooltipProvider != null && itemDef != null)
-            {
-                var itemDescription = Language.GetString(itemDef.descriptionToken);
-
-                _iconToMasterRef.TryGetValue(self, out var master);
-
-                // TODO: use a pool to reduce StatContext allocations
-                itemDescription += ItemStatProvider.ProvideStatsForItem(newIndex, newCount, new StatContext(master));
-
-                self.tooltipProvider.overrideBodyText = itemDescription;
-            }
+            return ItemStatProvider.GetItemStatDef(index);
         }
 
-        private void ItemDisplayAllocateIconsHook(On.RoR2.UI.ItemInventoryDisplay.orig_AllocateIcons orig,
-            ItemInventoryDisplay self, int count)
+        public static void AddStatModifier(AbstractStatModifier modifier)
         {
-            orig(self, count);
-
-            var icons = self.GetFieldValue<List<ItemIcon>>("itemIcons");
-
-            _displayToMasterRef.TryGetValue(self, out var masterRef);
-
-            // naive, but not worth improving as it is not called every frame
-            icons.ForEach(i => _iconToMasterRef[i] = masterRef);
+            StatModifiers.AddStatModifier(modifier);
         }
 
-        private void ScoreboardSetMasterHook(ScoreboardStrip.orig_SetMaster orig, RoR2.UI.ScoreboardStrip self,
-            CharacterMaster master)
+        public static List<IStatModifier> GetModifiersForItemIndex(ItemIndex index)
         {
-            orig(self, master);
-
-            if (master)
-            {
-                _displayToMasterRef[self.itemInventoryDisplay] = master;
-            }
+            return StatModifiers.GetModifiersForItemIndex(index);
         }
 
-        private void HudUpdateHook(HUD.orig_Update orig, RoR2.UI.HUD self)
+        public static List<IStatModifier> GetModifiersForItemDef(ItemStatDef itemStatDef)
         {
-            orig(self);
-
-            if (self.itemInventoryDisplay && self.targetMaster)
-            {
-                _displayToMasterRef[self.itemInventoryDisplay] = self.targetMaster;
-            }
-        }
-
-        private void SetNotificationItemHook(GenericNotification.orig_SetItem orig, RoR2.UI.GenericNotification self,
-            ItemDef itemDef)
-        {
-            orig(self, itemDef);
-
-            self.descriptionText.token = itemDef.descriptionToken;
+            return StatModifiers.GetModifiersForItemDef(itemStatDef);
         }
     }
 }

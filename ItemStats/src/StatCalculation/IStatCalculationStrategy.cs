@@ -1,10 +1,9 @@
-using System.Collections.Generic;
-using ItemStats.Stat;
+using RoR2;
 
 namespace ItemStats.StatCalculation
 {
     public interface IStatCalculationStrategy
     {
-        string ProcessItem(List<ItemStat> stats, int count, StatContext context, string additionalText);
+        string ProcessItem(ItemStatDef statDef, ItemIndex itemIndex, int count, StatContext context);
     }
 }

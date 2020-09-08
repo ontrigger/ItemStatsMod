@@ -70,12 +70,17 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs"/>
     <Compile Include="src\ContextProvider.cs"/>
+    <Compile Include="src\Hooks.cs"/>
     <Compile Include="src\ItemStatDefinitions.cs"/>
     <Compile Include="src\ItemStatProvider.cs"/>
     <Compile Include="src\ItemStatsMod.cs"/>
-    <Compile Include="src\Modifiers.cs"/>
     <Compile Include="src\StatCalculation\DefaultStatCalculationStrategy.cs"/>
     <Compile Include="src\StatCalculation\IStatCalculationStrategy.cs"/>
+    <Compile Include="src\StatModification\AbstractStatModifier.cs"/>
+    <Compile Include="src\StatModification\IStatModifier.cs"/>
+    <Compile Include="src\StatModification\LuckModifier.cs"/>
+    <Compile Include="src\StatModification\StatModifiers.cs"/>
+    <Compile Include="src\StatModification\TreasureCacheModifier.cs"/>
     <Compile Include="src\Stat\IStat.cs"/>
     <Compile Include="src\Stat\ItemStat.cs"/>
     <Compile Include="src\Stat\ItemStatDef.cs"/>
@@ -84,8 +89,6 @@
     <Compile Include="src\ValueFormatters\Extensions.cs"/>
     <Compile Include="src\ValueFormatters\IStatFormatter.cs"/>
     <Compile Include="src\ValueFormatters\ModifierFormatter.cs"/>
-    <Compile Include="src\ValueFormatters\PercentageFormatter.cs"/>
-    <Compile Include="src\ValueFormatters\IntFormatter.cs"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config"/>

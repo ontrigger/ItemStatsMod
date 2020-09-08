@@ -1,57 +1,64 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
-using ItemStats.Stat;
-using JetBrains.Annotations;
+using RoR2;
 
 namespace ItemStats.StatCalculation
 {
     public class DefaultStatCalculationStrategy : IStatCalculationStrategy
     {
-        public string ProcessItem(List<ItemStat> stats, int count, StatContext context,
-            [CanBeNull] string additionalText)
+        public string ProcessItem(ItemStatDef statDef, ItemIndex itemIndex, int count, StatContext context)
         {
             var fullStatText = new StringBuilder();
             fullStatText.Append("\n\n");
 
-            if (additionalText != null)
+            if (statDef.AdditionalText != null)
             {
-                fullStatText.Append(additionalText);
+                fullStatText.Append(statDef.AdditionalText);
                 fullStatText.Append("\n\n");
             }
 
-            foreach (var stat in stats)
+            var statList = statDef.Stats;
+            var modifierList = statDef.GetStatModifiers();
+            for (var statIndex = 0; statIndex < statList.Count; statIndex++)
             {
+                var stat = statList[statIndex];
                 var m = stat.GetInitialStat(count, context);
                 if (!m.HasValue) continue;
                 var originalValue = m.Value;
 
+                var lastLine = statList.IndexOf(stat) == statList.Count - 1;
+
                 var modifiedValueSum = 0f;
                 var formattedContributions = new StringBuilder();
-                foreach (var statModifier in stat.StatModifiers)
+
+                foreach (var statModifier in modifierList)
                 {
-                    m = statModifier.GetInitialStat(originalValue, context);
-                    if (!m.HasValue) continue;
+                    if (!statModifier.AffectsItem(itemIndex, statIndex)) continue;
+
+                    m = statModifier.ModifyValue(originalValue, itemIndex, statIndex, context);
 
                     var modifierContribution = (float) m - originalValue;
 
                     // skip modifiers that contrib less that 1% to the final value
                     if (!ContributionSignificant(modifierContribution)) continue;
 
-                    formattedContributions.AppendLine(statModifier.Format(modifierContribution));
+                    formattedContributions.AppendLine(
+                        statModifier.Format(modifierContribution, itemIndex, statIndex, context)
+                    );
 
                     modifiedValueSum += modifierContribution;
                 }
 
-                var finalFormattedValue = stat.Format(originalValue + modifiedValueSum);
+                var finalFormattedValue = stat.Format(originalValue + modifiedValueSum, context);
 
                 // explicitly align left on the last line to fix the stack counter alignment
-                var lastLineAlignment = stats.IndexOf(stat) == stats.Count - 1 ? "<align=left>" : "";
+                var lastLineAlignment = lastLine ? "<align=left>" : "";
 
-                fullStatText.Append(lastLineAlignment + $"{stat.StatText}: {finalFormattedValue} \n");
-                // if (modifiedValueSum > 0f) fullStatText.AppendLine();
+                fullStatText.Append(lastLineAlignment + finalFormattedValue);
+                if (!lastLine) fullStatText.Append("\n");
                 fullStatText.Append(formattedContributions);
             }
+
 
             return fullStatText.Append($"<br><align=right>({count} stacks)").ToString();
         }

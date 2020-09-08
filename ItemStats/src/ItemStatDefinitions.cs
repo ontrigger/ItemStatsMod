@@ -20,7 +20,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1f - 1f / (0.15f * itemCount + 1f),
-                            "Block Chance"
+                            (value, ctx) => $"Block Chance: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -30,7 +30,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 0.14f,
-                            "Movement Speed Increase"
+                            (value, ctx) => $"Movement Speed Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -40,7 +40,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 0.15f,
-                            "Attack Speed Increase"
+                            (value, ctx) => $"Attack Speed Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -50,14 +50,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.0225f + 0.0225f * itemCount,
-                            "Healing Per Second",
-                            // TODO: use a decorator instead of additional param for the formatter
-                            new PercentageFormatter(maxValue: 1f)
+                            (value, ctx) => $"Healing Per Second: {value.FormatPercentage(maxValue: 1f)}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 1.5f + 1.5f * itemCount,
-                            "Area Increase",
-                            new IntFormatter("m")
+                            (value, ctx) => $"Area Increase: {value.FormatInt("m")}"
                         )
                     }
                 },
@@ -67,8 +64,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 0.1f,
-                            "Additional Crit Chance",
-                            new PercentageFormatter(maxValue: 1f)
+                            (value, ctx) => $"Additional Crit Chance: {value.FormatPercentage(maxValue: 1f)}"
                         )
                     }
                 },
@@ -78,8 +74,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Total Additional Jumps",
-                            new IntFormatter()
+                            (value, ctx) => $"Total Additional Jumps: {value.FormatInt()}"
                         )
                     }
                 },
@@ -89,8 +84,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Total Heal",
-                            new IntFormatter(" HP")
+                            (value, ctx) => $"Total Heal: {value.FormatInt("HP")}"
                         )
                     }
                 },
@@ -100,14 +94,12 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 30f,
-                            "Ghost Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Ghost Duration: {value.FormatInt("s")}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 0.07f,
-                            "Proc Chance",
-                            new PercentageFormatter(),
-                            Modifiers.Luck
+                            (value, ctx) => $"Proc Chance: {value.FormatPercentage()}"
+                            // StatModifiers.Luck
                         )
                     }
                 },
@@ -117,13 +109,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 40f,
-                            "Bonus Health",
-                            new IntFormatter("HP")
+                            (value, ctx) => $"Bonus Health: {value.FormatInt("HP")}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 1.6f,
-                            "Additional Regeneration",
-                            new IntFormatter("HP/s", 1)
+                            (value, ctx) => $"Additional Regeneration: {value.FormatInt("HP/s")}"
                         )
                     }
                 },
@@ -133,8 +123,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Additional Rerolls",
-                            new IntFormatter()
+                            (value, ctx) => $"Additional Rerolls: {value.FormatInt()}"
                         )
                     }
                 },
@@ -143,9 +132,17 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            (itemCount, ctx) => 0.05f * itemCount,
-                            "Health Healed"
-                        )
+                            (itemCount, ctx) =>
+                            {
+                                return 0.05f * itemCount * (ctx.Master != null ? ctx.Master.GetBody().maxHealth : 1);
+                            },
+                            (value, ctx) =>
+                            {
+                                var statValue = ctx.Master != null
+                                    ? $"{value.FormatInt("HP")}"
+                                    : $"{value.FormatPercentage()}";
+                                return "Health Healed: " + statValue;
+                            })
                     }
                 },
                 [ItemIndex.Crowbar] = new ItemStatDef
@@ -154,7 +151,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1f + 0.5f * itemCount,
-                            "Damage Increase"
+                            (value, ctx) => $"Damage Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -164,7 +161,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.02f * itemCount,
-                            "Heal Amount"
+                            (value, ctx) => $"Heal Amount: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -174,8 +171,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 2f + itemCount * 2f,
-                            "Cooldown Reduction",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Cooldown Reduction: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -185,8 +181,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1f - 1f / Mathf.Pow(itemCount + 1, 0.33f),
-                            "Drop Chance",
-                            modifiers: Modifiers.Luck
+                            (value, ctx) => $"Drop Chance: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -196,12 +191,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 2.5f * itemCount,
-                            "Ice Blast Damage"
+                            (value, ctx) => $"Ice Blast Damage: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 3f * itemCount,
-                            "Ice Debuff Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Ice Debuff Duration: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -211,12 +205,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 3f * itemCount,
-                            "Fire Tornado Damage"
+                            (value, ctx) => $"Fire Tornado Damage: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 0.08f,
-                            "Proc Chance",
-                            modifiers: Modifiers.Luck
+                            (value, ctx) => $"Proc Chance: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -226,8 +219,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 2f + 4f * itemCount,
-                            "Frenzy Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Frenzy Duration: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -237,7 +229,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 0.3f,
-                            "Speed Increase"
+                            (value, ctx) => $"Speed Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -247,9 +239,8 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1f - 1f / (0.05f * itemCount + 1f),
-                            "Stun Chance Increase",
-                            new PercentageFormatter(maxValue: 1f),
-                            Modifiers.Luck
+                            (value, ctx) => $"Stun Chance Increase: {value.FormatPercentage(maxValue: 1f)}"
+                            //  StatModifiers.Luck
                         )
                     }
                 },
@@ -259,8 +250,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 2f + 4f * itemCount,
-                            "Frenzy Duration",
-                            new IntFormatter()
+                            (value, ctx) => $"Frenzy Duration: {value.FormatInt()}"
                         )
                     }
                 },
@@ -270,8 +260,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Bonus Stock",
-                            new IntFormatter()
+                            (value, ctx) => $"Bonus Stock: {value.FormatInt()}"
                         )
                     }
                 },
@@ -281,8 +270,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 2f,
-                            "Bonus Charges",
-                            new IntFormatter()
+                            (value, ctx) => $"Bonus Charges: {value.FormatInt()}"
                         )
                     }
                 },
@@ -292,8 +280,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.5f * Mathf.Pow(0.85f, itemCount - 1),
-                            "Cooldown Decrease",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Cooldown Decrease: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -303,8 +290,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 4f,
-                            "Frenzy Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Frenzy Duration: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -314,7 +300,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.2f + 0.2f * (itemCount - 1),
-                            "Damage Increase"
+                            (value, ctx) => $"Damage Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -324,12 +310,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 12f + 2.4f * (itemCount - 1f),
-                            "Radius Increase",
-                            new IntFormatter("m")
+                            (value, ctx) => $"Radius Increase: {value.FormatInt("m")}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 3.5f * (1f + (itemCount - 1) * 0.8f),
-                            "Damage Increase"
+                            (value, ctx) => $"Damage Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -339,8 +324,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 3f * itemCount,
-                            "Bonus Health Regen",
-                            new IntFormatter("hp/s")
+                            (value, ctx) => $"Bonus Health Regen: {value.FormatInt("HP/s")}"
                         )
                     }
                 },
@@ -350,12 +334,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 8f + 4f * itemCount,
-                            "Radius Increase",
-                            new IntFormatter("m")
+                            (value, ctx) => $"Radius Increase: {value.FormatInt("m")}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 1.5f + 1.5f * itemCount,
-                            "Duration Increase"
+                            (value, ctx) => $"Duration Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -365,8 +348,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 8f + 8f * itemCount,
-                            "Radius Increase",
-                            new IntFormatter("m")
+                            (value, ctx) => $"Radius Increase: {value.FormatInt("m")}"
                         )
                     }
                 },
@@ -376,7 +358,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Soul Energy"
+                            (value, ctx) => $"Soul Energy: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -386,8 +368,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 4f + itemCount * 4f,
-                            "Health per Crit",
-                            new IntFormatter("HP")
+                            (value, ctx) => $"Health per Crit: {value.FormatInt("HP")}"
                         )
                     }
                 },
@@ -397,9 +378,8 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.15f * itemCount,
-                            "Bleed Chance Increase",
-                            new PercentageFormatter(maxValue: 1f),
-                            Modifiers.Luck
+                            (value, ctx) => $"Bleed Chance Increase: {value.FormatPercentage(maxValue: 1f)}"
+                            // StatModifiers.Luck
                         )
                     }
                 },
@@ -409,8 +389,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 2 * itemCount,
-                            "Slow Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Slow Duration: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -420,12 +399,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Bonus Charges",
-                            new IntFormatter()
+                            (value, ctx) => $"Bonus Charges: {value.FormatInt()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 1 - Mathf.Pow(0.85f, itemCount),
-                            "Cooldown Decrease"
+                            (value, ctx) => $"Cooldown Decrease: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -436,13 +414,12 @@ namespace ItemStats
                         new ItemStat(
                             //TODO: make run a modifier
                             (itemCount, ctx) => itemCount * 2f * Run.instance.difficultyCoefficient,
-                            "Gold per Hit(*)",
-                            new IntFormatter()
+                            (value, ctx) => $"Gold per Hit(*): {value.FormatInt()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 0.3f,
-                            "Proc Chance",
-                            modifiers: Modifiers.Luck
+                            (value, ctx) => $"Proc Chance: {value.FormatPercentage()}"
+                            // modifiers: StatModifiers.Luck
                         )
                     }
                 },
@@ -452,7 +429,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Healing Increase"
+                            (value, ctx) => $"Healing Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -462,8 +439,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.08f * itemCount,
-                            "Shield Health Increase",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Shield Health Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -473,19 +449,16 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 2f,
-                            "Total Bounces",
-                            new IntFormatter()
+                            (value, ctx) => $"Total Bounces: {value.FormatInt()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 20f + 2f * itemCount,
-                            "Bounce Range",
-                            new IntFormatter("m")
+                            (value, ctx) => $"Bounce Range: {value.FormatInt("m")}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 0.25f,
-                            "Proc Chance",
-                            new PercentageFormatter(),
-                            Modifiers.Luck
+                            (value, ctx) => $"Proc Chance: {value.FormatPercentage()}"
+                            // StatModifiers.Luck
                         )
                     }
                 },
@@ -495,23 +468,20 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 80f / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
-                            "Common Chance",
-                            new PercentageFormatter(maxValue: 1f),
-                            Modifiers.TreasureCache
+                            (value, ctx) => $"Common Chance: {value.FormatPercentage(maxValue: 1f)}"
+                            // StatModifiers.TreasureCache
                         ),
                         new ItemStat(
                             (itemCount, ctx) =>
                                 20f * itemCount / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
-                            "Uncommon Chance",
-                            new PercentageFormatter(maxValue: 1f),
-                            Modifiers.TreasureCache
+                            (value, ctx) => $"Uncommon Chance: {value.FormatPercentage(maxValue: 1f)}"
+                            // StatModifiers.TreasureCache
                         ),
                         new ItemStat(
                             (itemCount, ctx) =>
                                 Mathf.Pow(itemCount, 2f) / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
-                            "Rare Chance",
-                            new PercentageFormatter(maxValue: 1f),
-                            Modifiers.TreasureCache
+                            (value, ctx) => $"Rare Chance: {value.FormatPercentage(maxValue: 1f)}"
+                            // StatModifiers.TreasureCache
                         )
                     }
                 },
@@ -521,13 +491,12 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1f - 100f / (100f + 20f * itemCount),
-                            "Hook Chance",
-                            modifiers: Modifiers.Luck
+                            (value, ctx) => $"Hook Chance: {value.FormatPercentage()}"
+                            // modifiers: StatModifiers.Luck
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 5f + itemCount * 5f,
-                            "Max Enemies Hooked",
-                            new IntFormatter()
+                            (value, ctx) => $"Max Enemies Hooked: {value.FormatInt()}"
                         )
                     }
                 },
@@ -537,7 +506,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.1f + 0.2f * itemCount,
-                            "Speed Increase"
+                            (value, ctx) => $"Speed Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -547,8 +516,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 30f * itemCount,
-                            "Sprint Bonus Armor",
-                            new IntFormatter()
+                            (value, ctx) => $"Sprint Bonus Armor: {value.FormatInt()}"
                         )
                     }
                 },
@@ -558,8 +526,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 2f * itemCount,
-                            "Total Bounces",
-                            new IntFormatter()
+                            (value, ctx) => $"Total Bounces: {value.FormatInt()}"
                         )
                     }
                 },
@@ -569,8 +536,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Total Guards",
-                            new IntFormatter()
+                            (value, ctx) => $"Total Guards: {value.FormatInt()}"
                         )
                     }
                 },
@@ -580,7 +546,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.5f + (itemCount - 1) * 0.25f,
-                            "Max Health Increase"
+                            (value, ctx) => $"Max Health Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -590,9 +556,8 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.05f * itemCount,
-                            "Proc Chance Increase",
-                            new PercentageFormatter(maxValue: 1f),
-                            Modifiers.Luck
+                            (value, ctx) => $"Proc Chance Increase: {value.FormatPercentage(maxValue: 1f)}"
+                            // StatModifiers.Luck
                         )
                     }
                 },
@@ -603,11 +568,11 @@ namespace ItemStats
                         //TODO: need to get masters maxhealth to get actual heal amount
                         new ItemStat(
                             (itemCount, ctx) => 0.1f / itemCount,
-                            "Health Fraction/s"
+                            (value, ctx) => $"Health Fraction/s: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Healing per Heal Increase"
+                            (value, ctx) => $"Healing per Heal Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -617,8 +582,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 3f + 5f * itemCount,
-                            "Empowering Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Empowerment Duration: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -628,8 +592,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Extra Lives",
-                            new IntFormatter()
+                            (value, ctx) => $"Extra Lives: {value.FormatInt()}"
                         )
                     }
                 },
@@ -639,8 +602,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1 - Mathf.Pow(0.75f, itemCount),
-                            "Cooldown Reduction",
-                            new PercentageFormatter(2)
+                            (value, ctx) => $"Cooldown Reduction: {value.FormatPercentage(2)}"
                         )
                     }
                 },
@@ -650,8 +612,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 4 + itemCount * 4,
-                            "Firework Count",
-                            new IntFormatter()
+                            (value, ctx) => $"Firework Count: {value.FormatInt()}"
                         )
                     }
                 },
@@ -661,14 +622,12 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 3 * itemCount,
-                            "Missile Total Damage",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Missile Total Damage: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 0.1f,
-                            "Proc Chance",
-                            new PercentageFormatter(),
-                            Modifiers.Luck
+                            (value, ctx) => $"Proc Chance: {value.FormatPercentage()}"
+                            // StatModifiers.Luck
                         )
                     }
                 },
@@ -678,13 +637,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 100 * itemCount,
-                            "Max Additional Health",
-                            new IntFormatter("HP")
+                            (value, ctx) => $"Max Additional Health: {value.FormatInt("HP")}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Health Gained Per Kill",
-                            new IntFormatter("HP")
+                            (value, ctx) => $"Health Gained Per Kill: {value.FormatInt("HP")}"
                         )
                     }
                 },
@@ -694,11 +651,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.12f + 0.24f * itemCount,
-                            "Max Attack Speed"
+                            (value, ctx) => $"Max Attack Speed: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 0.05f,
-                            "Crit Chance Bonus"
+                            (value, ctx) => $"Crit Chance Bonus: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -708,12 +665,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 6f * itemCount,
-                            "Radius",
-                            new IntFormatter("m")
+                            (value, ctx) => $"Radius: {value.FormatInt("m")}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 6 + (itemCount - 1) * 3,
-                            "Max Possible Icicles"
+                            (value, ctx) => $"Max Possible Icicles: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -723,8 +679,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1.5f + 2.5f * itemCount,
-                            "Explosion Radius",
-                            new IntFormatter("m", 1)
+                            (value, ctx) => $"Explosion Radius: {value.FormatInt("m", 1)}"
                         )
                     }
                 },
@@ -734,8 +689,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 15f * itemCount,
-                            "Barrier Health",
-                            new IntFormatter("HP")
+                            (value, ctx) => $"Barrier Health: {value.FormatInt("HP")}"
                         )
                     }
                 },
@@ -745,8 +699,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.5f * itemCount,
-                            "Barrier From Overheal",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Barrier From Overheal: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -756,8 +709,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1 - 1 / (1 + 0.13f * itemCount),
-                            "Kill Health Threshold",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Kill Health Threshold: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -767,8 +719,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 8f + 4f * (itemCount - 1),
-                            "Attack Speed Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Attack Speed Duration: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -778,13 +729,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Health Boost",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Health Boost: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 0.5f + 0.5f * itemCount,
-                            "Damage Boost",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Damage Boost: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -794,8 +743,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 3f * itemCount,
-                            "Damage Boost",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Damage Boost: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -805,8 +753,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1.5f * itemCount,
-                            "Dagger Damage",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Dagger Damage: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -816,12 +763,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 3f * itemCount,
-                            "Skill Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Skill Duration: {value.FormatInt("s")}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => Mathf.Min(1f, 0.25f * itemCount),
-                            "Health Healed"
+                            (value, ctx) => $"Health Healed: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -831,8 +777,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.15f * itemCount,
-                            "Damage Increase",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Damage Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -842,9 +787,8 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Max Occurrences",
-                            new IntFormatter(),
-                            Modifiers.TpHealingNova
+                            (value, ctx) => $"Max Occurrences: {value.FormatInt()}"
+                            // StatModifiers.TpHealingNova
                         )
                     }
                 },
@@ -854,8 +798,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 8f * itemCount,
-                            "Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Duration: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -865,13 +808,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 5 + 2 * (itemCount - 1),
-                            "Max Targets",
-                            new IntFormatter()
+                            (value, ctx) => $"Max Targets: {value.FormatInt()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 25f + 10f * (itemCount - 1),
-                            "Radius",
-                            new IntFormatter("m")
+                            (value, ctx) => $"Radius: {value.FormatInt("m")}"
                         )
                     }
                 },
@@ -881,8 +822,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 3f * itemCount,
-                            "Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Duration: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -892,8 +832,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.1f * itemCount,
-                            "Health Increase",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Health Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -903,8 +842,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 0.1f * itemCount,
-                            "Stat Increase",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Stat Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -914,14 +852,12 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => Run.instance.GetDifficultyScaledCost(25),
-                            "per Drop",
-                            new IntFormatter("$")
+                            (value, ctx) => $"per Drop: {value.FormatInt("$")}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 0.04f * itemCount,
-                            "Drop Chance",
-                            new PercentageFormatter(),
-                            Modifiers.Luck
+                            (value, ctx) => $"Drop Chance: {value.FormatPercentage()}"
+                            // StatModifiers.Luck
                         )
                     }
                 },
@@ -931,13 +867,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 12f * itemCount,
-                            "Max Charges",
-                            new IntFormatter()
+                            (value, ctx) => $"Max Charges: {value.FormatInt()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 2f * itemCount,
-                            "Recharge Delay",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Recharge Delay: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -947,18 +881,15 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 3f * itemCount,
-                            "Pierce Damage",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Pierce Damage: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 10f * itemCount,
-                            "Explosion Damage",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Explosion Damage: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 3f * itemCount,
-                            "On Return Damage",
-                            new PercentageFormatter()
+                            (value, ctx) => $"On Return Damage: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -968,8 +899,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 30f / itemCount,
-                            "Recharge Delay",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Recharge Delay: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -979,8 +909,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 5,
-                            "Reduced damage",
-                            new IntFormatter()
+                            (value, ctx) => $"Reduced damage: {value.FormatInt()}"
                         )
                     }
                 },
@@ -990,8 +919,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Attack Speed",
-                            new PercentageFormatter(0)
+                            (value, ctx) => $"Attack Speed: {value.FormatPercentage(0)}"
                         )
                     }
                 },
@@ -1001,8 +929,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount * 0.5f,
-                            "Increased Damage",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Increased Damage: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -1012,8 +939,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 3 + 1.5f * (itemCount - 1),
-                            "Radius",
-                            new IntFormatter("m", 1)
+                            (value, ctx) => $"Radius: {value.FormatInt("m", 1)}"
                         )
                     }
                 },
@@ -1023,13 +949,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 90f / (1f + 0.3f * Mathf.Min(itemCount, 3f)),
-                            "Minimum Charge Time",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Minimum Charge Time: {value.FormatInt("s")}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 1 / (2 * Mathf.Min(itemCount, 3f)),
-                            "Zone Size",
-                            new PercentageFormatter(2)
+                            (value, ctx) => $"Zone Size: {value.FormatPercentage(2)}"
                         )
                     }
                 },
@@ -1039,8 +963,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 7f * itemCount,
-                            "Debuff Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Debuff Duration: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -1050,8 +973,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 5f * itemCount,
-                            "Healing Radius",
-                            new IntFormatter("m")
+                            (value, ctx) => $"Healing Radius: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -1061,7 +983,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Attack Speed"
+                            (value, ctx) => $"Attack Speed: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -1071,8 +993,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Projectile Count",
-                            new IntFormatter(" projectile(s)")
+                            (value, ctx) => $"Projectile Count: {value.FormatInt(" projectile(s)")}"
                         )
                     }
                 },
@@ -1082,7 +1003,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1f / (itemCount + 1),
-                            "Health Reduction"
+                            (value, ctx) => $"Health Reduction: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -1092,8 +1013,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 1.5f + itemCount * 1.5f,
-                            "Cloak Duration",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Cloak Duration: {value.FormatInt("s")}"
                         )
                     }
                 },
@@ -1103,8 +1023,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 10f * Mathf.Pow(0.5f, itemCount - 1),
-                            "Recharge Time",
-                            new IntFormatter("s", 2)
+                            (value, ctx) => $"Recharge Time: {value.FormatInt("s", 2)}"
                         )
                     }
                 },
@@ -1114,8 +1033,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 10f * itemCount,
-                            "Boost Length",
-                            new IntFormatter("m")
+                            (value, ctx) => $"Boost Length: {value.FormatInt("m")}"
                         )
                     }
                 },
@@ -1125,11 +1043,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => Mathf.Pow(2f, itemCount),
-                            "Base Damage Increase"
+                            (value, ctx) => $"Base Damage Increase: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 1f / Mathf.Pow(2f, itemCount),
-                            "Max Health Reduction"
+                            (value, ctx) => $"Max Health Reduction: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -1139,13 +1057,12 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => (7f + 1f * itemCount) / 100f,
-                            "Summon Chance",
-                            new PercentageFormatter(),
-                            Modifiers.Luck
+                            (value, ctx) => $"Summon Chance: {value.FormatPercentage()}"
+                            // StatModifiers.Luck
                         ),
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Base Health"
+                            (value, ctx) => $"Base Health: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -1155,8 +1072,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Additional Enemies",
-                            new IntFormatter()
+                            (value, ctx) => $"Additional Enemies: {value.FormatInt()}"
                         )
                     }
                 },
@@ -1166,14 +1082,12 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 3 * itemCount,
-                            "Damage Increase",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Damage Increase: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 0.10f,
-                            "Proc Chance",
-                            new PercentageFormatter(),
-                            Modifiers.Luck
+                            (value, ctx) => $"Proc Chance: {value.FormatPercentage()}"
+                            // StatModifiers.Luck
                         ),
                     }
                 },
@@ -1183,12 +1097,11 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => 4 * itemCount,
-                            "Damage Increase",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Damage Increase: {value.FormatPercentage()}"
                         ),
                         new ItemStat(
                             (itemCount, ctx) => 0.15f * itemCount,
-                            "Explosion Damage Increase"
+                            (value, ctx) => $"Explosion Damage Increase: {value.FormatPercentage()}"
                         )
                     }
                 },
@@ -1198,8 +1111,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Enemy Difficulty Increase",
-                            new PercentageFormatter()
+                            (value, ctx) => $"Enemy Difficulty Increase: {value.FormatPercentage()}"
                         ),
                     }
                 },
@@ -1208,18 +1120,8 @@ namespace ItemStats
                     Stats = new List<ItemStat>
                     {
                         new ItemStat(
-                            (itemCount, ctx) =>
-                            {
-                                var radius = 16f;
-                                for (var i = 0; i < itemCount - 1; i++)
-                                {
-                                    radius *= 1.5f;
-                                }
-
-                                return radius;
-                            },
-                            "Radius Increase",
-                            new IntFormatter("m")
+                            (itemCount, ctx) => 16f * Mathf.Pow(1.5f, itemCount - 1),
+                            (value, ctx) => $"Radius Increase: {value.FormatInt("m")}"
                         ),
                     }
                 },
@@ -1229,8 +1131,7 @@ namespace ItemStats
                     {
                         new ItemStat(
                             (itemCount, ctx) => itemCount,
-                            "Cooldown Reduction",
-                            new IntFormatter("s")
+                            (value, ctx) => $"Cooldown Reduction: {value.FormatInt("s")}"
                         ),
                     }
                 },
