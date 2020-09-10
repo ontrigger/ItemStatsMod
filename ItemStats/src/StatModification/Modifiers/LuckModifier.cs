@@ -28,8 +28,7 @@ namespace ItemStats.StatModification
                 [ItemIndex.StickyBomb] = new[] {0},
                 [ItemIndex.Missile] = new[] {1},
                 [ItemIndex.BonusGoldPackOnKill] = new[] {1},
-                [ItemIndex.Incubator] = new[] {0},
-                [ItemIndex.Bear] = new[] {0}
+                [ItemIndex.Incubator] = new[] {0}
             };
     }
 }
