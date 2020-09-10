@@ -1,3 +1,13 @@
+# Changes in 2.0.0
+
+* Add custom item and stat modifier API
+
+* Support for new/updated items from the past few updates
+
+* Now shows healing bonuses from Rejuvenation Rack
+
+* Now shows item description on pickup
+
 # Changes in 1.5.0
 
 * Support for new/updated items from the Artifacts update
