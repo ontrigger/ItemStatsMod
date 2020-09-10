@@ -12,7 +12,20 @@ namespace ItemStats.StatModification
                 result * (1 + context.CountItems(ItemIndex.IncreaseHealing));
 
         protected override Func<float, ItemIndex, int, StatContext, string> FormatFunc =>
-            (result, itemIndex, itemStatIndex, ctx) => $"{result.FormatModifier()} from Rejuvenation Rack";
+            (result, itemIndex, itemStatIndex, ctx) =>
+            {
+                string formattedResult;
+                if (itemIndex == ItemIndex.Mushroom || itemIndex == ItemIndex.Tooth)
+                {
+                    formattedResult = result.FormatPercentage(signed: true, color: Colors.ModifierColor);
+                }
+                else
+                {
+                    formattedResult = result.FormatInt(signed: true, color: Colors.ModifierColor, postfix: "HP");
+                }
+
+                return $"{formattedResult} from Rejuvenation Rack";
+            };
 
         public override Dictionary<ItemIndex, IEnumerable<int>> AffectedItems =>
             new Dictionary<ItemIndex, IEnumerable<int>>

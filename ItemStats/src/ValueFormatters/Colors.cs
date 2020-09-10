@@ -10,5 +10,6 @@ namespace ItemStats.ValueFormatters
         public const string Red = "\"red\"";
         public const string White = "\"white\"";
         public const string Yellow = "\"yellow\"";
+        public const string ModifierColor = "#FFB6C1";
     }
 }

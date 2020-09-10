@@ -13,7 +13,8 @@ namespace ItemStats.StatModification
                 1 - Mathf.Pow(1 - result, 1 + context.CountItems(ItemIndex.Clover));
 
         protected override Func<float, ItemIndex, int, StatContext, string> FormatFunc =>
-            (result, itemIndex, itemStatIndex, ctx) => $"{result.FormatModifier()} from luck";
+            (result, itemIndex, itemStatIndex, ctx) =>
+                $"{result.FormatPercentage(signed: true, color: Colors.ModifierColor)} from luck";
 
         public override Dictionary<ItemIndex, IEnumerable<int>> AffectedItems =>
             new Dictionary<ItemIndex, IEnumerable<int>>

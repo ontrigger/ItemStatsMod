@@ -23,15 +23,22 @@ namespace ItemStats.ValueFormatters
 
         public static string FormatInt(
             this float value, string postfix = "",
-            int decimals = 0, string color = Colors.Green)
+            int decimals = 0, bool signed = false,
+            string color = Colors.Green)
         {
-            return $"{Math.Round(value, decimals)}{postfix}".SetColor(color);
+            var sign = "";
+            if (signed)
+            {
+                sign = value >= 0 ? "+" : "-";
+            }
+
+            return $"{sign}{Math.Round(value, decimals)}{postfix}".SetColor(color);
         }
 
         public static string FormatPercentage(
             this float value, int decimalPlaces = 1,
             float scale = 100f, float maxValue = float.MaxValue,
-            string color = Colors.Green)
+            bool signed = false, string color = Colors.Green)
         {
             // color light blue
             var maxStackMessage = value >= maxValue ? "(Max Stack)".SetColor("#ADD8E6") : "";
@@ -42,7 +49,13 @@ namespace ItemStats.ValueFormatters
             var valueStr = Math.Round(value * scale, decimalPlaces).ToString($"0.{trailFormatStr}");
             valueStr += "%";
 
-            return $"{valueStr.SetColor(color)} {maxStackMessage}";
+            var sign = "";
+            if (signed)
+            {
+                sign = value >= 0 ? "+" : "-";
+            }
+
+            return $"{sign}{valueStr}".SetColor(color) + $" {maxStackMessage}";
         }
 
         public static string FormatModifier(this float value, string statText = "", string color = "#FFB6C1")

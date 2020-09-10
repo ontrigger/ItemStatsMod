@@ -19,7 +19,8 @@ namespace ItemStats.StatModification
             };
 
         protected override Func<float, ItemIndex, int, StatContext, string> FormatFunc { get; } =
-            (result, itemIndex, itemStatIndex, ctx) => $"{result.FormatModifier()} from other players";
+            (result, itemIndex, itemStatIndex, ctx) =>
+                $"{result.FormatInt(signed: true, color: Colors.ModifierColor)} from other players";
 
         public override Dictionary<ItemIndex, IEnumerable<int>> AffectedItems =>
             new Dictionary<ItemIndex, IEnumerable<int>> {[ItemIndex.TreasureCache] = new[] {0, 1, 2}};
