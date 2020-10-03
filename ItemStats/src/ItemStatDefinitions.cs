@@ -763,9 +763,20 @@ namespace ItemStats
                         (value, ctx) => $"Skill Duration: {value.FormatInt("s")}"
                     ),
                     new ItemStat(
-                        (itemCount, ctx) => Mathf.Min(1f, 0.25f * itemCount),
-                        (value, ctx) => $"Health Healed: {value.FormatPercentage()}"
-                    )
+                        (itemCount, ctx) =>
+                        {
+                            var healthFraction = ctx.Master != null ? ctx.Master.GetBody().maxHealth : 1;
+
+                            // heal 1.3% of max HP per 5 times/s across 3 * itemCount seconds
+                            return healthFraction * 0.013f * 5 * (3f * itemCount);
+                        },
+                        (value, ctx) =>
+                        {
+                            var statValue = ctx.Master != null
+                                ? $"{value.FormatInt("HP")}"
+                                : $"{value.FormatPercentage()}";
+                            return "Health Healed: " + statValue;
+                        })
                 }
             };
             ItemDefs[ItemIndex.NearbyDamageBonus] = new ItemStatDef
@@ -1084,8 +1095,7 @@ namespace ItemStats
                     new ItemStat(
                         (itemCount, ctx) => 0.10f,
                         (value, ctx) => $"Proc Chance: {value.FormatPercentage()}"
-                        // StatModifiers.Luck
-                    ),
+                    )
                 }
             };
             ItemDefs[ItemIndex.BleedOnHitAndExplode] = new ItemStatDef

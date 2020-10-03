@@ -26,11 +26,8 @@ namespace ItemStats.ValueFormatters
             int decimals = 0, bool signed = false,
             string color = Colors.Green)
         {
-            var sign = "";
-            if (signed)
-            {
-                sign = value >= 0 ? "+" : "-";
-            }
+            if (!signed) value = Mathf.Abs(value);
+            var sign = signed && value > 0 ? "+" : "";
 
             return $"{sign}{Math.Round(value, decimals)}{postfix}".SetColor(color);
         }
@@ -43,17 +40,14 @@ namespace ItemStats.ValueFormatters
             // color light blue
             var maxStackMessage = value >= maxValue ? "(Max Stack)".SetColor("#ADD8E6") : "";
             value = Mathf.Min(value, maxValue);
+            if (!signed) value = Mathf.Abs(value);
 
             // amount of ###
             var trailFormatStr = new string('#', decimalPlaces);
             var valueStr = Math.Round(value * scale, decimalPlaces).ToString($"0.{trailFormatStr}");
             valueStr += "%";
 
-            var sign = "";
-            if (signed)
-            {
-                sign = value >= 0 ? "+" : "-";
-            }
+            var sign = signed && value > 0 ? "+" : "";
 
             return $"{sign}{valueStr}".SetColor(color) + $" {maxStackMessage}";
         }

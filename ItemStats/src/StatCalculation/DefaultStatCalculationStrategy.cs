@@ -45,6 +45,7 @@ namespace ItemStats.StatCalculation
                     if (!ContributionSignificant(modifierContribution)) continue;
 
                     formattedContributions.AppendLine();
+                    formattedContributions.Append("  ");
                     formattedContributions.Append(
                         statModifier.Format(modifierContribution, itemIndex, statIndex, context)
                     );
@@ -68,7 +69,7 @@ namespace ItemStats.StatCalculation
 
         private static bool ContributionSignificant(float contrib)
         {
-            return Math.Round(contrib, 3) > 0;
+            return Math.Round(Math.Abs(contrib), 4) > 0;
         }
     }
 }
