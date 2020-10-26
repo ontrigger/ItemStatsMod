@@ -1,3 +1,11 @@
+# Changes in 2.1.0
+
+* Fixed incorrect stats of Strides of Heresy
+
+* Fixed formatting issues
+
+* Luck stat modifier now shows purity
+
 # Changes in 2.0.0
 
 * Add custom item and stat modifier API
