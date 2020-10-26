@@ -6,6 +6,8 @@
 
 * Luck stat modifier now shows purity
 
+* Added config option to hide detailed descriptions in item pickup popup
+
 # Changes in 2.0.0
 
 * Add custom item and stat modifier API
