@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using ItemStats.StatModification;
 using R2API.Utils;
@@ -12,18 +13,32 @@ namespace ItemStats
     [NetworkCompatibility(CompatibilityLevel.NoNeedForSync, VersionStrictness.DifferentModVersionsAreOk)]
     public class ItemStatsMod : BaseUnityPlugin
     {
+        internal new static ManualLogSource Logger { get; private set; }
+
+        public static ConfigEntry<bool> DetailedPickupDescriptions;
+
         private ItemStatsMod()
         {
             Logger = base.Logger;
         }
 
-        internal new static ManualLogSource Logger { get; private set; }
-
         public void Awake()
         {
+            InitConfig();
+
             ItemStatProvider.Init();
             StatModifiers.Init();
             Hooks.Init();
+        }
+
+        private void InitConfig()
+        {
+            DetailedPickupDescriptions = Config.Bind(
+                "Settings",
+                "DetailedPickupDescriptions",
+                true,
+                "Toggle displaying full item descriptions in the pickup popup"
+            );
         }
 
         public static void AddCustomItemStatDef(ItemIndex index, ItemStatDef customDef)

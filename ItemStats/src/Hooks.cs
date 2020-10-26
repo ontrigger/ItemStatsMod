@@ -84,7 +84,10 @@ namespace ItemStats
         {
             orig(self, itemDef);
 
-            self.descriptionText.token = itemDef.descriptionToken;
+            if (ItemStatsMod.DetailedPickupDescriptions.Value)
+            {
+                self.descriptionText.token = itemDef.descriptionToken;
+            }
         }
     }
 }

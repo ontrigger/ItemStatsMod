@@ -3,6 +3,7 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\MAX\RiderProjects\ItemStats\ItemStatsMod\bin\Release\UnityEngine.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\SteamLibrary\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\Assembly-CSharp.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\core\BepInEx.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=355ff9d5_002Df89c_002D5bae_002Df2ee_002Dd4294431b2a3_0023Assembly_002DCSharp/@EntryIndexedValue">True</s:Boolean>
 	</wpf:ResourceDictionary>
