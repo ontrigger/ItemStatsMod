@@ -33,9 +33,14 @@ namespace ItemStats.StatModification
 
         public bool AffectsItem(ItemIndex itemIndex, int statIndex)
         {
-            var affectedStats = AffectedItems[itemIndex];
+            if (AffectedItems.TryGetValue(itemIndex, out var affectedStats))
+            {
+                return affectedStats.Contains(statIndex);
+            }
 
-            return affectedStats != null && affectedStats.Contains(statIndex);
+            ;
+
+            return false;
         }
     }
 }

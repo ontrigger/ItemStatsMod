@@ -12,6 +12,13 @@ namespace ItemStats.StatModification
         protected override Func<float, ItemIndex, int, StatContext, float> ModifyValueFunc =>
             (result, itemIndex, itemStatIndex, context) =>
             {
+                // if chance is already >= 100% then return same value so
+                // that there are no contribution stats
+                if (result >= 1)
+                {
+                    return result;
+                }
+
                 var cloverCount = context.CountItems(ItemCatalog.FindItemIndex("Clover"));
                 var purityCount = context.CountItems(ItemCatalog.FindItemIndex("LunarBadLuck"));
 
@@ -29,43 +36,44 @@ namespace ItemStats.StatModification
             {
                 // TODO: pass the original value to be able to properly show clover and purity contribution
                 var itemCount = ctx.CountItems(itemIndex);
-                if (itemCount > 0)
+                if (itemCount <= 0)
                 {
-                    var itemStatDef = ItemStatsMod.GetItemStatDef(itemIndex);
-                    var itemStat = itemStatDef.Stats[itemStatIndex];
-
-                    // ReSharper disable once PossibleInvalidOperationException
-                    var originalValue = itemStat.GetInitialStat(itemCount, ctx).Value;
-
-                    var cloverCount = ctx.CountItems(ItemCatalog.FindItemIndex("Clover"));
-                    var purityCount = ctx.CountItems(ItemCatalog.FindItemIndex("LunarBadLuck"));
-
-                    var cloverContribution = 1 - Mathf.Pow(1 - originalValue, 1 + cloverCount) - originalValue;
-                    var purityContribution =
-                        (float) Math.Round(Mathf.Pow(originalValue, 1 + purityCount), 3) - originalValue;
-
-                    var stringBuilder = new StringBuilder();
-
-                    if (cloverCount > 0)
-                    {
-                        stringBuilder
-                            .Append(cloverContribution.FormatPercentage(signed: true, color: Colors.ModifierColor))
-                            .Append(" from Clover");
-
-                        if (purityCount > 0) stringBuilder.AppendLine().Append("  ");
-                    }
-
-                    if (purityCount > 0)
-                    {
-                        stringBuilder
-                            .Append(purityContribution.FormatPercentage(signed: true, color: Colors.ModifierColor))
-                            .Append(" from Purity");
-                    }
-
-                    return stringBuilder.ToString();
+                    return $"{result.FormatPercentage(signed: true, color: Colors.ModifierColor)} from luck";
                 }
 
-                return $"{result.FormatPercentage(signed: true, color: Colors.ModifierColor)} from luck";
+                var itemStatDef = ItemStatsMod.GetItemStatDef(itemIndex);
+                var itemStat = itemStatDef.Stats[itemStatIndex];
+
+                // ReSharper disable once PossibleInvalidOperationException
+                var originalValue = Mathf.Clamp01(itemStat.GetInitialStat(itemCount, ctx).Value);
+
+                var cloverCount = ctx.CountItems(ItemCatalog.FindItemIndex("Clover"));
+                var purityCount = ctx.CountItems(ItemCatalog.FindItemIndex("LunarBadLuck"));
+
+                var cloverContribution = 1 - Mathf.Pow(1 - originalValue, 1 + cloverCount) - originalValue;
+
+                var purityContribution =
+                    (float) Math.Round(Mathf.Pow(originalValue, 1 + purityCount), 3) - originalValue;
+
+                var stringBuilder = new StringBuilder();
+
+                if (cloverCount > 0)
+                {
+                    stringBuilder
+                        .Append(cloverContribution.FormatPercentage(signed: true, color: Colors.ModifierColor))
+                        .Append(" from Clover");
+
+                    if (purityCount > 0) stringBuilder.AppendLine().Append("  ");
+                }
+
+                if (purityCount > 0)
+                {
+                    stringBuilder
+                        .Append(purityContribution.FormatPercentage(signed: true, color: Colors.ModifierColor))
+                        .Append(" from Purity");
+                }
+
+                return stringBuilder.ToString();
             };
 
         public override Dictionary<ItemIndex, IEnumerable<int>> AffectedItems =>
@@ -76,7 +84,7 @@ namespace ItemStats.StatModification
                 [ItemCatalog.FindItemIndex("BleedOnHit")] = new[] {0},
                 [ItemCatalog.FindItemIndex("GoldOnHit")] = new[] {1},
                 [ItemCatalog.FindItemIndex("ChainLightning")] = new[] {2},
-                [ItemCatalog.FindItemIndex("BounceNearby")] = new[] {1},
+                [ItemCatalog.FindItemIndex("BounceNearby")] = new[] {0},
                 [ItemCatalog.FindItemIndex("StickyBomb")] = new[] {0},
                 [ItemCatalog.FindItemIndex("Missile")] = new[] {1},
                 [ItemCatalog.FindItemIndex("BonusGoldPackOnKill")] = new[] {1},

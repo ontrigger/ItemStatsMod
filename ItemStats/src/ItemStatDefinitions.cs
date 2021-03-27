@@ -276,7 +276,7 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 0.5f * Mathf.Pow(0.85f, itemCount - 1),
+                        (itemCount, ctx) => 1f - (0.5f * Mathf.Pow(0.85f, itemCount - 1)),
                         (value, ctx) => $"Cooldown Decrease: {value.FormatPercentage()}"
                     )
                 }
@@ -1101,7 +1101,7 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => itemCount,
+                        (itemCount, ctx) => 0.4f * itemCount,
                         (value, ctx) => $"Enemy Difficulty Increase: {value.FormatPercentage()}"
                     ),
                 }
@@ -1132,7 +1132,7 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 500 * itemCount,
+                        (itemCount, ctx) => 5f * itemCount,
                         (value, ctx) => $"Damage: {value.FormatPercentage()}"
                     ),
                 }
@@ -1143,7 +1143,7 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 100 * itemCount,
+                        (itemCount, ctx) => 1f * itemCount,
                         (value, ctx) => $"Damage per Ally: {value.FormatPercentage()}"
                     ),
                 }
