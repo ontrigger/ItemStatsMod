@@ -1,3 +1,7 @@
+# Changes in 2.2.0
+
+* Anniversary update support
+
 # Changes in 2.1.0
 
 * Fixed incorrect stats of Strides of Heresy
@@ -32,8 +36,7 @@
 
 # Changes in 1.3.1
 
-* Fixed the lunar ability 
- replacement thingy from crashing when spectating in multiplayer
+* Fixed the lunar ability replacement thingy from crashing when spectating in multiplayer
 
 * Updated the Tooth healing amount
 

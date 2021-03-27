@@ -59,16 +59,4 @@ namespace ItemStats.StatModification
             return existingEntry ?? new List<IStatModifier>();
         }
     }
-
-    /*public class TpHealingNova : StatModifier
-    {
-        // TODO: fix
-        protected override Func<float, StatContext, float> ModifyValueFunc =>
-            (count, ctx) => ContextProvider.GetPlayerIdToItemCountMap(ItemIndex.TPHealingNova)
-                .Where(pair => pair.Key != 0)
-                .Sum(pair => pair.Value) + count;
-
-        protected override IStatFormatter FormatFunc =>
-            new ModifierFormatter("from other players");
-    }*/
 }

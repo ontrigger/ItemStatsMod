@@ -1,4 +1,4 @@
-# ItemStats 2.1.0 (Now with Custom Item support!)
+# ItemStats 2.2.0
 Provides current stack bonuses for an item in the tooltip
 
 ![demo](https://i.nyah.moe/VvsO.png)
@@ -38,3 +38,4 @@ Open the solution, link the libraries in the Lib folder, DL the required NuGet p
 
 * kylewill0725
 * orare
+* XuaTheGrate
