@@ -17,7 +17,6 @@ namespace ItemStats
 
         public static void Init()
         {
-            ItemStatsMod.Logger.LogInfo($"hello {ItemCatalog.FindItemIndex("Bear")}");
             ItemDefs[ItemCatalog.FindItemIndex("Bear")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
