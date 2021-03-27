@@ -12,8 +12,8 @@ namespace ItemStats.StatModification
         protected override Func<float, ItemIndex, int, StatContext, float> ModifyValueFunc =>
             (result, itemIndex, itemStatIndex, context) =>
             {
-                var cloverCount = context.CountItems(ItemIndex.Clover);
-                var purityCount = context.CountItems(ItemIndex.LunarBadLuck);
+                var cloverCount = context.CountItems(ItemCatalog.FindItemIndex("Clover"));
+                var purityCount = context.CountItems(ItemCatalog.FindItemIndex("LunarBadLuck"));
 
                 var luck = cloverCount - purityCount;
                 if (luck > 0)
@@ -37,8 +37,8 @@ namespace ItemStats.StatModification
                     // ReSharper disable once PossibleInvalidOperationException
                     var originalValue = itemStat.GetInitialStat(itemCount, ctx).Value;
 
-                    var cloverCount = ctx.CountItems(ItemIndex.Clover);
-                    var purityCount = ctx.CountItems(ItemIndex.LunarBadLuck);
+                    var cloverCount = ctx.CountItems(ItemCatalog.FindItemIndex("Clover"));
+                    var purityCount = ctx.CountItems(ItemCatalog.FindItemIndex("LunarBadLuck"));
 
                     var cloverContribution = 1 - Mathf.Pow(1 - originalValue, 1 + cloverCount) - originalValue;
                     var purityContribution =
@@ -71,17 +71,17 @@ namespace ItemStats.StatModification
         public override Dictionary<ItemIndex, IEnumerable<int>> AffectedItems =>
             new Dictionary<ItemIndex, IEnumerable<int>>
             {
-                [ItemIndex.GhostOnKill] = new[] {1},
-                [ItemIndex.StunChanceOnHit] = new[] {0},
-                [ItemIndex.BleedOnHit] = new[] {0},
-                [ItemIndex.GoldOnHit] = new[] {1},
-                [ItemIndex.ChainLightning] = new[] {2},
-                [ItemIndex.BounceNearby] = new[] {1},
-                [ItemIndex.StickyBomb] = new[] {0},
-                [ItemIndex.Missile] = new[] {1},
-                [ItemIndex.BonusGoldPackOnKill] = new[] {1},
-                [ItemIndex.Incubator] = new[] {0},
-                [ItemIndex.FireballsOnHit] = new[] {1}
+                [ItemCatalog.FindItemIndex("GhostOnKill")] = new[] {1},
+                [ItemCatalog.FindItemIndex("StunChanceOnHit")] = new[] {0},
+                [ItemCatalog.FindItemIndex("BleedOnHit")] = new[] {0},
+                [ItemCatalog.FindItemIndex("GoldOnHit")] = new[] {1},
+                [ItemCatalog.FindItemIndex("ChainLightning")] = new[] {2},
+                [ItemCatalog.FindItemIndex("BounceNearby")] = new[] {1},
+                [ItemCatalog.FindItemIndex("StickyBomb")] = new[] {0},
+                [ItemCatalog.FindItemIndex("Missile")] = new[] {1},
+                [ItemCatalog.FindItemIndex("BonusGoldPackOnKill")] = new[] {1},
+                [ItemCatalog.FindItemIndex("Incubator")] = new[] {0},
+                [ItemCatalog.FindItemIndex("FireballsOnHit")] = new[] {1}
             };
     }
 }
