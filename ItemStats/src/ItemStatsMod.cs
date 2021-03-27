@@ -9,7 +9,7 @@ using RoR2;
 namespace ItemStats
 {
     [BepInDependency("com.bepis.r2api")]
-    [BepInPlugin("dev.ontrigger.itemstats", "ItemStats", "2.2.0")]
+    [BepInPlugin("dev.ontrigger.itemstats", "ItemStats", "2.2.1")]
     [NetworkCompatibility(CompatibilityLevel.NoNeedForSync, VersionStrictness.DifferentModVersionsAreOk)]
     public class ItemStatsMod : BaseUnityPlugin
     {

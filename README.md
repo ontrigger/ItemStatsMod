@@ -1,4 +1,4 @@
-# ItemStats 2.2.0
+# ItemStats 2.2.1
 Provides current stack bonuses for an item in the tooltip
 
 ![demo](https://i.nyah.moe/VvsO.png)

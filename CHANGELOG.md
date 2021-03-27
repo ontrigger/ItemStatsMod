@@ -1,3 +1,11 @@
+# Changes in 2.2.1
+
+* Fixed clover incorrectly calculating stats for items with >= 100% chance to proc
+
+* Fixed clover modifying the incorrect stat on Fresh Meat
+
+* Fixed incorrect percentage formatting for the new items
+
 # Changes in 2.2.0
 
 * Anniversary update support
