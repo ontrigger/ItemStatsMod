@@ -152,7 +152,7 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 1f + 0.5f * itemCount,
+                        (itemCount, ctx) => 0.75f * itemCount,
                         (value, ctx) => $"Damage Increase: {value.FormatPercentage()}"
                     )
                 }
@@ -375,7 +375,7 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 0.15f * itemCount,
+                        (itemCount, ctx) => 0.1f * itemCount,
                         (value, ctx) => $"Bleed Chance Increase: {value.FormatPercentage(maxValue: 1f)}"
                         // StatModifiers.Luck
                     )
@@ -491,7 +491,7 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 0.1f + 0.2f * itemCount,
+                        (itemCount, ctx) => 0.25f * itemCount,
                         (value, ctx) => $"Speed Increase: {value.FormatPercentage()}"
                     )
                 }
@@ -650,12 +650,8 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 6f * itemCount,
+                        (itemCount, ctx) => 3f + 3f * itemCount,
                         (value, ctx) => $"Radius: {value.FormatInt("m")}"
-                    ),
-                    new ItemStat(
-                        (itemCount, ctx) => 6 + (itemCount - 1) * 3,
-                        (value, ctx) => $"Max Possible Icicles: {value.FormatPercentage()}"
                     )
                 }
             };
@@ -773,7 +769,7 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 0.15f * itemCount,
+                        (itemCount, ctx) => 0.2f * itemCount,
                         (value, ctx) => $"Damage Increase: {value.FormatPercentage()}"
                     )
                 }
@@ -1009,8 +1005,8 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 1.5f + itemCount * 1.5f,
-                        (value, ctx) => $"Cloak Duration: {value.FormatInt("s")}"
+                        (itemCount, ctx) => 30 - (0.5f * itemCount),
+                        (value, ctx) => $"Cooldown: {value.FormatInt("s")}"
                     )
                 }
             };
