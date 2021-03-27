@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using ItemStats.ValueFormatters;
 using RoR2;
-using static RoR2.RoR2Content;
 
 namespace ItemStats.StatModification
 {
