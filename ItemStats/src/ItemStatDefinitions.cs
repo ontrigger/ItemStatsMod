@@ -1144,7 +1144,7 @@ namespace ItemStats
                 {
                     new ItemStat(
                         (itemCount, ctx) => 100 * itemCount,
-                        (value, ctx) => $"Damage: {value.FormatPercentage()}"
+                        (value, ctx) => $"Damage per Ally: {value.FormatPercentage()}"
                     ),
                 }
             };
