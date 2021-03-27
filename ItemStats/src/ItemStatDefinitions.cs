@@ -1004,7 +1004,7 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 30 * Mathf.Pow(0.5f, itemCount),
+                        (itemCount, ctx) => 30 * Mathf.Pow(0.5f, itemCount - 1),
                         (value, ctx) => $"Cooldown: {value.FormatInt("s")}"
                     )
                 }
