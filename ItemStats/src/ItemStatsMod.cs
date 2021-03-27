@@ -22,7 +22,7 @@ namespace ItemStats
             Logger = base.Logger;
         }
 
-        public void Awake()
+        public void Start()
         {
             InitConfig();
 

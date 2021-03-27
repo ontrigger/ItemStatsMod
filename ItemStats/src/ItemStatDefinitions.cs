@@ -17,7 +17,8 @@ namespace ItemStats
 
         public static void Init()
         {
-            ItemDefs[ItemIndex.Bear] = new ItemStatDef
+            ItemStatsMod.Logger.LogInfo($"hello {ItemCatalog.FindItemIndex("Bear")}");
+            ItemDefs[ItemCatalog.FindItemIndex("Bear")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -27,7 +28,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Hoof] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Hoof")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -37,7 +38,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Syringe] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Syringe")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -47,7 +48,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Mushroom] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Mushroom")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -61,7 +62,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.CritGlasses] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("CritGlasses")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -71,7 +72,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Feather] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Feather")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -81,7 +82,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Seed] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Seed")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -91,7 +92,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.GhostOnKill] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("GhostOnKill")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -106,7 +107,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Knurl] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Knurl")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -120,7 +121,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Clover] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Clover")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -130,7 +131,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Medkit] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Medkit")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -146,7 +147,7 @@ namespace ItemStats
                         })
                 }
             };
-            ItemDefs[ItemIndex.Crowbar] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Crowbar")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -156,7 +157,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Tooth] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Tooth")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -166,7 +167,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Talisman] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Talisman")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -176,7 +177,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Bandolier] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Bandolier")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -186,7 +187,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.IceRing] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("IceRing")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -200,7 +201,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.FireRing] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("FireRing")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -210,7 +211,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.WarCryOnMultiKill] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("WarCryOnMultiKill")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -220,7 +221,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.SprintOutOfCombat] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("SprintOutOfCombat")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -230,7 +231,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.StunChanceOnHit] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("StunChanceOnHit")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -241,7 +242,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.WarCryOnCombat] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("WarCryOnCombat")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -251,7 +252,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.SecondarySkillMagazine] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("SecondarySkillMagazine")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -261,7 +262,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.UtilitySkillMagazine] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("UtilitySkillMagazine")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -271,7 +272,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.AutoCastEquipment] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("AutoCastEquipment")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -281,7 +282,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.KillEliteFrenzy] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("KillEliteFrenzy")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -291,7 +292,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.BossDamageBonus] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("BossDamageBonus")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -301,7 +302,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.ExplodeOnDeath] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("ExplodeOnDeath")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -315,7 +316,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.HealWhileSafe] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("HealWhileSafe")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -325,7 +326,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.IgniteOnKill] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("IgniteOnKill")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -339,7 +340,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.WardOnLevel] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("WardOnLevel")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -349,7 +350,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.NovaOnHeal] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("NovaOnHeal")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -359,7 +360,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.HealOnCrit] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("HealOnCrit")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -369,7 +370,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.BleedOnHit] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("BleedOnHit")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -380,7 +381,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.SlowOnHit] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("SlowOnHit")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -390,7 +391,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.EquipmentMagazine] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("EquipmentMagazine")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -404,7 +405,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.GoldOnHit] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("GoldOnHit")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -420,7 +421,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.IncreaseHealing] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("IncreaseHealing")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -430,7 +431,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.PersonalShield] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("PersonalShield")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -440,7 +441,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.ChainLightning] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("ChainLightning")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -459,30 +460,18 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.TreasureCache] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("TreasureCache")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 80f / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
-                        (value, ctx) => $"Common Chance: {value.FormatPercentage(maxValue: 1f)}"
+                        (itemCount, ctx) => itemCount,
+                        (value, ctx) => $"Unlockable Caches: {value}"
                         // StatModifiers.TreasureCache
                     ),
-                    new ItemStat(
-                        (itemCount, ctx) =>
-                            20f * itemCount / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
-                        (value, ctx) => $"Uncommon Chance: {value.FormatPercentage(maxValue: 1f)}"
-                        // StatModifiers.TreasureCache
-                    ),
-                    new ItemStat(
-                        (itemCount, ctx) =>
-                            Mathf.Pow(itemCount, 2f) / (80f + 20f * itemCount + Mathf.Pow(itemCount, 2f)),
-                        (value, ctx) => $"Rare Chance: {value.FormatPercentage(maxValue: 1f)}"
-                        // StatModifiers.TreasureCache
-                    )
                 }
             };
-            ItemDefs[ItemIndex.BounceNearby] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("BounceNearby")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -497,7 +486,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.SprintBonus] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("SprintBonus")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -507,7 +496,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.SprintArmor] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("SprintArmor")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -517,7 +506,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.ShockNearby] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("ShockNearby")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -527,7 +516,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.BeetleGland] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("BeetleGland")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -537,7 +526,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.ShieldOnly] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("ShieldOnly")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -547,7 +536,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.StickyBomb] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("StickyBomb")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -558,7 +547,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.RepeatHeal] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("RepeatHeal")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -573,7 +562,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.HeadHunter] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("HeadHunter")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -583,7 +572,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.ExtraLife] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("ExtraLife")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -593,7 +582,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.AlienHead] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("AlienHead")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -603,7 +592,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Firework] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Firework")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -613,7 +602,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Missile] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Missile")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -628,7 +617,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Infusion] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Infusion")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -642,7 +631,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.AttackSpeedOnCrit] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("AttackSpeedOnCrit")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -656,7 +645,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Icicle] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Icicle")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -670,7 +659,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Behemoth] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Behemoth")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -680,7 +669,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.BarrierOnKill] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("BarrierOnKill")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -690,7 +679,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.BarrierOnOverHeal] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("BarrierOnOverHeal")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -700,7 +689,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.ExecuteLowHealthElite] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("ExecuteLowHealthElite")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -710,7 +699,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.EnergizedOnEquipmentUse] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("EnergizedOnEquipmentUse")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -720,7 +709,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.TitanGoldDuringTP] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("TitanGoldDuringTP")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -734,7 +723,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.SprintWisp] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("SprintWisp")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -744,7 +733,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Dagger] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Dagger")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -754,7 +743,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.LunarUtilityReplacement] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("LunarUtilityReplacement")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -779,7 +768,7 @@ namespace ItemStats
                         })
                 }
             };
-            ItemDefs[ItemIndex.NearbyDamageBonus] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("NearbyDamageBonus")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -789,7 +778,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.TPHealingNova] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("TPHealingNova")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -800,7 +789,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.ArmorReductionOnHit] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("ArmorReductionOnHit")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -810,7 +799,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Thorns] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Thorns")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -824,17 +813,17 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.RegenOnKill] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("FlatHealth")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 3f * itemCount,
-                        (value, ctx) => $"Duration: {value.FormatInt("s")}"
+                        (itemCount, ctx) => 25 * itemCount,
+                        (value, ctx) => $"Health Increase: {value.FormatInt()}"
                     )
                 }
             };
-            ItemDefs[ItemIndex.Pearl] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Pearl")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -844,7 +833,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.ShinyPearl] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("ShinyPearl")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -854,7 +843,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.BonusGoldPackOnKill] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("BonusGoldPackOnKill")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -869,7 +858,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.LunarPrimaryReplacement] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("LunarPrimaryReplacement")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -883,7 +872,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.LaserTurbine] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("LaserTurbine")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -901,7 +890,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.NovaOnLowHealth] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("NovaOnLowHealth")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -911,7 +900,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.ArmorPlate] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("ArmorPlate")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -921,7 +910,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Squid] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Squid")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -931,7 +920,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.DeathMark] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("DeathMark")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -941,7 +930,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Plant] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Plant")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -951,7 +940,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.FocusConvergence] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("FocusConvergence")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -965,7 +954,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.DeathMark] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("DeathMark")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -975,7 +964,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Plant] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Plant")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -985,7 +974,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Squid] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Squid")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -995,7 +984,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.CaptainDefenseMatrix] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("CaptainDefenseMatrix")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1005,7 +994,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.CutHp] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("CutHp")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1015,7 +1004,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Phasing] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Phasing")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1025,7 +1014,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.FallBoots] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("FallBoots")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1035,7 +1024,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.JumpBoost] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("JumpBoost")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1045,7 +1034,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.LunarDagger] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("LunarDagger")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1059,7 +1048,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.Incubator] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("Incubator")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1074,7 +1063,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.SiphonOnLowHealth] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("SiphonOnLowHealth")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1084,7 +1073,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.FireballsOnHit] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("FireballsOnHit")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1098,7 +1087,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.BleedOnHitAndExplode] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("BleedOnHitAndExplode")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1112,7 +1101,7 @@ namespace ItemStats
                     )
                 }
             };
-            ItemDefs[ItemIndex.MonstersOnShrineUse] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("MonstersOnShrineUse")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1122,7 +1111,7 @@ namespace ItemStats
                     ),
                 }
             };
-            ItemDefs[ItemIndex.RandomDamageZone] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("RandomDamageZone")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
@@ -1132,13 +1121,76 @@ namespace ItemStats
                     ),
                 }
             };
-            ItemDefs[ItemIndex.LunarBadLuck] = new ItemStatDef
+            ItemDefs[ItemCatalog.FindItemIndex("LunarBadLuck")] = new ItemStatDef
             {
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
                         (itemCount, ctx) => itemCount,
                         (value, ctx) => $"Cooldown Reduction: {value.FormatInt("s")}"
+                    ),
+                }
+            };
+            // Charged Perforator
+            ItemDefs[ItemCatalog.FindItemIndex("LightningStrikeOnHit")] = new ItemStatDef
+            {
+                Stats = new List<ItemStat>
+                {
+                    new ItemStat(
+                        (itemCount, ctx) => 500 * itemCount,
+                        (value, ctx) => $"Damage: {value.FormatPercentage()}"
+                    ),
+                }
+            };
+            // Empathy Cores
+            ItemDefs[ItemCatalog.FindItemIndex("RoboBallBuddy")] = new ItemStatDef
+            {
+                Stats = new List<ItemStat>
+                {
+                    new ItemStat(
+                        (itemCount, ctx) => 100 * itemCount,
+                        (value, ctx) => $"Damage: {value.FormatPercentage()}"
+                    ),
+                }
+            };
+            // Planula
+            ItemDefs[ItemCatalog.FindItemIndex("ParentEgg")] = new ItemStatDef
+            {
+                Stats = new List<ItemStat>
+                {
+                    new ItemStat(
+                        (itemCount, ctx) => 15 * itemCount,
+                        (value, ctx) => $"Heal Amount: {value.FormatInt(" HP")}"
+                    ),
+                }
+            };
+            // Essence of Heresy
+            ItemDefs[ItemCatalog.FindItemIndex("LunarSpecialReplacement")] = new ItemStatDef
+            {
+                Stats = new List<ItemStat>
+                {
+                    new ItemStat(
+                        (itemCount, ctx) => 10 * itemCount,
+                        (value, ctx) => $"Effect Duration: {value.FormatInt("s")}"
+                    ),
+                    new ItemStat(
+                        (itemCount, ctx) => 8 * itemCount,
+                        (value, ctx) => $"Recharge: {value.FormatInt("s")}"
+                    ),
+                }
+            };
+            // Hooks of Heresy
+            ItemDefs[ItemCatalog.FindItemIndex("LunarSecondaryReplacement")] = new ItemStatDef
+            {
+                Stats = new List<ItemStat>
+                {
+                    new ItemStat(
+                        (itemCount, ctx) => 3 * itemCount,
+                        (value, ctx) => $"Root Duration: {value.FormatInt("s")}"
+                    ),
+                    new ItemStat(
+                        (itemCount, ctx) => 5 * itemCount,
+                        (value, ctx) => $"Recharge: {value.FormatInt("s")}"
                     ),
                 }
             };
