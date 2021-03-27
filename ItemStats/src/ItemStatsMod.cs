@@ -22,13 +22,16 @@ namespace ItemStats
             Logger = base.Logger;
         }
 
-        public void Start()
+        public void Awake()
         {
             InitConfig();
 
-            ItemStatProvider.Init();
-            StatModifiers.Init();
-            Hooks.Init();
+            ItemCatalog.availability.CallWhenAvailable(() =>
+            {
+                ItemStatProvider.Init();
+                StatModifiers.Init();
+                Hooks.Init();
+            });
         }
 
         private void InitConfig()
