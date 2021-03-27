@@ -1004,7 +1004,7 @@ namespace ItemStats
                 Stats = new List<ItemStat>
                 {
                     new ItemStat(
-                        (itemCount, ctx) => 30 - (0.5f * itemCount),
+                        (itemCount, ctx) => 30 * Mathf.Pow(0.5f, itemCount),
                         (value, ctx) => $"Cooldown: {value.FormatInt("s")}"
                     )
                 }
@@ -1170,7 +1170,7 @@ namespace ItemStats
                     ),
                     new ItemStat(
                         (itemCount, ctx) => 8 * itemCount,
-                        (value, ctx) => $"Recharge: {value.FormatInt("s")}"
+                        (value, ctx) => $"Cooldown: {value.FormatInt("s")}"
                     ),
                 }
             };
@@ -1185,7 +1185,7 @@ namespace ItemStats
                     ),
                     new ItemStat(
                         (itemCount, ctx) => 5 * itemCount,
-                        (value, ctx) => $"Recharge: {value.FormatInt("s")}"
+                        (value, ctx) => $"Cooldown: {value.FormatInt("s")}"
                     ),
                 }
             };
