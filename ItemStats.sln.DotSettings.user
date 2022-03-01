@@ -1,9 +1,14 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005CSteamLibrary_005Csteamapps_005Ccommon_005CRisk_0020of_0020Rain_00202_005CBepInEx_005Cplugins_005CMMHOOK_005CMMHOOK_005FRoR2_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005CSteamLibrary_005Csteamapps_005Ccommon_005CRisk_0020of_0020Rain_00202_005CRisk_0020of_0020Rain_00202_005FData_005CManaged_005Ccom_002Eunity_002Emultiplayer_002Dhlapi_002ERuntime_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005CSteamLibrary_005Csteamapps_005Ccommon_005CRisk_0020of_0020Rain_00202_005CRisk_0020of_0020Rain_00202_005FData_005CManaged_005CRoR2_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Int64 x:Key="/Default/CodeStyle/Naming/CSharpAutoNaming/AutoNamingCompletedVersion/@EntryValue">2</s:Int64>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\MAX\RiderProjects\ItemStats\ItemStatsMod\bin\Release\UnityEngine.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\SteamLibrary\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\Assembly-CSharp.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\SteamLibrary\steamapps\common\Risk of Rain 2\BepInEx\core\BepInEx.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\MAX\RiderProjects\ItemStats\ItemStats\bin\Release\R2API.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\SteamLibrary\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\RoR2.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=355ff9d5_002Df89c_002D5bae_002Df2ee_002Dd4294431b2a3_0023Assembly_002DCSharp/@EntryIndexedValue">True</s:Boolean>
+	
 	</wpf:ResourceDictionary>
