@@ -1298,7 +1298,7 @@ namespace ItemStats
 				Stats = new List<ItemStat>
 				{
 					new ItemStat(
-						(itemCount, ctx) => 0.05f * itemCount,
+						(itemCount, ctx) => 0.005f * itemCount,
 						(value, ctx) => $"Instakill Chance: {value.FormatPercentage()}"
 					),
 				},
